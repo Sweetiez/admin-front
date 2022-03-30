@@ -1,6 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie-player';
 import loadingSplash from '../../assets/lotties/splash-loading.json';
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
   return (
@@ -41,26 +42,25 @@ const Login: React.FC = () => {
                         />
                       </div>
                       <div className="text-center pt-1 mb-3 pb-1">
-                        <button
-                          className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md bg-blue-500 hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                          type="button"
-                          data-mdb-ripple="true"
-                          data-mdb-ripple-color="light"
-                        >
-                          Log in
-                        </button>
-                        <a className="text-gray-500" href="#!">
+                        <Link to={'/admin'}>
+                          <div
+                            className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md bg-blue-500 hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                            // type="button"
+                          >
+                            Log in
+                          </div>
+                        </Link>
+                        <div className="text-gray-500" >
                           Forgot password?
-                        </a>
+                        </div>
                       </div>
                     </form>
-
                   </div>
                   <Lottie
-                      className="h-fit w-fit"
-                      loop
-                      animationData={loadingSplash}
-                      play
+                    className="h-fit w-fit"
+                    loop
+                    animationData={loadingSplash}
+                    play
                   />
                 </div>
               </div>
