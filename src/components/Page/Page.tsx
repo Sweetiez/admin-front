@@ -13,7 +13,7 @@ const Page: React.FC<PageProps> = ({ children }) => {
       <Sidebar />
       <div
         id="main-content"
-        className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+        className="h-full w-fit bg-gray-50 relative overflow-y-auto lg:ml-64"
       >
         <main>{children}</main>
       </div>
