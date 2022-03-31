@@ -3,6 +3,10 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        birthstone: ["'Birthstone', cursive"],
+        pompiere: ["'Pompiere', cursive"],
+      },
       colors: {
         brown: {
           50: '#fdf8f6',

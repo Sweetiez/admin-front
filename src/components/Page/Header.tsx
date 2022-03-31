@@ -62,7 +62,7 @@ const Header: React.FC = () => {
                   className="h-6 mr-2"
                   alt="Windster Logo"
                 />
-                <span className="dark:text-white self-center whitespace-nowrap">
+                <span className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
                   FI-Sweets | Admin
                 </span>
               </div>

@@ -6,7 +6,7 @@ const Sidebar: React.FC = () => {
       <div className="flex overflow-hidden dark:bg-gray-800 bg-white ">
         <aside
           id="sidebar"
-          className="fixed hidden pt-10 z-20 h-full top-0 left-0  flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
+          className="fixed hidden pt-12 z-20 h-full top-0 left-0  flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
           aria-label="Sidebar"
         >
           <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 dark:bg-gray-800 bg-white pt-0">
