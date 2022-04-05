@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import Page from '../Page/Page';
 import ProductModel from './ProductModel';
+import CreateProduct from './CreateProduct';
+import { Transition, Dialog } from '@headlessui/react';
 
 const ProductList: React.FC = () => {
+  const [modalState, setModalState] = useState(false);
   const products = [
     {
       id: '1',
@@ -18,7 +21,6 @@ const ProductList: React.FC = () => {
       price: 100,
       status: 'active',
     },
-
     {
       id: '3',
       name: 'Product 4',
@@ -26,7 +28,6 @@ const ProductList: React.FC = () => {
       price: 100,
       status: 'active',
     },
-
     {
       id: '4',
       name: 'Product 4',
@@ -38,30 +39,94 @@ const ProductList: React.FC = () => {
 
   return (
     <Page>
-      <div className="overflow-x-auto">
-        <div className="min-w-screen min-h-screen bg-gray-100 dark:bg-gray-600 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
-          <div className="w-full lg:w-5/6">
-            <div className="bg-white shadow-md rounded my-6">
-              <table className="min-w-max w-full table-auto">
-                <thead>
-                  <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Product</th>
-                    <th className="py-3 px-6 text-left">Price</th>
-                    <th className="py-3 px-6 text-center">Priority</th>
-                    <th className="py-3 px-6 text-center">Status</th>
-                    <th className="py-3 px-6 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-600 text-sm font-light">
-                  {products.map((product, index) => (
-                    <ProductTableRow _id={index} product={product} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+      <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
+        {/*<div className="bg-gray-100 dark:bg-gray-600 bg-gray-100 font-sans overflow-hidden">*/}
+        {/*  <div className="col-start-2 col-end-4 lg:w-5/6">*/}
+        {/*    <div className="bg-white shadow-md rounded my-6">*/}
+        <div className="col-start-2 col-end-5">
+          <button
+            onClick={() => setModalState(true)}
+            className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+          >
+            Add product
+          </button>
         </div>
+        <table className="row-start-2 col-start-2 col-end-5">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <th className="py-3 px-6 text-left">Product</th>
+              <th className="py-3 px-6 text-left">Price</th>
+              <th className="py-3 px-6 text-center">Priority</th>
+              <th className="py-3 px-6 text-center">Status</th>
+              <th className="py-3 px-6 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light">
+            {products.map((product, index) => (
+              <ProductTableRow _id={index} product={product} />
+            ))}
+          </tbody>
+        </table>
+        <table className="row-start-2 col-start-5 col-end-8">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <th className="py-3 px-6 text-left">Product</th>
+              <th className="py-3 px-6 text-left">Price</th>
+              <th className="py-3 px-6 text-center">Priority</th>
+              <th className="py-3 px-6 text-center">Status</th>
+              <th className="py-3 px-6 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light">
+            {products.map((product, index) => (
+              <ProductTableRow _id={index} product={product} />
+            ))}
+          </tbody>
+        </table>
       </div>
+      <Transition.Root show={modalState} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed z-10 inset-0 overflow-y-auto"
+          onClose={setModalState}
+        >
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            </Transition.Child>
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <CreateProduct setOpenedModal={setModalState} />
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+      {/*</div>*/}
+      {/*</div>*/}
+      {/*</div>*/}
     </Page>
   );
 };
@@ -72,7 +137,7 @@ interface ProductRowProps {
 }
 const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
   const lineColor = `border-b border-gray-200 ${
-    _id % 2 === 0 ? '' : 'bg-gray-50'
+    _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
   } hover:bg-gray-100`;
 
   return (
@@ -80,13 +145,13 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
       <tr className={lineColor}>
         <td className="py-3 px-6 text-left">
           <div className="flex items-center">
-            <div className="mr-2">
-              <img
-                className="w-6 h-6"
-                src="https://img.icons8.com/color/48/000000/php.png"
-                alt="img1"
-              />
-            </div>
+            {/*<div className="mr-2">*/}
+            {/*  <img*/}
+            {/*    className="w-6 h-6"*/}
+            {/*    src="https://img.icons8.com/color/48/000000/php.png"*/}
+            {/*    alt="img1"*/}
+            {/*  />*/}
+            {/*</div>*/}
             <span className="font-medium">{product.name}</span>
           </div>
         </td>
@@ -104,15 +169,15 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
           <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
             Published
           </span>
-          <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
-            Created
-          </span>
-          <span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">
-            ???
-          </span>
-          <span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">
-            Deleted
-          </span>
+          {/*<span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">*/}
+          {/*  Created*/}
+          {/*</span>*/}
+          {/*<span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">*/}
+          {/*  ???*/}
+          {/*</span>*/}
+          {/*<span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">*/}
+          {/*  Deleted*/}
+          {/*</span>*/}
         </td>
         <td className="py-3 px-6 text-center">
           <div className="flex item-center justify-center">
