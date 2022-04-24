@@ -63,7 +63,7 @@ const ProductList: React.FC = () => {
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
             {products.map((product, index) => (
-              <ProductTableRow _id={index} product={product} />
+              <ProductTableRow key={index} _id={index} product={product} />
             ))}
           </tbody>
         </table>
@@ -79,7 +79,7 @@ const ProductList: React.FC = () => {
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
             {products.map((product, index) => (
-              <ProductTableRow _id={index} product={product} />
+              <ProductTableRow key={index} _id={index} product={product} />
             ))}
           </tbody>
         </table>
