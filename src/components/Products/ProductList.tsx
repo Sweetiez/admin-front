@@ -3,46 +3,19 @@ import Page from '../Page/Page';
 import ProductModel from './ProductModel';
 import CreateProduct from './CreateProduct';
 import { Transition, Dialog } from '@headlessui/react';
+import { useSweets } from '../../hooks/sweets/sweetsHooks';
 
 const ProductList: React.FC = () => {
   const [modalState, setModalState] = useState(false);
-  const products = [
-    {
-      id: '1',
-      name: 'Product 1',
-      priority: 1,
-      price: 100,
-      status: 'active',
-    },
-    {
-      id: '2',
-      name: 'Product 2',
-      priority: 1,
-      price: 100,
-      status: 'active',
-    },
-    {
-      id: '3',
-      name: 'Product 4',
-      priority: 1,
-      price: 100,
-      status: 'active',
-    },
-    {
-      id: '4',
-      name: 'Product 4',
-      priority: 1,
-      price: 100,
-      status: 'active',
-    },
-  ];
+  let { data: sweets } = useSweets();
+
+  if (sweets === undefined) {
+    sweets = [];
+  }
 
   return (
     <Page>
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
-        {/*<div className="bg-gray-100 dark:bg-gray-600 bg-gray-100 font-sans overflow-hidden">*/}
-        {/*  <div className="col-start-2 col-end-4 lg:w-5/6">*/}
-        {/*    <div className="bg-white shadow-md rounded my-6">*/}
         <div className="col-start-2 col-end-5">
           <button
             onClick={() => setModalState(true)}
@@ -62,7 +35,7 @@ const ProductList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {products.map((product, index) => (
+            {sweets.map((product, index) => (
               <ProductTableRow key={index} _id={index} product={product} />
             ))}
           </tbody>
@@ -78,7 +51,7 @@ const ProductList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {products.map((product, index) => (
+            {sweets.map((product, index) => (
               <ProductTableRow key={index} _id={index} product={product} />
             ))}
           </tbody>
@@ -124,9 +97,6 @@ const ProductList: React.FC = () => {
           </div>
         </Dialog>
       </Transition.Root>
-      {/*</div>*/}
-      {/*</div>*/}
-      {/*</div>*/}
     </Page>
   );
 };
@@ -162,22 +132,13 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
         </td>
         <td className="py-3 px-6 text-center">
           <div className="flex items-center justify-center">
-            <span>{product.priority}</span>
+            <span>{product.highlight}</span>
           </div>
         </td>
         <td className="py-3 px-6 text-center">
           <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
-            Published
+            {product.status}
           </span>
-          {/*<span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">*/}
-          {/*  Created*/}
-          {/*</span>*/}
-          {/*<span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">*/}
-          {/*  ???*/}
-          {/*</span>*/}
-          {/*<span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">*/}
-          {/*  Deleted*/}
-          {/*</span>*/}
         </td>
         <td className="py-3 px-6 text-center">
           <div className="flex item-center justify-center">

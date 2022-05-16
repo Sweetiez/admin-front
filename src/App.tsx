@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProductList from './components/Products/ProductList';
+import RecipeList from './components/Recipes/RecipeList';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 function App() {
   const queryClient = new QueryClient();
@@ -16,8 +18,10 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/products" element={<ProductList />} />
+            <Route path="/admin/recipes" element={<RecipeList />} />
           </Routes>
         </Router>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
   );
