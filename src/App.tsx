@@ -6,23 +6,26 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ProductList from './components/Products/ProductList';
 import RecipeList from './components/Recipes/RecipeList';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <div className="wrapper transition duration-500 dark:bg-gray-600 h-screen bg-gray-50">
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/admin" element={<Dashboard />} />
-            <Route path="/admin/products" element={<ProductList />} />
-            <Route path="/admin/recipes" element={<RecipeList />} />
-          </Routes>
-        </Router>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/admin" element={<Dashboard />} />
+              <Route path="/admin/products" element={<ProductList />} />
+              <Route path="/admin/recipes" element={<RecipeList />} />
+            </Routes>
+          </Router>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ToastProvider>
     </div>
   );
 }

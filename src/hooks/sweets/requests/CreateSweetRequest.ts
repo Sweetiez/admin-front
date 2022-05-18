@@ -1,4 +1,4 @@
-import Ingredients from '../../components/Products/Ingredients';
+import Ingredients from '../../../components/Products/Ingredients';
 
 export default class CreateSweetRequest {
   name: string | undefined;

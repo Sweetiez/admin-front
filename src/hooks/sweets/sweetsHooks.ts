@@ -1,7 +1,8 @@
 import { useQuery } from 'react-query';
-import { commonRequest } from '../utils/request';
+import { commonRequest } from '../common/request';
 import ProductModel from '../../components/Products/ProductModel';
-import CreateSweetRequest from './CreateSweetRequest';
+import CreateSweetRequest from './requests/CreateSweetRequest';
+import PublishSweetRequest from './requests/PublishSweetRequest';
 
 export function useSweets() {
   return useQuery<ProductModel[], Error>(`all-sweets`, async () => {
@@ -20,5 +21,14 @@ export async function createSweet(createSweetRequest: CreateSweetRequest) {
     data: createSweetRequest,
   });
 
+  return data;
+}
+
+export async function publishSweet(publishSweetRequest: PublishSweetRequest) {
+  const { data } = await commonRequest({
+    url: `sweets/publish`,
+    method: 'PUT',
+    data: publishSweetRequest,
+  });
   return data;
 }

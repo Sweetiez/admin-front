@@ -1,4 +1,4 @@
-import { commonRequest } from './utils/request';
+import { commonRequest } from '../common/request';
 
 const login = async (username: string, password: string): Promise<string> => {
   const { data } = await commonRequest({

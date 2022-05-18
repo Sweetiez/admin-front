@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
-import CreateSweetRequest from '../../hooks/sweets/CreateSweetRequest';
+import React from 'react';
+import CreateSweetRequest from '../../hooks/sweets/requests/CreateSweetRequest';
 import { useMutation } from 'react-query';
 import { createSweet } from '../../hooks/sweets/sweetsHooks';
 import ProductModel from './ProductModel';
+import { useQueryClient } from 'react-query';
+import { useToasts } from 'react-toast-notifications';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
 }
 const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
-  const [status, setStatus] = useState('');
-  const [message, setMessage] = useState('');
+  const queryClient = useQueryClient();
+  const { addToast } = useToasts();
 
   const { mutate } = useMutation(createSweet, {
-    onSuccess: (data: ProductModel) => {
-      setMessage(`Your benchmark ${data.name} has been saved`);
-      setStatus('Success');
+    onSuccess: async (data: ProductModel) => {
+      addToast(`Sweet ${data.name} created successfully`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      await queryClient.invalidateQueries('all-sweets');
+      setOpenedModal(false);
     },
     onError: (err: any) => {
-      setMessage(`Failed to create benchmark: ${err}`);
-      setStatus('Error');
+      addToast(err.message, { appearance: 'error', autoDismiss: true });
     },
   });
 
@@ -30,7 +35,10 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     const description = event.target.description.value;
 
     if (name === '' || price === '' || flavor === '' || description === '') {
-      alert('Please fill out all fields');
+      addToast('Please fill out all fields', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
       return;
     }
 
