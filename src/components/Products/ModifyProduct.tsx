@@ -81,7 +81,6 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
       });
     }
   }
-  console.log(sweetData);
 
   return (
     <div className="overflow-x-auto">
