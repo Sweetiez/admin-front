@@ -6,6 +6,7 @@ import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import Lottie from 'react-lottie-player';
 import animationJson from '../../assets/lotties/walking-celery.json';
+import { useTranslation } from 'react-i18next';
 
 interface PublishModalProps {
   product: ProductModelRow;
@@ -16,6 +17,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
   product,
   setOpenedModal,
 }) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
 
@@ -24,7 +26,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
     const result = await publishSweet(publishRequest);
     // refresh sweets
     await queryClient.invalidateQueries('all-sweets');
-    addToast(`Sweet published ${result.name.value}`, {
+    addToast(`${t('products.publish.alert_success')}: ${result.name.value}`, {
       appearance: 'info',
       autoDismiss: true,
     });
@@ -47,14 +49,12 @@ const PublishModal: React.FC<PublishModalProps> = ({
                 className="text-lg leading-6 font-medium text-gray-900"
                 id="modal-title"
               >
-                Publier la mignadise
+                {t('products.publish.title')}
               </h3>
               <div className="mt-2">
                 {/*<p className="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>*/}
                 <p className="text-sm text-gray-500">
-                  Êtes-vous vraiment certain de vouloir publier la mignardise ?
-                  Cette mignardise sera disponible à l'achat dans la boutique
-                  après cette action.
+                  {t('products.publish.description')}
                 </p>
               </div>
             </div>
@@ -71,7 +71,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
             type="button"
             className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Publier
+            {t('products.publish.publish_btn')}
           </button>
           <button
             onClick={() => {
@@ -80,12 +80,10 @@ const PublishModal: React.FC<PublishModalProps> = ({
             type="button"
             className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Cancel
+            {t('products.publish.cancel_btn')}
           </button>
         </div>
       </div>
-
-      {/*</div>*/}
     </>
   );
 };

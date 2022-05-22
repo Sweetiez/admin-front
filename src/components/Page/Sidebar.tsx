@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="flex overflow-hidden dark:bg-gray-800 bg-white ">
@@ -25,7 +28,7 @@ const Sidebar: React.FC = () => {
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                       </svg>
-                      <span className="ml-3">Dashboard</span>
+                      <span className="ml-3">{t('navigation.dashboard')}</span>
                     </div>
                   </li>
                   <li>
@@ -44,7 +47,7 @@ const Sidebar: React.FC = () => {
                           />
                         </svg>
                         <span className="ml-3 flex-1 whitespace-nowrap">
-                          Products
+                          {t('navigation.products')}
                         </span>
                       </div>
                     </Link>
@@ -65,7 +68,7 @@ const Sidebar: React.FC = () => {
                           />
                         </svg>
                         <span className="ml-3 flex-1 whitespace-nowrap">
-                          Recettes
+                          {t('navigation.recipe')}
                         </span>
                       </div>
                     </Link>

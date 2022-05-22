@@ -1,0 +1,70 @@
+{
+  "login": {
+    "title": "Pannel d'administration - FI-Sweets",
+    "subtitle": "Veuillez vous connecter",
+    "email": "Email",
+    "password": "Mot de passe",
+    "login_btn": "Se connecter",
+    "forgot_password": "Mot de passe oublié ?",
+    "alert_welcome": "Bienvenue",
+    "alert_failed_empty": "Email ou mot de passe vide",
+    "alert_failed_incorrect": "Email ou mot de passe incorrect"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "products": "Produits",
+    "recipe": "Recettes"
+  },
+  "products": {
+    "add_btn": "Ajouter un produit",
+    "title_all": "Tous les produits",
+    "title_online": "Produits en ligne",
+    "add": {
+      "title": "Ajouter un produit",
+      "name": "Nom",
+      "price": "Prix",
+      "flavor": "Saveur",
+      "description": "Description",
+      "cancel_btn": "Annuler",
+      "save_btn": "Créer",
+      "alert_success": "Mignardise ajouté avec succès",
+      "alert_failed_empty": "Merci de remplir tous les champs"
+    },
+    "update": {
+      "title": "Modifier un produit",
+      "name": "Nom",
+      "price": "Prix",
+      "flavor": "Saveur",
+      "highlight": "Mise en avant",
+      "description": "Description",
+      "img_upload_title": "Ajouté une image",
+      "img_upload_description": "Sélectionner une image",
+      "cancel_btn": "Annuler",
+      "modify_btn": "Modifier",
+      "alert_success": "Mignardise modifié succès",
+      "alert_img_upload": "Image ajouté avec succès",
+      "alert_failed": "Erreur lors de la modification de la mignardise"
+    },
+    "col_name": {
+      "product": "Nom",
+      "price": "Prix",
+      "highlight": "Mise en avant",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publier la mignardise",
+      "description": "Êtes-vous vraiment certain de vouloir publier la mignardise ? Cette mignardise sera disponible à l'achat dans la boutique après cette action.",
+      "cancel_btn": "Annuler",
+      "publish_btn": "Publier",
+      "alert_success": "Mignardise publiée"
+    },
+    "unpublish": {
+      "title": "Retirer la mignadise de la boutique",
+      "description": "Êtes-vous vraiment certain de vouloir retirer la mignardise de la boutique ? Cette mignardise ne sera plus disponible à l'achat dans la boutique après cette action.",
+      "cancel_btn": "Annuler",
+      "publish_btn": "Retirer",
+      "alert_success": "Mignardise retirée"
+    }
+  }
+}

@@ -8,6 +8,7 @@ import {
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient } from 'react-query';
 import UpdateSweetRequest from '../../hooks/sweets/requests/UpdateSweetRequest';
+import { useTranslation } from 'react-i18next';
 
 interface ModifyProductProps {
   product: ProductModelRow;
@@ -18,6 +19,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
   product,
   setOpenedModal,
 }) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const {
     isLoading: isSweetLoading,
@@ -46,7 +48,10 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     );
 
     await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-    addToast(`Image uploaded`, { appearance: 'success', autoDismiss: true });
+    addToast(`${t('products.update.alert_img_upload')}`, {
+      appearance: 'success',
+      autoDismiss: true,
+    });
   }
 
   async function handleModifySweet(event: any) {
@@ -73,10 +78,13 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-      addToast(`Sweet updated`, { appearance: 'success', autoDismiss: true });
+      addToast(`${t('products.update.alert_success')}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
       setOpenedModal(false);
     } else {
-      addToast(`Error updating sweet`, {
+      addToast(`${t('products.update.alert_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -90,20 +98,20 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl">
-                Product modification
+                {t('products.update.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              Name
+              {t('products.update.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder="Name"
+              placeholder={t('products.update.name')}
               defaultValue={sweetData?.name}
             />
           </div>
@@ -111,19 +119,19 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                Price
+                {t('products.update.price')}
               </label>
               <input
                 id="price"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
-                placeholder="Price"
+                placeholder={t('products.update.price')}
                 defaultValue={sweetData?.price}
               />
             </div>
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                Flavor
+                {t('products.update.flavor')}
               </label>
               <select
                 id="flavor"
@@ -139,7 +147,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              Highlight
+              {t('products.update.highlight')}
             </label>
             <select
               id="highlight"
@@ -154,20 +162,20 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              Description
+              {t('products.update.description')}
             </label>
             <input
               id="description"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder="Description"
+              placeholder={t('products.update.description')}
               defaultValue={sweetData?.description}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">
-              Upload Photo
+              {t('products.update.img_upload_title')}
             </label>
             <div className="flex items-center justify-center w-full">
               <label className="flex flex-col border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-purple-300 group">
@@ -187,7 +195,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
                     />
                   </svg>
                   <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider">
-                    Select a photo
+                    {t('products.update.img_upload_description')}
                   </p>
                 </div>
                 <input
@@ -210,11 +218,11 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              Cancel
+              {t('products.update.cancel_btn')}
             </button>
             <input
               type="submit"
-              value="Modify"
+              value={t('products.update.modify_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>
