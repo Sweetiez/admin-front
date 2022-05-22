@@ -6,6 +6,7 @@ import { Transition, Dialog } from '@headlessui/react';
 import { useSweets } from '../../hooks/sweets/sweetsHooks';
 import ModifyProduct from './ModifyProduct';
 import PublishModal from './PublishModal';
+import UnPublishModal from './UnPublishModal';
 
 const ProductList: React.FC = () => {
   const [addModalState, setAddModalState] = useState(false);
@@ -124,6 +125,7 @@ interface ProductRowProps {
 const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
   const [modifyModalState, setModifyModalState] = useState(false);
   const [publishModalState, setPublishModalState] = useState(false);
+  const [unPublishModalState, setUnPublishModalState] = useState(false);
 
   const lineColor = `border-b border-gray-200 ${
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
@@ -143,6 +145,71 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
     default:
       statusStyle = 'bg-brown-200 text-brown-600';
   }
+
+  const isPublished = product.status === 'PUBLISHED';
+
+  const publishSVG = (
+    <svg
+      fill="#FFF"
+      height="18"
+      viewBox="0 0 24 24"
+      width="18"
+      stroke="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+    </svg>
+  );
+
+  const unpublishedSVG = (
+    <svg
+      version="1.0"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="18px"
+      height="18px"
+      viewBox="0 0 64 64"
+      enableBackground="new 0 0 64 64"
+    >
+      <polygon
+        fill="none"
+        stroke="#000000"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        points="44,18 54,18 54,63 10,63 10,18 20,18 "
+      />
+      <line
+        fill="none"
+        stroke="#000000"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        x1="39"
+        y1="49"
+        x2="25"
+        y2="35"
+      />
+      <line
+        fill="none"
+        stroke="#000000"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        x1="25"
+        y1="49"
+        x2="39"
+        y2="35"
+      />
+      <path
+        fill="none"
+        stroke="#000000"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+        d="M22,24V11c0-5.523,4.477-10,10-10s10,4.477,10,10v13"
+      />
+    </svg>
+  );
 
   return (
     <>
@@ -209,20 +276,14 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
               </svg>
             </div>
             <div
-              onClick={() => setPublishModalState(true)}
+              onClick={
+                isPublished
+                  ? () => setUnPublishModalState(true)
+                  : () => setPublishModalState(true)
+              }
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
-              <svg
-                fill="#FFF"
-                height="18"
-                viewBox="0 0 24 24"
-                width="18"
-                stroke="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
-              </svg>
+              {isPublished ? unpublishedSVG : publishSVG}
             </div>
           </div>
         </td>
@@ -308,6 +369,50 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
                 <PublishModal
                   product={product}
                   setOpenedModal={setPublishModalState}
+                />
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
+      <Transition.Root show={unPublishModalState} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed z-10 inset-0 overflow-y-auto"
+          onClose={setUnPublishModalState}
+        >
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            </Transition.Child>
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <UnPublishModal
+                  product={product}
+                  setOpenedModal={setUnPublishModalState}
                 />
               </div>
             </Transition.Child>

@@ -5,6 +5,7 @@ import CreateSweetRequest from './requests/CreateSweetRequest';
 import PublishSweetRequest from './requests/PublishSweetRequest';
 import ProductModel from '../../components/Products/ProductModel';
 import UpdateSweetRequest from './requests/UpdateSweetRequest';
+import UnPublishSweetRequest from './requests/UnPublishSweetRequest';
 
 export function useSweets() {
   return useQuery<ProductModelRow[], Error>(`all-sweets`, async () => {
@@ -40,6 +41,15 @@ export async function publishSweet(publishSweetRequest: PublishSweetRequest) {
     url: `admin/sweets/publish`,
     method: 'PUT',
     data: publishSweetRequest,
+  });
+  return data;
+}
+
+export async function unPublishSweet(request: UnPublishSweetRequest) {
+  const { data } = await authenticatedRequest({
+    url: `admin/sweets/publish`,
+    method: 'DELETE',
+    data: request,
   });
   return data;
 }
