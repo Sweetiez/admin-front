@@ -7,8 +7,10 @@ import { useSweets } from '../../hooks/sweets/sweetsHooks';
 import ModifyProduct from './ModifyProduct';
 import PublishModal from './PublishModal';
 import UnPublishModal from './UnPublishModal';
+import { useTranslation } from 'react-i18next';
 
 const ProductList: React.FC = () => {
+  const { t } = useTranslation();
   const [addModalState, setAddModalState] = useState(false);
   let { data: sweets } = useSweets();
 
@@ -23,26 +25,36 @@ const ProductList: React.FC = () => {
           onClick={() => setAddModalState(true)}
           className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
         >
-          Add product
+          {t('products.add_btn')}
         </button>
       </>
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
         <div className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-5">
-          <div>Tous les produits</div>
+          <div>{t('products.title_all')}</div>
         </div>
         <div className="col-start-5 col-end-8">
-          <div>Produits en ligne</div>
+          <div>{t('products.title_online')}</div>
         </div>
 
         <table className="row-start-2 col-start-2 col-end-5 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Product</th>
-              <th className="py-3 px-6 text-left">Price</th>
-              <th className="py-3 px-6 text-center">Highlight</th>
-              <th className="py-3 px-6 text-center">Status</th>
-              <th className="py-3 px-6 text-center">Actions</th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.product')}
+              </th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.price')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.highlight')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.status')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.actions')}
+              </th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
@@ -57,11 +69,21 @@ const ProductList: React.FC = () => {
         <table className="row-start-2 col-start-5 col-end-8 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Product</th>
-              <th className="py-3 px-6 text-left">Price</th>
-              <th className="py-3 px-6 text-center">Highlight</th>
-              <th className="py-3 px-6 text-center">Status</th>
-              <th className="py-3 px-6 text-center">Actions</th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.product')}
+              </th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.price')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.highlight')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.status')}
+              </th>
+              <th className="py-3 px-6 text-center">
+                {t('products.col_name.actions')}
+              </th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">

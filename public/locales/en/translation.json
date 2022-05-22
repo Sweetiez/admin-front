@@ -1,0 +1,70 @@
+{
+  "login": {
+    "title": "Admin Panel - FI-Sweets",
+    "subtitle": "Please login to your account",
+    "email": "Email",
+    "password": "Password",
+    "login_btn": "Login",
+    "forgot_password": "Forgot Password?",
+    "alert_welcome": "Welcome",
+    "alert_failed_empty": "Email or password empty",
+    "alert_failed_incorrect": "Email or password incorrect"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "recipe": "Recipes"
+  },
+  "products": {
+    "add_btn": "Add Product",
+    "title_all": "All products",
+    "title_online": "Online products",
+    "add": {
+      "title": "Create sweet",
+      "name": "Name",
+      "price": "Price",
+      "flavor": "Flavor",
+      "description": "Description",
+      "cancel_btn": "Cancel",
+      "save_btn": "Create",
+      "alert_success": "Sweet created successfully",
+      "alert_failed_empty": "Thanks to fill all fields"
+    },
+    "update": {
+      "title": "Product modification",
+      "name": "Name",
+      "price": "Price",
+      "flavor": "Flavor",
+      "highlight": "Highlight",
+      "description": "Description",
+      "img_upload_title": "Upload image",
+      "img_upload_description": "Select an image",
+      "cancel_btn": "Cancel",
+      "modify_btn": "Modify",
+      "alert_success": "Sweet modified successfully",
+      "alert_img_upload": "Image uploaded successfully",
+      "alert_failed": "Error while modifying sweet"
+    },
+    "col_name": {
+      "product": "Name",
+      "price": "Price",
+      "highlight": "Highlight",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publish the sweet",
+      "description": "Are you really sure you want to publish the mignardise? This mignardise will be available for purchase in the store after this action.",
+      "cancel_btn": "Cancel",
+      "publish_btn": "Publish",
+      "alert_success": "Sweet published"
+    },
+    "unpublish": {
+      "title": "Remove the sweet from the store",
+      "description": "Are you sure you want to remove the sweet from the store? This sweet will no longer be available for purchase in the store after this action.",
+      "cancel_btn": "Cancel",
+      "publish_btn": "Unpublish",
+      "alert_success": "Sweet unpublished"
+    }
+  }
+}
