@@ -1,9 +1,52 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Lottie from 'react-lottie-player';
 import loadingSplash from '../../assets/lotties/splash-loading.json';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useToken } from '../../hooks/token';
+import { login } from '../../hooks/auth/register';
+import LoginRequest from '../../hooks/auth/requests/LoginRequest';
+import { useToasts } from 'react-toast-notifications';
 
 const Login: React.FC = () => {
+  const { addToast } = useToasts();
+  const navigate = useNavigate();
+  const { token, setToken } = useToken();
+
+  useEffect(() => {
+    if (token) {
+      navigate('/admin');
+    }
+  }, [token, navigate]);
+
+  const loginUser = async (event: any) => {
+    event.preventDefault();
+
+    const request = new LoginRequest(
+      event.target.username.value,
+      event.target.password.value,
+    );
+
+    if (request.username?.trim() === '' || request.password?.trim() === '') {
+      addToast(`Email or password are empty`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    try {
+      const response = await login(request);
+      addToast(`Welcome ${request.username}`, {
+        appearance: 'info',
+        autoDismiss: true,
+      });
+      setToken(response);
+      navigate('/admin/products');
+    } catch (e) {
+      addToast(`Login failed`, { appearance: 'error', autoDismiss: true });
+    }
+  };
+
   return (
     <div>
       <section className="h-screen gradient-form bg-gray-200">
@@ -23,36 +66,34 @@ const Login: React.FC = () => {
                         Admin Panel - FI-Sweets
                       </h4>
                     </div>
-                    <form>
+                    <form onSubmit={loginUser}>
                       <p className="mb-4">Please login to your account</p>
                       <div className="mb-4">
                         <input
                           type="text"
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                          id="exampleFormControlInput1"
-                          placeholder="Username"
+                          id="username"
+                          placeholder="Email"
                         />
                       </div>
                       <div className="mb-4">
                         <input
                           type="password"
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                          id="exampleFormControlInput1"
+                          id="password"
                           placeholder="Password"
                         />
                       </div>
                       <div className="text-center pt-1 mb-3 pb-1">
-                        <Link to={'/admin'}>
+                        <button type="submit">
                           <div
                             className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md bg-blue-500 hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                             // type="button"
                           >
                             Log in
                           </div>
-                        </Link>
-                        <div className="text-gray-500" >
-                          Forgot password?
-                        </div>
+                        </button>
+                        <div className="text-gray-500">Forgot password?</div>
                       </div>
                     </form>
                   </div>

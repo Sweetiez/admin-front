@@ -72,6 +72,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     const response = await updateSweet(request);
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
+      await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
       addToast(`Sweet updated`, { appearance: 'success', autoDismiss: true });
       setOpenedModal(false);
     } else {
@@ -85,30 +86,10 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
   return (
     <div className="overflow-x-auto">
       <div className="grid bg-white rounded-lg shadow-xl w-fit">
-        <div className="flex justify-center py-4">
-          <div className="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
-            <svg
-              className="w-8 h-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-              />
-            </svg>
-          </div>
-        </div>
-
-        {/*<form>*/}
         <form onSubmit={handleModifySweet}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl">
                 Product modification
               </h1>
             </div>
@@ -214,15 +195,11 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
                   className="hidden"
                   onChange={onSubmitUploadFile}
                 />
-                {/*<input*/}
-                {/*    type="hidden"*/}
-                {/*    {...register("thumbnail", { required: true })}*/}
-                {/*/>*/}
               </label>
             </div>
-            <div>
-              {sweetData?.images?.map((image, index) => (
-                <p key={index}>{image}</p>
+            <div className="flex pt-3">
+              {sweetData?.images?.map((image) => (
+                <img className="mr-3 w-16 h-16" src={image} alt="thumbnail" />
               ))}
             </div>
           </div>

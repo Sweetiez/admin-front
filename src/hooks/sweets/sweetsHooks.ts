@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { commonRequest } from '../common/request';
+import { authenticatedRequest } from '../common/request';
 import ProductModelRow from '../../components/Products/ProductModelRow';
 import CreateSweetRequest from './requests/CreateSweetRequest';
 import PublishSweetRequest from './requests/PublishSweetRequest';
@@ -8,7 +8,7 @@ import UpdateSweetRequest from './requests/UpdateSweetRequest';
 
 export function useSweets() {
   return useQuery<ProductModelRow[], Error>(`all-sweets`, async () => {
-    const { data } = await commonRequest({
+    const { data } = await authenticatedRequest({
       url: `admin/sweets`,
     });
     return data;
@@ -18,7 +18,7 @@ export function useSweets() {
 export function useSweetById(id: string) {
   return useQuery<ProductModel, Error>(`sweet-${id}`, async () => {
     if (id) {
-      const { data } = await commonRequest({
+      const { data } = await authenticatedRequest({
         url: `admin/sweets/${id}`,
       });
       return data;
@@ -27,7 +27,7 @@ export function useSweetById(id: string) {
 }
 
 export async function createSweet(createSweetRequest: CreateSweetRequest) {
-  const { data } = await commonRequest({
+  const { data } = await authenticatedRequest({
     url: `admin/sweets`,
     method: 'POST',
     data: createSweetRequest,
@@ -36,7 +36,7 @@ export async function createSweet(createSweetRequest: CreateSweetRequest) {
 }
 
 export async function publishSweet(publishSweetRequest: PublishSweetRequest) {
-  const { data } = await commonRequest({
+  const { data } = await authenticatedRequest({
     url: `admin/sweets/publish`,
     method: 'PUT',
     data: publishSweetRequest,
@@ -48,7 +48,7 @@ export async function uploadSweetImage(sweetId: string, image: File) {
   const formData = new FormData();
   formData.append('image', image);
 
-  const { data } = await commonRequest({
+  const { data } = await authenticatedRequest({
     url: `admin/sweets/${sweetId}/image`,
     method: 'POST',
     data: formData,
@@ -58,7 +58,7 @@ export async function uploadSweetImage(sweetId: string, image: File) {
 }
 
 export async function updateSweet(request: UpdateSweetRequest) {
-  const { data } = await commonRequest({
+  const { data } = await authenticatedRequest({
     url: `admin/sweets`,
     method: 'PUT',
     data: request,

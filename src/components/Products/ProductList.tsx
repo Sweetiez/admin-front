@@ -36,7 +36,7 @@ const ProductList: React.FC = () => {
           <div>Produits en ligne</div>
         </div>
 
-        <table className="row-start-2 col-start-2 col-end-5">
+        <table className="row-start-2 col-start-2 col-end-5 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Product</th>
@@ -54,7 +54,8 @@ const ProductList: React.FC = () => {
               ))}
           </tbody>
         </table>
-        <table className="row-start-2 col-start-5 col-end-8">
+
+        <table className="row-start-2 col-start-5 col-end-8 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Product</th>
@@ -132,11 +133,10 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
   } hover:bg-gray-100`;
 
-  async function handlePublishSweet(id: string) {
-    const publishRequest = new PublishSweetRequest(id, 'BANNER');
+  async function handlePublishSweet(id: string, highlight: string) {
+    const publishRequest = new PublishSweetRequest(id, highlight);
     const result = await publishSweet(publishRequest);
     // refresh sweets
-    console.log(result);
     await queryClient.invalidateQueries('all-sweets');
     addToast(`Sweet published ${result.name.value}`, {
       appearance: 'info',
@@ -216,7 +216,12 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
               </svg>
             </div>
             <div
-              onClick={() => handlePublishSweet(product.id ? product.id : '')}
+              onClick={() =>
+                handlePublishSweet(
+                  product.id ? product.id : '',
+                  product.highlight ? product.highlight : '',
+                )
+              }
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
               <svg
