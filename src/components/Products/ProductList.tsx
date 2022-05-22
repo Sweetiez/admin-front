@@ -39,7 +39,7 @@ const ProductList: React.FC = () => {
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Product</th>
               <th className="py-3 px-6 text-left">Price</th>
-              <th className="py-3 px-6 text-center">Priority</th>
+              <th className="py-3 px-6 text-center">Highlight</th>
               <th className="py-3 px-6 text-center">Status</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
@@ -58,7 +58,7 @@ const ProductList: React.FC = () => {
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">Product</th>
               <th className="py-3 px-6 text-left">Price</th>
-              <th className="py-3 px-6 text-center">Priority</th>
+              <th className="py-3 px-6 text-center">Highlight</th>
               <th className="py-3 px-6 text-center">Status</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
@@ -129,18 +129,26 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
   } hover:bg-gray-100`;
 
+  let statusStyle: string;
+  switch (product.status) {
+    case 'PUBLISHED':
+      statusStyle = 'bg-green-200 text-green-600';
+      break;
+    case 'CREATED':
+      statusStyle = 'bg-indigo-200 text-indigo-600';
+      break;
+    case 'DELETED':
+      statusStyle = 'bg-red-200 text-red-600';
+      break;
+    default:
+      statusStyle = 'bg-brown-200 text-brown-600';
+  }
+
   return (
     <>
       <tr className={lineColor}>
         <td className="py-3 px-6 text-left">
           <div className="flex items-center">
-            {/*<div className="mr-2">*/}
-            {/*  <img*/}
-            {/*    className="w-6 h-6"*/}
-            {/*    src="https://img.icons8.com/color/48/000000/php.png"*/}
-            {/*    alt="img1"*/}
-            {/*  />*/}
-            {/*</div>*/}
             <span className="font-medium">{product.name}</span>
           </div>
         </td>
@@ -155,7 +163,7 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
           </div>
         </td>
         <td className="py-3 px-6 text-center">
-          <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+          <span className={`${statusStyle} py-1 px-3 rounded-full text-xs`}>
             {product.status}
           </span>
         </td>
@@ -201,12 +209,6 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
               </svg>
             </div>
             <div
-              // onClick={() =>
-              //   handlePublishSweet(
-              //     product.id ? product.id : '',
-              //     product.highlight ? product.highlight : '',
-              //   )
-              // }
               onClick={() => setPublishModalState(true)}
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
