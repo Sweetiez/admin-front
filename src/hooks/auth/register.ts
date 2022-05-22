@@ -1,16 +1,16 @@
-import { commonRequest } from './utils/request';
+import { commonRequest, loginRequest } from '../common/request';
+import LoginRequest from './requests/LoginRequest';
 
-const login = async (username: string, password: string): Promise<string> => {
-  const { data } = await commonRequest({
+const login = async (request: LoginRequest): Promise<string> => {
+  const token = await loginRequest({
     url: `/auth/login`,
     method: 'POST',
     data: {
-      username: username,
-      password: password,
+      username: request.username,
+      password: request.password,
     },
   });
-
-  return data.access_token;
+  return token.slice(7);
 };
 
 const register = async (

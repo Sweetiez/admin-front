@@ -1,10 +1,11 @@
-import Page from './Page/Page';
+import React from 'react';
+import Login from './Auth/Login';
 
 const Landing: React.FC = () => {
   return (
-    <Page>
-      <h1>Landing</h1>
-    </Page>
+    <>
+      <Login />
+    </>
   );
 };
 
