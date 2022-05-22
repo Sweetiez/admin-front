@@ -4,6 +4,7 @@ import UnPublishSweetRequest from '../../hooks/sweets/requests/UnPublishSweetReq
 import { unPublishSweet } from '../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
+import { useTranslation } from 'react-i18next';
 
 interface UnPublishModalProps {
   product: ProductModelRow;
@@ -14,6 +15,7 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
   product,
   setOpenedModal,
 }) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
 
@@ -22,7 +24,7 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
     const result = await unPublishSweet(request);
     // refresh sweets
     await queryClient.invalidateQueries('all-sweets');
-    addToast(`Sweet ${result.name.value} unpublished`, {
+    addToast(`${t('products.unpublish.alert_success')}: ${result.name.value}`, {
       appearance: 'info',
       autoDismiss: true,
     });
@@ -56,14 +58,12 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
                 className="text-lg leading-6 font-medium text-gray-900"
                 id="modal-title"
               >
-                Retirer la mignadise de la boutique
+                {t('products.unpublish.title')}
               </h3>
               <div className="mt-2">
                 {/*<p className="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>*/}
                 <p className="text-sm text-gray-500">
-                  Êtes-vous vraiment certain de vouloir retirer la mignardise de
-                  la boutique ? Cette mignardise ne sera plus disponible à
-                  l'achat dans la boutique après cette action.
+                  {t('products.unpublish.description')}
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
             type="button"
             className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Retirer
+            {t('products.unpublish.publish_btn')}
           </button>
           <button
             onClick={() => {
@@ -84,12 +84,10 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
             type="button"
             className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Cancel
+            {t('products.unpublish.cancel_btn')}
           </button>
         </div>
       </div>
-
-      {/*</div>*/}
     </>
   );
 };
