@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductModelRow from './ProductModelRow';
 import PublishSweetRequest from '../../hooks/sweets/requests/PublishSweetRequest';
-import { publishSweet } from '../../hooks/sweets/sweetsHooks';
+import { publishSweet, useSweetById } from '../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import Lottie from 'react-lottie-player';
@@ -18,10 +18,23 @@ const PublishModal: React.FC<PublishModalProps> = ({
   setOpenedModal,
 }) => {
   const { t } = useTranslation();
+  const { data: sweetData } = useSweetById(product.id ? product.id : '');
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
 
-  async function handlePublishSweet(id: string, highlight: string) {
+  async function handlePublishSweet(
+    id: string,
+    highlight: string,
+    images: string[],
+  ) {
+    if (images.length <= 0 || images[0] === '') {
+      addToast(t('products.publish.alert_fail_images'), {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return;
+    }
+
     const publishRequest = new PublishSweetRequest(id, highlight);
     const result = await publishSweet(publishRequest);
     // refresh sweets
@@ -66,6 +79,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
               handlePublishSweet(
                 product?.id ? product?.id : '',
                 product?.highlight ? product?.highlight : '',
+                sweetData?.images ? sweetData?.images : [],
               )
             }
             type="button"

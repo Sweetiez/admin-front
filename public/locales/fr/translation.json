@@ -43,6 +43,7 @@
       "modify_btn": "Modifier",
       "alert_success": "Mignardise modifié succès",
       "alert_img_upload": "Image ajouté avec succès",
+      "alert_img_delete": "Image supprimé avec succès",
       "alert_failed": "Erreur lors de la modification de la mignardise"
     },
     "col_name": {
@@ -57,7 +58,8 @@
       "description": "Êtes-vous vraiment certain de vouloir publier la mignardise ? Cette mignardise sera disponible à l'achat dans la boutique après cette action.",
       "cancel_btn": "Annuler",
       "publish_btn": "Publier",
-      "alert_success": "Mignardise publiée"
+      "alert_success": "Mignardise publiée",
+      "alert_fail_images": "Merci d'ajouter au moins une image à la mignardise"
     },
     "unpublish": {
       "title": "Retirer la mignadise de la boutique",
