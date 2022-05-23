@@ -31,8 +31,8 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/admin-front:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/admin-front:${{ steps.get_tag.outputs.tag }}
 
-#      - name: Deploy on DEV server
-#        uses: fjogeleit/http-request-action@master
-#        with:
-#          url: ${{ secrets.WEBHOOK_DEV_SERVER_URL }}
-#          method: POST
+      - name: Deploy on DEV server
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: ${{ secrets.WEBHOOK_DEV_SERVER_URL }}
+          method: POST
