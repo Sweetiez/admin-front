@@ -6,6 +6,7 @@ import PublishSweetRequest from './requests/PublishSweetRequest';
 import ProductModel from '../../components/Products/ProductModel';
 import UpdateSweetRequest from './requests/UpdateSweetRequest';
 import UnPublishSweetRequest from './requests/UnPublishSweetRequest';
+import DeleteImageRequest from './requests/DeleteImageRequest';
 
 export function useSweets() {
   return useQuery<ProductModelRow[], Error>(`all-sweets`, async () => {
@@ -62,6 +63,19 @@ export async function uploadSweetImage(sweetId: string, image: File) {
     url: `admin/sweets/${sweetId}/image`,
     method: 'POST',
     data: formData,
+  });
+
+  return data;
+}
+
+export async function deleteSweetImage(
+  id: string,
+  request: DeleteImageRequest,
+) {
+  const { data } = await authenticatedRequest({
+    url: `admin/sweets/${id}/image`,
+    method: 'DELETE',
+    data: request,
   });
 
   return data;

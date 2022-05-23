@@ -1,6 +1,7 @@
 import ProductModelRow from './ProductModelRow';
 import React from 'react';
 import {
+  deleteSweetImage,
   updateSweet,
   uploadSweetImage,
   useSweetById,
@@ -9,6 +10,7 @@ import { useToasts } from 'react-toast-notifications';
 import { useQueryClient } from 'react-query';
 import UpdateSweetRequest from '../../hooks/sweets/requests/UpdateSweetRequest';
 import { useTranslation } from 'react-i18next';
+import DeleteImageRequest from '../../hooks/sweets/requests/DeleteImageRequest';
 
 interface ModifyProductProps {
   product: ProductModelRow;
@@ -83,6 +85,24 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
         autoDismiss: true,
       });
       setOpenedModal(false);
+    } else {
+      addToast(`${t('products.update.alert_failed')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  }
+
+  async function onDeleteImage(id: string, url: string) {
+    const request = new DeleteImageRequest(url);
+    const response = await deleteSweetImage(id, request);
+    if (response) {
+      await queryClient.invalidateQueries(`all-sweets`);
+      await queryClient.invalidateQueries(`sweet-${id}`);
+      addToast(`${t('products.update.alert_img_delete')}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
     } else {
       addToast(`${t('products.update.alert_failed')}`, {
         appearance: 'error',
@@ -207,12 +227,37 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
             </div>
             <div className="flex pt-3">
               {sweetData?.images?.map((image) => (
-                <img className="mr-3 w-16 h-16" src={image} alt="thumbnail" />
+                <div className="mr-3 w-16 h-16">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onDeleteImage(sweetData?.id ? sweetData?.id : '', image)
+                    }
+                    className="absolute w-5 h-5 bg-red-500"
+                  >
+                    <svg
+                      className="mt-0.5 ml-0.5 w-4 h-4 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </button>
+                  <img src={image} alt="thumbnail" />
+                </div>
               ))}
             </div>
           </div>
           <div className="flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5">
             <button
+              type="button"
               onClick={() => {
                 setOpenedModal(false);
               }}

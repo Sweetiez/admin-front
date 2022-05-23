@@ -43,6 +43,7 @@
       "modify_btn": "Modifier",
       "alert_success": "Mignardise modifié succès",
       "alert_img_upload": "Image ajouté avec succès",
+      "alert_img_delete": "Image supprimé avec succès",
       "alert_failed": "Erreur lors de la modification de la mignardise"
     },
     "col_name": {

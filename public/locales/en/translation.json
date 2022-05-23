@@ -43,6 +43,7 @@
       "modify_btn": "Modify",
       "alert_success": "Sweet modified successfully",
       "alert_img_upload": "Image uploaded successfully",
+      "alert_img_delete": "Failed to delete image",
       "alert_failed": "Error while modifying sweet"
     },
     "col_name": {
