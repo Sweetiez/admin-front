@@ -57,7 +57,8 @@
       "description": "Are you really sure you want to publish the mignardise? This mignardise will be available for purchase in the store after this action.",
       "cancel_btn": "Cancel",
       "publish_btn": "Publish",
-      "alert_success": "Sweet published"
+      "alert_success": "Sweet published",
+      "alert_fail_images": "Thanks to add at least one image"
     },
     "unpublish": {
       "title": "Remove the sweet from the store",

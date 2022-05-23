@@ -57,7 +57,8 @@
       "description": "Êtes-vous vraiment certain de vouloir publier la mignardise ? Cette mignardise sera disponible à l'achat dans la boutique après cette action.",
       "cancel_btn": "Annuler",
       "publish_btn": "Publier",
-      "alert_success": "Mignardise publiée"
+      "alert_success": "Mignardise publiée",
+      "alert_fail_images": "Merci d'ajouter au moins une image à la mignardise"
     },
     "unpublish": {
       "title": "Retirer la mignadise de la boutique",
