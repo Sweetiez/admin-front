@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { getToken } from '../token';
+import { getToken } from '../auth/token';
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_API_ENDPOINT,
