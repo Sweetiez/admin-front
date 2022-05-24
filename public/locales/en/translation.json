@@ -1,4 +1,10 @@
 {
+  "auth": {
+    "unauthorized": "Access unauthorized"
+  },
+  "logout": {
+    "success": "Logout successful"
+  },
   "login": {
     "title": "Admin Panel - FI-Sweets",
     "subtitle": "Please login to your account",
@@ -13,7 +19,8 @@
   "navigation": {
     "dashboard": "Dashboard",
     "products": "Products",
-    "recipe": "Recipes"
+    "recipe": "Recipes",
+    "logout": "Logout"
   },
   "products": {
     "add_btn": "Add Product",

@@ -1,9 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import RoleRenderBasedAccess from '../Auth/RoleRenderBasedAccess';
+import { Role } from '../../hooks/auth/access/Roles';
+import { logout } from '../../hooks/auth/access/access';
+import { useToasts } from 'react-toast-notifications';
 
 const Sidebar: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { addToast } = useToasts();
+
+  function handleLogout() {
+    logout();
+    addToast(t('logout.success'), { appearance: 'success', autoDismiss: true });
+    navigate('/');
+  }
 
   return (
     <>
@@ -53,25 +65,27 @@ const Sidebar: React.FC = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/admin/recipes">
-                      <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
-                        <svg
-                          className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        <span className="ml-3 flex-1 whitespace-nowrap">
-                          {t('navigation.recipe')}
-                        </span>
-                      </div>
-                    </Link>
+                    <RoleRenderBasedAccess role={Role.ADMIN}>
+                      <Link to="/admin/recipes">
+                        <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
+                          <svg
+                            className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="ml-3 flex-1 whitespace-nowrap">
+                            {t('navigation.recipe')}
+                          </span>
+                        </div>
+                      </Link>
+                    </RoleRenderBasedAccess>
                   </li>
                   <li>
                     <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
@@ -130,7 +144,11 @@ const Sidebar: React.FC = () => {
                     </div>
                   </li>
                   <li>
-                    <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group "
+                    >
                       <svg
                         className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                         fill="currentColor"
@@ -144,9 +162,9 @@ const Sidebar: React.FC = () => {
                         />
                       </svg>
                       <span className="ml-3 flex-1 whitespace-nowrap">
-                        Sign In
+                        {t('navigation.logout')}
                       </span>
-                    </div>
+                    </button>
                   </li>
                 </ul>
                 <div className="space-y-2 pt-2">

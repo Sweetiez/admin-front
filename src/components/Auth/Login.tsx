@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import Lottie from 'react-lottie-player';
 import loadingSplash from '../../assets/lotties/splash-loading.json';
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../../hooks/token';
+import { useToken } from '../../hooks/auth/token';
 import { login } from '../../hooks/auth/register';
 import LoginRequest from '../../hooks/auth/requests/LoginRequest';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
+import { isAuthorized, logout } from '../../hooks/auth/access/access';
+import { Role } from '../../hooks/auth/access/Roles';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -38,12 +40,22 @@ const Login: React.FC = () => {
 
     try {
       const response = await login(request);
-      addToast(`${t('login.alert_welcome')} ${request.username}`, {
-        appearance: 'info',
-        autoDismiss: true,
-      });
       setToken(response);
-      navigate('/admin/products');
+      const isAuthorize = isAuthorized(Role.ADMIN);
+      if (!isAuthorize) {
+        logout();
+        addToast(`${t('auth.unauthorized')}`, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+        navigate('/');
+      } else {
+        addToast(`${t('login.alert_welcome')} ${request.username}`, {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+        navigate('/admin/products');
+      }
     } catch (e) {
       addToast(`${t('login.alert_failed_incorrect')}`, {
         appearance: 'error',

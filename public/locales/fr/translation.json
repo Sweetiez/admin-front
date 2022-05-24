@@ -1,4 +1,10 @@
 {
+  "auth": {
+    "unauthorized": "Accès non autorisé"
+  },
+  "logout": {
+    "success": "Déconnexion réussie"
+  },
   "login": {
     "title": "Pannel d'administration - FI-Sweets",
     "subtitle": "Veuillez vous connecter",
@@ -13,7 +19,8 @@
   "navigation": {
     "dashboard": "Tableau de bord",
     "products": "Produits",
-    "recipe": "Recettes"
+    "recipe": "Recettes",
+    "logout": "Se déconnecter"
   },
   "products": {
     "add_btn": "Ajouter un produit",

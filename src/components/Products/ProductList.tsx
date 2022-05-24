@@ -2,12 +2,14 @@ import React, { Fragment, useState } from 'react';
 import Page from '../Page/Page';
 import ProductModelRow from './ProductModelRow';
 import CreateProduct from './CreateProduct';
-import { Transition, Dialog } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 import { useSweets } from '../../hooks/sweets/sweetsHooks';
 import ModifyProduct from './ModifyProduct';
 import PublishModal from './PublishModal';
 import UnPublishModal from './UnPublishModal';
 import { useTranslation } from 'react-i18next';
+import AccessRoleController from '../Auth/AccessRoleController';
+import { Role } from '../../hooks/auth/access/Roles';
 
 const ProductList: React.FC = () => {
   const { t } = useTranslation();
@@ -21,6 +23,7 @@ const ProductList: React.FC = () => {
   return (
     <Page>
       <>
+        <AccessRoleController redirect="/" role={Role.ADMIN} />
         <button
           onClick={() => setAddModalState(true)}
           className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
