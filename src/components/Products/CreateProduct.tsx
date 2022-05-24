@@ -2,7 +2,7 @@ import React from 'react';
 import CreateSweetRequest from '../../hooks/sweets/requests/CreateSweetRequest';
 import { useMutation } from 'react-query';
 import { createSweet } from '../../hooks/sweets/sweetsHooks';
-import ProductModelRow from './ProductModelRow';
+import ProductModelRow from './models/ProductModelRow';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';

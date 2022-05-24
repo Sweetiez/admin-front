@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import Page from '../Page/Page';
-import ProductModelRow from './ProductModelRow';
+import ProductModelRow from './models/ProductModelRow';
 import CreateProduct from './CreateProduct';
 import { Dialog, Transition } from '@headlessui/react';
 import { useSweets } from '../../hooks/sweets/sweetsHooks';
