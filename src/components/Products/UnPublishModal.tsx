@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductModelRow from './ProductModelRow';
+import ProductModelRow from './models/ProductModelRow';
 import UnPublishSweetRequest from '../../hooks/sweets/requests/UnPublishSweetRequest';
 import { unPublishSweet } from '../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';

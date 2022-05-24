@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 import { authenticatedRequest } from '../common/request';
-import ProductModelRow from '../../components/Products/ProductModelRow';
+import ProductModelRow from '../../components/Products/models/ProductModelRow';
 import CreateSweetRequest from './requests/CreateSweetRequest';
 import PublishSweetRequest from './requests/PublishSweetRequest';
-import ProductModel from '../../components/Products/ProductModel';
+import ProductModel from '../../components/Products/models/ProductModel';
 import UpdateSweetRequest from './requests/UpdateSweetRequest';
 import UnPublishSweetRequest from './requests/UnPublishSweetRequest';
 import DeleteImageRequest from './requests/DeleteImageRequest';

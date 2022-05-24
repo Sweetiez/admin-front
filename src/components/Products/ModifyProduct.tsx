@@ -1,4 +1,4 @@
-import ProductModelRow from './ProductModelRow';
+import ProductModelRow from './models/ProductModelRow';
 import React from 'react';
 import {
   deleteSweetImage,
