@@ -1,8 +1,9 @@
 import { commonRequest, loginRequest } from '../common/request';
 import LoginRequest from './requests/LoginRequest';
+import LoginResponse from './responses/LoginResponse';
 
-const login = async (request: LoginRequest): Promise<string> => {
-  const token = await loginRequest({
+const login = async (request: LoginRequest): Promise<LoginResponse> => {
+  return await loginRequest({
     url: `/auth/login`,
     method: 'POST',
     data: {
@@ -10,7 +11,6 @@ const login = async (request: LoginRequest): Promise<string> => {
       password: request.password,
     },
   });
-  return token.slice(7);
 };
 
 const register = async (
