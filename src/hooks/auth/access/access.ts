@@ -16,6 +16,7 @@ export function isAuthorized(role: Role): boolean {
 
 export function logout() {
   localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
 }
 
 export function parseJwt(token: string): DecodedToken {
@@ -23,4 +24,8 @@ export function parseJwt(token: string): DecodedToken {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace('-', '+').replace('_', '/');
   return JSON.parse(window.atob(base64));
+}
+
+export function cleanToken(token: string): string {
+  return token.slice(7);
 }

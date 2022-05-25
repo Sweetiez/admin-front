@@ -1,5 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getToken } from '../auth/token';
+import LoginResponse from '../auth/responses/LoginResponse';
+import { cleanToken, logout } from '../auth/access/access';
+import { getRefreshToken } from '../auth/refreshToken';
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_API_ENDPOINT,
@@ -12,7 +15,21 @@ const authenticatedRequest = (options: AxiosRequestConfig) => {
   // commonRequest(options);
   const onSuccess = (response: any) => response;
   const onError = (error: any) => {
-    // optionaly catch errors and add some additional logging here
+    if (error.response.status === 403) {
+      client.defaults.headers.common.Authorization = `Bearer ${getRefreshToken()}`;
+      client({ timeout: 5000, url: `/auth/refresh/token`, method: 'GET' })
+        .then((response: any) => {
+          localStorage.setItem(
+            'access_token',
+            cleanToken(response.headers['authorization']),
+          );
+        })
+        .catch((error: any) => {
+          logout();
+          return error;
+        });
+    }
+    // optionally catch errors and add some additional logging here
     return error;
   };
 
@@ -28,7 +45,7 @@ const commonRequest = (options: AxiosRequestConfig) => {
   };
   const onError = (error: any) => {
     throw error;
-    // optionaly catch errors and add some additional logging here
+    // optionally catch errors and add some additional logging here
     // return error;
   };
 
@@ -38,10 +55,15 @@ const commonRequest = (options: AxiosRequestConfig) => {
 };
 
 const loginRequest = (options: AxiosRequestConfig) => {
-  const onSuccess = (response: any) => response.headers['authorization'];
+  const onSuccess = (response: any) => {
+    return new LoginResponse(
+      cleanToken(response.headers['authorization']),
+      cleanToken(response.headers['refresh-token']),
+    );
+  };
   const onError = (error: any) => {
     throw error;
-    // optionaly catch errors and add some additional logging here
+    // optionally catch errors and add some additional logging here
     // return error;
   };
 
