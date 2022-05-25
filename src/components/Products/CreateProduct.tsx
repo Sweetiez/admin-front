@@ -6,6 +6,7 @@ import ProductModelRow from './models/ProductModelRow';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
+import { capitalizeFirstLetter } from '../../hooks/utils/strings';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -31,10 +32,10 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
   const submitSweetCreation = async (event: any) => {
     event.preventDefault();
-    const name = event.target.name.value;
+    const name = capitalizeFirstLetter(event.target.name.value);
     const price = event.target.price.value;
     const flavor = event.target.flavor.value;
-    const description = event.target.description.value;
+    const description = capitalizeFirstLetter(event.target.description.value);
 
     if (name === '' || price === '' || flavor === '' || description === '') {
       addToast(`${t('products.add.alert_failed_empty')}`, {
