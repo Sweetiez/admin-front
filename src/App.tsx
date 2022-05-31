@@ -7,6 +7,7 @@ import ProductList from './components/Products/ProductList';
 import RecipeList from './components/Recipes/RecipeList';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastProvider } from 'react-toast-notifications';
+import Orders from './components/Orders/Orders';
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/admin" element={<Dashboard />} />
+              <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/products" element={<ProductList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
             </Routes>

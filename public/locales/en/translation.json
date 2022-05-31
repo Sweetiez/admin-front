@@ -18,9 +18,17 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
+    "orders": "Orders",
     "products": "Products",
     "recipe": "Recipes",
     "logout": "Logout"
+  },
+  "orders": {
+    "title" : "Orders",
+    "checkbox-label": "Show delivered orders",
+    "createdAt": "Ordered at",
+    "pickupDate": "Recovery date",
+    "totalPrice": "Total price"
   },
   "products": {
     "add_btn": "Add Product",

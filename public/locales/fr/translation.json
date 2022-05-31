@@ -18,9 +18,17 @@
   },
   "navigation": {
     "dashboard": "Tableau de bord",
+    "orders": "Commandes",
     "products": "Produits",
     "recipe": "Recettes",
     "logout": "Se déconnecter"
+  },
+  "orders": {
+    "title" : "Commandes en cours",
+    "checkbox-label": "Afficher les commandes réceptionnés",
+    "createdAt": "Commandé le",
+    "pickupDate": "Commande prévue pour le",
+    "totalPrice": "Prix total"
   },
   "products": {
     "add_btn": "Ajouter un produit",
