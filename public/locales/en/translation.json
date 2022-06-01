@@ -18,9 +18,26 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
+    "orders": "Orders",
     "products": "Products",
     "recipe": "Recipes",
     "logout": "Logout"
+  },
+  "orders": {
+    "title" : "Orders",
+    "checkbox-label": "Show delivered orders",
+    "createdAt": "Ordered at",
+    "pickupDate": "Recovery date",
+    "totalPrice": "Total price",
+    "status-modal": {
+      "client-ref": "Order reference",
+      "client-contact": "Contact",
+      "status-selector" : "Status",
+      "submit" : "Update",
+      "cancel" : "Cancel",
+      "alert_success": "Status updated",
+      "alert_failed": "Status update failed"
+    }
   },
   "products": {
     "add_btn": "Add Product",

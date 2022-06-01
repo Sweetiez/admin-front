@@ -9,12 +9,14 @@ import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
 import { isAuthorized, logout } from '../../hooks/auth/access/access';
 import { Role } from '../../hooks/auth/access/Roles';
+import { useRefreshToken } from '../../hooks/auth/refreshToken';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
   const { addToast } = useToasts();
   const navigate = useNavigate();
   const { token, setToken } = useToken();
+  const { setRefreshToken } = useRefreshToken();
 
   useEffect(() => {
     if (token) {
@@ -40,7 +42,8 @@ const Login: React.FC = () => {
 
     try {
       const response = await login(request);
-      setToken(response);
+      setToken(response.token);
+      setRefreshToken(response.refreshToken);
       const isAuthorize = isAuthorized(Role.ADMIN);
       if (!isAuthorize) {
         logout();
