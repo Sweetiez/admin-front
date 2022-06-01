@@ -36,11 +36,10 @@ const ProductList: React.FC = () => {
         <div className="col-start-2 col-end-5">
           <div>{t('products.title_all')}</div>
         </div>
-        <div className="col-start-5 col-end-8">
+        <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
           <div>{t('products.title_online')}</div>
         </div>
-
-        <table className="row-start-2 col-start-2 col-end-5 h-40">
+        <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
@@ -68,8 +67,7 @@ const ProductList: React.FC = () => {
               ))}
           </tbody>
         </table>
-
-        <table className="row-start-2 col-start-5 col-end-8 h-40">
+        <table className="row-start-4 2xl:row-start-2 col-start-2 2xl:col-start-5 col-end-8 2xl:col-end-8 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
