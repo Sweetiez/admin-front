@@ -24,11 +24,20 @@
     "logout": "Se déconnecter"
   },
   "orders": {
-    "title" : "Commandes en cours",
+    "title": "Commandes en cours",
     "checkbox-label": "Afficher les commandes réceptionnés",
     "createdAt": "Commandé le",
     "pickupDate": "Commande prévue pour le",
-    "totalPrice": "Prix total"
+    "totalPrice": "Prix total",
+    "status-modal": {
+      "client-ref": "Référence commande",
+      "client-contact": "Contact",
+      "status-selector": "Status",
+      "submit": "Mettre à jour",
+      "cancel": "Annuler",
+      "alert_success": "Status mis à jour",
+      "alert_failed": "Status non mis à jour"
+    }
   },
   "products": {
     "add_btn": "Ajouter un produit",
