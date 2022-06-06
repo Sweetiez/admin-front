@@ -21,6 +21,7 @@
     "orders": "Commandes",
     "products": "Produits",
     "recipe": "Recettes",
+    "report": "Signalements",
     "logout": "Se déconnecter"
   },
   "orders": {
@@ -92,5 +93,14 @@
       "publish_btn": "Retirer",
       "alert_success": "Mignardise retirée"
     }
+  },
+  "reports": {
+    "comment": "Commentaire",
+    "reason": "Motif du signalement",
+    "deleteComment": "Supprimer le commentaire",
+    "cancelReport": "Annuler le signalement",
+    "areYouSure": "Etes-vous sûr ?",
+    "cancel": "Annuler",
+    "yes": "Oui"
   }
 }
