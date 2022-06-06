@@ -8,6 +8,7 @@ import RecipeList from './components/Recipes/RecipeList';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastProvider } from 'react-toast-notifications';
 import Orders from './components/Orders/Orders';
+import ReportList from "./components/Reports/ReportList";
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function App() {
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/products" element={<ProductList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
+              <Route path="/admin/reports" element={<ReportList />} />
             </Routes>
           </Router>
           <ReactQueryDevtools initialIsOpen={false} />

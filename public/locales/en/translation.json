@@ -21,6 +21,7 @@
     "orders": "Orders",
     "products": "Products",
     "recipe": "Recipes",
+    "report": "Reports",
     "logout": "Logout"
   },
   "orders": {
@@ -92,5 +93,14 @@
       "publish_btn": "Unpublish",
       "alert_success": "Sweet unpublished"
     }
+  },
+  "reports": {
+    "comment": "Comment",
+    "reason": "Reason of report",
+    "deleteComment": "Delete comment",
+    "cancelReport": "Cancel report",
+    "areYouSure": "Are you sure?",
+    "cancel": "Cancel",
+    "yes": "Yes"
   }
 }
