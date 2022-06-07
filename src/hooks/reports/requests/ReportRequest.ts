@@ -1,7 +1,7 @@
 export default class ReportRequest {
-    reportId: string | undefined;
+  reportId: string | undefined;
 
-    constructor(reportId: string | undefined) {
-        this.reportId = reportId;
-    }
+  constructor(reportId: string | undefined) {
+    this.reportId = reportId;
+  }
 }
