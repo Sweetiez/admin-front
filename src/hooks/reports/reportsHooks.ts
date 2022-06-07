@@ -22,3 +22,13 @@ export function useEvaluationById(id: string) {
     }
   });
 }
+
+export async function deleteEvalutaion(reportId: string) {
+  if(reportId) {
+    const { data } = await authenticatedRequest({
+      url: `admin/reports/${reportId}`,
+      method: 'DELETE',
+    });
+    return data;
+  }
+}

@@ -99,7 +99,8 @@
     "reason": "Reason of report",
     "deleteComment": "Delete comment",
     "cancelReport": "Cancel report",
-    "areYouSure": "Are you sure?",
+    "areYouSureDelete": "Are you sure you want to delete the comment?",
+    "areYouSureCancel": "Are you sure you want to cancel the report?",
     "cancel": "Cancel",
     "yes": "Yes"
   }
