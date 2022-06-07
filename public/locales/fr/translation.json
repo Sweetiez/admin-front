@@ -99,7 +99,8 @@
     "reason": "Motif du signalement",
     "deleteComment": "Supprimer le commentaire",
     "cancelReport": "Annuler le signalement",
-    "areYouSure": "Etes-vous sûr ?",
+    "areYouSureDelete": "Etes-vous sûr de vouloir supprimer le commentaire ?",
+    "areYouSureCancel": "Etes-vous sûr de vouloir annuler le signalement ?",
     "cancel": "Annuler",
     "yes": "Oui"
   }

@@ -1,12 +1,16 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import ReportModel from './models/ReportModel';
 import {
+  deleteEvalutaion,
   useEvaluationById,
 } from '../../hooks/reports/reportsHooks';
-import {useTranslation} from "react-i18next";
-import Modal from "../utils/Modal";
-import ValidateDeleteJudgement from "./ValidateDeleteJudgement";
-import ValidateCancelJudgement from "./ValidateCancelJudgement";
+import { useTranslation } from 'react-i18next';
+import Modal from '../utils/Modal';
+import ValidateDeleteJudgement from './ValidateDeleteJudgement';
+import ValidateCancelJudgement from './ValidateCancelJudgement';
+import { useToasts } from 'react-toast-notifications';
+import Lottie from 'react-lottie-player';
+import animationJudgement from '../../assets/lotties/judgement.json';
 
 interface ReportCardProps {
   report: ReportModel;
@@ -14,9 +18,13 @@ interface ReportCardProps {
 
 const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
   const { t } = useTranslation();
-  const [judgementDeleteModalState, setJudgementDeleteModalState] = useState(false);
-  const [judgementCancelModalState, setJudgementCancelModalState] = useState(false);
+  const { addToast } = useToasts();
+  const [judgementDeleteModalState, setJudgementDeleteModalState] =
+    useState(false);
+  const [judgementCancelModalState, setJudgementCancelModalState] =
+    useState(false);
   let { data: evaluation } = useEvaluationById(report.evaluationId!);
+  let displayAnimation: boolean = false;
   const judgementDeleteModalCloseClick = useCallback(() => {
     setJudgementDeleteModalState(false);
   }, []);
@@ -25,14 +33,29 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
     setJudgementCancelModalState(false);
   }, []);
 
-
   const handleDeleteComment = () => {
-
+    try {
+      const response = deleteEvalutaion(report.id!);
+      setJudgementDeleteModalState(false);
+      addToast(`${t('login.alert_welcome')}`, {
+        appearance: 'info',
+        autoDismiss: true,
+      });
+     return <Lottie
+          className="h-fit w-fit"
+          loop
+          animationData={animationJudgement}
+          play
+      />
+    } catch (e) {
+      addToast(`${t('login.alert_failed_incorrect')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
   };
 
-  const handleCancelReport = () => {
-
-  };
+  const handleCancelReport = () => {};
 
   return (
     <>
@@ -53,17 +76,56 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
             )}
           </div>
           <div className="flex justify-center">
-            <button className="rounded-lg bg-red-600 text-xs text-white p-2 shadow" onClick={() => setJudgementDeleteModalState(true)}>
+            <button
+              className="rounded-lg bg-red-600 text-xs text-white p-2 shadow"
+              onClick={() => setJudgementDeleteModalState(true)}
+            >
               {t('reports.deleteComment')}
             </button>
-            <button className="rounded-lg bg-green-600 text-xs text-white p-2 shadow ml-2" onClick={() => setJudgementCancelModalState(true)}>
+            <button
+              className="rounded-lg bg-green-600 text-xs text-white p-2 shadow ml-2"
+              onClick={() => setJudgementCancelModalState(true)}
+            >
               {t('reports.cancelReport')}
             </button>
           </div>
         </div>
       </div>
-      <Modal modalContent={<ValidateDeleteJudgement manageClick={handleDeleteComment} manageClickClose={judgementDeleteModalCloseClick}/>} modalState={judgementDeleteModalState} setModalState={judgementDeleteModalCloseClick}/>
-      <Modal modalContent={<ValidateCancelJudgement manageClick={handleCancelReport} manageClickClose={judgementCancelModalCloseClick}/>} modalState={judgementCancelModalState} setModalState={judgementCancelModalCloseClick}/>
+
+
+      {/*<div>*/}
+      {/*  {displayAnimation ? (*/}
+      {/*    <Lottie*/}
+      {/*      className="h-fit w-fit"*/}
+      {/*      loop*/}
+      {/*      animationData={animationJudgement}*/}
+      {/*      play*/}
+      {/*    />*/}
+      {/*  ) : (*/}
+      {/*    <></>*/}
+      {/*  )}*/}
+      {/*</div>*/}
+
+      <Modal
+        modalContent={
+          <ValidateDeleteJudgement
+            manageClick={handleDeleteComment}
+            manageClickClose={judgementDeleteModalCloseClick}
+          />
+        }
+        modalState={judgementDeleteModalState}
+        setModalState={judgementDeleteModalCloseClick}
+      />
+      <Modal
+        modalContent={
+          <ValidateCancelJudgement
+            manageClick={handleCancelReport}
+            manageClickClose={judgementCancelModalCloseClick}
+          />
+        }
+        modalState={judgementCancelModalState}
+        setModalState={judgementCancelModalCloseClick}
+      />
     </>
   );
 };

@@ -12,7 +12,7 @@ const ValidateJudgement: React.FC<ValidateJudgementProps> = ({manageClick, manag
         <>
             <div className="p-8">
                 <div className="flex justify-center mb-4">
-                    <span className="text-lg"> {t('reports.areYouSure')}</span>
+                    <span className="text-lg">{t('reports.areYouSureCancel')}</span>
                 </div>
                 <div className="flex justify-center">
                     <button className="rounded-lg bg-red-600 text-xs text-white p-2 shadow w-16" onClick={manageClickClose}>
