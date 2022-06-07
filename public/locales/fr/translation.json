@@ -102,6 +102,10 @@
     "areYouSureDelete": "Etes-vous sûr de vouloir supprimer le commentaire ?",
     "areYouSureCancel": "Etes-vous sûr de vouloir annuler le signalement ?",
     "cancel": "Annuler",
-    "yes": "Oui"
+    "yes": "Oui",
+    "alert_cancel_success": "Le signalement à bien été annulé",
+    "alert_cancel_error": "Erreur lors de l'annulation du signalement",
+    "alert_delete_success": "Le commentaire à bien été supprimé",
+    "alert_delete_error": "Erreur lors de la suppression du commentaire"
   }
 }
