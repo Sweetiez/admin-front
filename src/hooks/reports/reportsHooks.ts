@@ -24,11 +24,19 @@ export function useEvaluationById(id: string) {
 }
 
 export async function deleteEvalutaion(reportId: string) {
-  if(reportId) {
-    const { data } = await authenticatedRequest({
+  if (reportId) {
+    return await authenticatedRequest({
       url: `admin/reports/${reportId}`,
       method: 'DELETE',
     });
-    return data;
+  }
+}
+
+export async function cancelReport(reportId: string) {
+  if (reportId) {
+    return await authenticatedRequest({
+      url: `admin/reports/${reportId}/spam`,
+      method: 'DELETE',
+    });
   }
 }

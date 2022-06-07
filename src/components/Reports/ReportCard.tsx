@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import ReportModel from './models/ReportModel';
 import {
+  cancelReport,
   deleteEvalutaion,
   useEvaluationById,
 } from '../../hooks/reports/reportsHooks';
@@ -9,8 +10,7 @@ import Modal from '../utils/Modal';
 import ValidateDeleteJudgement from './ValidateDeleteJudgement';
 import ValidateCancelJudgement from './ValidateCancelJudgement';
 import { useToasts } from 'react-toast-notifications';
-import Lottie from 'react-lottie-player';
-import animationJudgement from '../../assets/lotties/judgement.json';
+import { useQueryClient } from 'react-query';
 
 interface ReportCardProps {
   report: ReportModel;
@@ -18,13 +18,13 @@ interface ReportCardProps {
 
 const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const { addToast } = useToasts();
   const [judgementDeleteModalState, setJudgementDeleteModalState] =
     useState(false);
   const [judgementCancelModalState, setJudgementCancelModalState] =
     useState(false);
   let { data: evaluation } = useEvaluationById(report.evaluationId!);
-  let displayAnimation: boolean = false;
   const judgementDeleteModalCloseClick = useCallback(() => {
     setJudgementDeleteModalState(false);
   }, []);
@@ -33,29 +33,39 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
     setJudgementCancelModalState(false);
   }, []);
 
-  const handleDeleteComment = () => {
+  const handleDeleteComment = async () => {
     try {
-      const response = deleteEvalutaion(report.id!);
+      await deleteEvalutaion(report.id!);
+      await queryClient.invalidateQueries(`all-reports`);
       setJudgementDeleteModalState(false);
-      addToast(`${t('login.alert_welcome')}`, {
-        appearance: 'info',
+      addToast(`${t('reports.alert_delete_success')}`, {
+        appearance: 'success',
         autoDismiss: true,
       });
-     return <Lottie
-          className="h-fit w-fit"
-          loop
-          animationData={animationJudgement}
-          play
-      />
     } catch (e) {
-      addToast(`${t('login.alert_failed_incorrect')}`, {
+      addToast(`${t('reports.alert_delete_error')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
     }
   };
 
-  const handleCancelReport = () => {};
+  const handleCancelReport = async () => {
+    try {
+      await cancelReport(report.id!);
+      await queryClient.invalidateQueries(`all-reports`);
+      setJudgementCancelModalState(false);
+      addToast(`${t('reports.alert_cancel_success')}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+    } catch (e) {
+      addToast(`${t('reports.alert_cancel_error')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -91,20 +101,6 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
           </div>
         </div>
       </div>
-
-
-      {/*<div>*/}
-      {/*  {displayAnimation ? (*/}
-      {/*    <Lottie*/}
-      {/*      className="h-fit w-fit"*/}
-      {/*      loop*/}
-      {/*      animationData={animationJudgement}*/}
-      {/*      play*/}
-      {/*    />*/}
-      {/*  ) : (*/}
-      {/*    <></>*/}
-      {/*  )}*/}
-      {/*</div>*/}
 
       <Modal
         modalContent={

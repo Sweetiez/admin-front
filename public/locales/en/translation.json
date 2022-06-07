@@ -25,7 +25,7 @@
     "logout": "Logout"
   },
   "orders": {
-    "title" : "Orders",
+    "title": "Orders",
     "checkbox-label": "Show delivered orders",
     "createdAt": "Ordered at",
     "pickupDate": "Recovery date",
@@ -33,9 +33,9 @@
     "status-modal": {
       "client-ref": "Order reference",
       "client-contact": "Contact",
-      "status-selector" : "Status",
-      "submit" : "Update",
-      "cancel" : "Cancel",
+      "status-selector": "Status",
+      "submit": "Update",
+      "cancel": "Cancel",
       "alert_success": "Status updated",
       "alert_failed": "Status update failed"
     }
@@ -102,6 +102,10 @@
     "areYouSureDelete": "Are you sure you want to delete the comment?",
     "areYouSureCancel": "Are you sure you want to cancel the report?",
     "cancel": "Cancel",
-    "yes": "Yes"
+    "yes": "Yes",
+    "alert_cancel_success": "The report has been cancelled",
+    "alert_cancel_error": "Error while cancelling the report",
+    "alert_delete_success": "The comment has been deleted",
+    "alert_delete_error": "Error while deleting the comment"
   }
 }
