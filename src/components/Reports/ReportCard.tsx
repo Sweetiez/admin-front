@@ -3,7 +3,6 @@ import ReportModel from './models/ReportModel';
 import {
   cancelReport,
   deleteEvalutaion,
-  useEvaluationById,
 } from '../../hooks/reports/reportsHooks';
 import { useTranslation } from 'react-i18next';
 import Modal from '../utils/Modal';
@@ -24,7 +23,6 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
     useState(false);
   const [judgementCancelModalState, setJudgementCancelModalState] =
     useState(false);
-  let { data: evaluation } = useEvaluationById(report.evaluationId!);
   const judgementDeleteModalCloseClick = useCallback(() => {
     setJudgementDeleteModalState(false);
   }, []);
@@ -73,7 +71,7 @@ const ReportCard: React.FC<ReportCardProps> = ({ report }) => {
         <div className="flex justify-center">
           <span className="font-semibold text-xl">{t('reports.comment')}</span>
         </div>
-        <div className="flex justify-center p-4">{evaluation?.comment}</div>
+        <div className="flex justify-center p-4">{report.comment}</div>
         <div className="border-t w-full">
           <div className="flex justify-center p-2">
             <span className="font-semibold text-xl">{t('reports.reason')}</span>
