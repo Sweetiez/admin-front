@@ -41,6 +41,31 @@
     }
   },
   "recipes": {
+    "non-published": "Produits non publiés",
+    "published": "Produits publiés",
+    "table": {
+      "title": "Titre de la recette",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publier la recette",
+      "message": "Voulez-vous vraiment publier cette recette ?",
+      "submit": "Publier",
+      "alert": {
+        "success": "Recette publiée",
+        "images": "Veuillez ajouter au moins une image",
+        "failed": "Recette non publiée"
+      }
+    },
+    "unpublished": {
+      "title": "Retirer la recette",
+      "message": "Voulez-vous vraiment retirer cette recette ? Elle ne sera plus visible sur le site.",
+      "submit": "Retirer",
+      "alert": {
+        "success": "Recette retirée"
+      }
+    },
     "create": {
       "title": "Créer une recette",
       "name": "Nom de la recette",

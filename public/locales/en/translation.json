@@ -41,6 +41,31 @@
     }
   },
   "recipes": {
+    "non-published": "Non-published recipes",
+    "published": "Published recipes",
+    "table": {
+      "title": "Recipe titles",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publish recipe",
+      "message": "Are you sure you want to publish this recipe?",
+      "submit": "Publish",
+      "alert": {
+        "success": "Recipe published",
+        "images": "Please upload at least one image",
+        "failed": "Recipe publication failed"
+      }
+    },
+    "unpublished": {
+      "title": "Unpublish recipe",
+      "message": "Are you sure you want to unpublish this recipe?",
+      "submit": "Unpublish",
+      "alert": {
+        "success": "Recipe unpublished"
+      }
+    },
     "create": {
       "title": "Create recipe",
       "name": "Name",
