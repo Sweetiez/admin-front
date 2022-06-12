@@ -59,7 +59,6 @@ const UnPublishRecipe: React.FC<UnPublishRecipeProps> = ({
               {t('recipes.unpublished.title')}
             </h3>
             <div className="mt-2">
-              {/*<p className="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>*/}
               <p className="text-sm text-gray-500">
                 {t('recipes.unpublished.message')}
               </p>
