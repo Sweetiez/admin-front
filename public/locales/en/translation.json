@@ -40,6 +40,31 @@
       "alert_failed": "Status update failed"
     }
   },
+  "recipes": {
+    "create": {
+      "title": "Create recipe",
+      "name": "Name",
+      "people": "People",
+      "cost": "Cost",
+      "difficulty": "Difficulty",
+      "time": {
+        "preparation": "Preparation",
+        "chill": "Chill",
+        "cooking": "Bake",
+        "minutes": "Minutes"
+      },
+      "description": "Description",
+      "alert": {
+        "empty": "Thanks to fill all fields",
+        "success": "Recipe created"
+      }
+    },
+    "button": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "edit": "Edit"
+    }
+  },
   "products": {
     "add_btn": "Add Product",
     "title_all": "All products",

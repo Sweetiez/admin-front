@@ -40,6 +40,31 @@
       "alert_failed": "Status non mis à jour"
     }
   },
+  "recipes": {
+    "create": {
+      "title": "Créer une recette",
+      "name": "Nom de la recette",
+      "people": "Personnes",
+      "cost": "Coût",
+      "difficulty": "Difficulté",
+      "time": {
+        "preparation": "Préparation",
+        "chill": "Repos",
+        "cooking": "Cuisson",
+        "minutes": "Minutes"
+      },
+      "description": "Description",
+      "alert": {
+        "empty": "Veuillez remplir tous les champs",
+        "success": "Recette créée"
+      }
+    },
+    "button": {
+      "add": "Ajouter une recette",
+      "cancel": "Annuler",
+      "edit": "Editer"
+    }
+  },
   "products": {
     "add_btn": "Ajouter un produit",
     "title_all": "Tous les produits",
