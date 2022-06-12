@@ -1,4 +1,4 @@
-import StepModel from "./StepModel";
+import StepModel from './StepModel';
 
 export default class RecipeModel {
   id: string | undefined;
