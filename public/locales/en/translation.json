@@ -84,6 +84,13 @@
         "success": "Recipe created"
       }
     },
+    "edit": {
+      "title": "Edit recipe",
+      "step": {
+        "add": "Add step",
+        "update": "Update steps"
+      }
+    },
     "button": {
       "add": "Add",
       "cancel": "Cancel",

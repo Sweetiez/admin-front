@@ -84,6 +84,13 @@
         "success": "Recette créée"
       }
     },
+    "edit": {
+      "title": "Modifier une recette",
+      "step": {
+        "add": "Ajouter une étape",
+        "update": "Mettre à jour"
+      }
+    },
     "button": {
       "add": "Ajouter une recette",
       "cancel": "Annuler",

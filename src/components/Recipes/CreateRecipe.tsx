@@ -46,8 +46,6 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
       Number(event.target.cookTime.value),
     );
 
-    console.log(request);
-
     if (!request.isValid()) {
       addToast(`${t('recipes.create.alert.empty')}`, {
         appearance: 'error',
