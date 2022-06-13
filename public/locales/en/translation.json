@@ -94,7 +94,8 @@
     "button": {
       "add": "Add",
       "cancel": "Cancel",
-      "edit": "Edit"
+      "edit": "Edit",
+      "back": "Back"
     }
   },
   "products": {

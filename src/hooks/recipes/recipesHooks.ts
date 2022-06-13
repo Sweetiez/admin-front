@@ -7,6 +7,8 @@ import UnPublishRecipeRequest from './requests/UnPublishRecipeRequest';
 import UpdateRecipeStepsRequest from './requests/UpdateRecipeStepsRequest';
 import DeleteImageRequest from '../sweets/requests/DeleteImageRequest';
 import UpdateRecipeRequest from './requests/UpdateRecipeRequest';
+import AddStepRecipeRequest from './requests/AddStepRecipeRequest';
+import DeleteStepRequest from './requests/DeleteStepRequest';
 
 export function useRecipes() {
   return useQuery<RecipeModel[], Error>(`all-recipes`, async () => {
@@ -30,6 +32,24 @@ export async function createRecipe(request: CreateRecipeRequest) {
   const { data } = await authenticatedRequest({
     url: `admin/recipes`,
     method: 'POST',
+    data: request,
+  });
+  return data;
+}
+
+export async function createRecipeStep(request: AddStepRecipeRequest) {
+  const { data } = await authenticatedRequest({
+    url: `admin/recipes/step`,
+    method: 'POST',
+    data: request,
+  });
+  return data;
+}
+
+export async function deleteRecipeStep(request: DeleteStepRequest) {
+  const { data } = await authenticatedRequest({
+    url: `admin/recipes/step`,
+    method: 'DELETE',
     data: request,
   });
   return data;
