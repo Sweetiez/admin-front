@@ -94,7 +94,8 @@
     "button": {
       "add": "Ajouter une recette",
       "cancel": "Annuler",
-      "edit": "Editer"
+      "edit": "Editer",
+      "back": "Retour"
     }
   },
   "products": {

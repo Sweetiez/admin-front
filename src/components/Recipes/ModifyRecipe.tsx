@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { arrayMove, List } from 'react-movable';
 import StepCard from './StepCard';
 import StepModel from './models/StepModel';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   deleteRecipeImage,
   updateRecipe,
@@ -20,13 +20,17 @@ import DeleteImageRequest from '../../hooks/sweets/requests/DeleteImageRequest';
 import { capitalizeFirstLetter } from '../../hooks/utils/strings';
 import ProductModelRow from '../Products/models/ProductModelRow';
 import UpdateRecipeRequest from '../../hooks/recipes/requests/UpdateRecipeRequest';
+import Modal from '../utils/Modal';
+import AddRecipeStepModal from '../Products/AddRecipeStepModal';
 
 const ModifyRecipe: React.FC = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   let { id } = useParams();
   const { data: recipe } = useRecipeDetail(id ? id : '');
   const { addToast } = useToasts();
+  const [addStepModal, setAddStepModal] = useState(false);
 
   const [items, setItems] = useState(
     computeStepCards(recipe ? recipe : new RecipeModel()),
@@ -39,7 +43,9 @@ const ModifyRecipe: React.FC = () => {
         autoDismiss: true,
       });
       await queryClient.invalidateQueries('all-recipes');
-      await queryClient.invalidateQueries(`recipe-${id}`);
+      await queryClient.invalidateQueries(
+        `recipe-${recipe?.id ? recipe.id : ''}`,
+      );
     },
     onError: (err: any) => {
       addToast(err.message, { appearance: 'error', autoDismiss: true });
@@ -60,6 +66,7 @@ const ModifyRecipe: React.FC = () => {
     );
 
     mutate(request);
+    navigate(`/admin/recipes`);
   }
 
   async function handleModifyRecipeSteps() {
@@ -89,7 +96,7 @@ const ModifyRecipe: React.FC = () => {
 
   function computeStepCards(recipe: RecipeModel) {
     return recipe?.steps
-      ? recipe.steps.map((step) => <StepCard step={step} />)
+      ? recipe.steps.map((step) => <StepCard recipe={recipe} step={step} />)
       : [];
   }
 
@@ -132,13 +139,19 @@ const ModifyRecipe: React.FC = () => {
       <div className="flex justify-between">
         <div className="w-4/6">
           <form onSubmit={submitRecipeModification}>
-            {/*<form>*/}
-            <div className="flex justify-center">
+            <div className="flex justify-between">
+              <Link
+                className="m-3 py-2 px-4 shadow-md no-underline rounded-full bg-gray-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+                to="/admin/recipes"
+              >
+                {t('recipes.button.back')}
+              </Link>
               <div className="flex">
-                <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+                <h1 className="m-3 text-gray-600 font-bold md:text-2xl text-xl">
                   {t('recipes.edit.title')}
                 </h1>
               </div>
+              <div></div>
             </div>
 
             <div className="grid grid-cols-1 mt-5 mx-7">
@@ -340,7 +353,7 @@ const ModifyRecipe: React.FC = () => {
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="flex justify-between">
               <button
-                onClick={handleModifyRecipeSteps}
+                onClick={() => setAddStepModal(true)}
                 className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
               >
                 {t('recipes.edit.step.add')}
@@ -392,6 +405,16 @@ const ModifyRecipe: React.FC = () => {
           </div>
         </div>
       </div>
+      <Modal
+        modalContent={
+          <AddRecipeStepModal
+            recipe={recipe ? recipe : new RecipeModel()}
+            setOpenedModal={setAddStepModal}
+          />
+        }
+        modalState={addStepModal}
+        setModalState={() => setAddStepModal(false)}
+      />
     </Page>
   );
 };
