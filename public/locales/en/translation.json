@@ -21,10 +21,11 @@
     "orders": "Orders",
     "products": "Products",
     "recipe": "Recipes",
+    "report": "Reports",
     "logout": "Logout"
   },
   "orders": {
-    "title" : "Orders",
+    "title": "Orders",
     "checkbox-label": "Show delivered orders",
     "createdAt": "Ordered at",
     "pickupDate": "Recovery date",
@@ -32,11 +33,69 @@
     "status-modal": {
       "client-ref": "Order reference",
       "client-contact": "Contact",
-      "status-selector" : "Status",
-      "submit" : "Update",
-      "cancel" : "Cancel",
+      "status-selector": "Status",
+      "submit": "Update",
+      "cancel": "Cancel",
       "alert_success": "Status updated",
       "alert_failed": "Status update failed"
+    }
+  },
+  "recipes": {
+    "non-published": "Non-published recipes",
+    "published": "Published recipes",
+    "table": {
+      "title": "Recipe titles",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publish recipe",
+      "message": "Are you sure you want to publish this recipe?",
+      "submit": "Publish",
+      "alert": {
+        "success": "Recipe published",
+        "images": "Please upload at least one image",
+        "failed": "Recipe publication failed"
+      }
+    },
+    "unpublished": {
+      "title": "Unpublish recipe",
+      "message": "Are you sure you want to unpublish this recipe?",
+      "submit": "Unpublish",
+      "alert": {
+        "success": "Recipe unpublished"
+      }
+    },
+    "create": {
+      "title": "Create recipe",
+      "name": "Name",
+      "people": "People",
+      "cost": "Cost",
+      "difficulty": "Difficulty",
+      "time": {
+        "preparation": "Preparation",
+        "chill": "Chill",
+        "cooking": "Bake",
+        "minutes": "Minutes"
+      },
+      "description": "Description",
+      "alert": {
+        "empty": "Thanks to fill all fields",
+        "success": "Recipe created"
+      }
+    },
+    "edit": {
+      "title": "Edit recipe",
+      "step": {
+        "add": "Add step",
+        "update": "Update steps"
+      }
+    },
+    "button": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "back": "Back"
     }
   },
   "products": {
@@ -92,5 +151,19 @@
       "publish_btn": "Unpublish",
       "alert_success": "Sweet unpublished"
     }
+  },
+  "reports": {
+    "comment": "Comment",
+    "reason": "Reason of report",
+    "deleteComment": "Delete comment",
+    "cancelReport": "Cancel report",
+    "areYouSureDelete": "Are you sure you want to delete the comment?",
+    "areYouSureCancel": "Are you sure you want to cancel the report?",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "alert_cancel_success": "The report has been cancelled",
+    "alert_cancel_error": "Error while cancelling the report",
+    "alert_delete_success": "The comment has been deleted",
+    "alert_delete_error": "Error while deleting the comment"
   }
 }

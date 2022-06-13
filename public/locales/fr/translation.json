@@ -21,6 +21,7 @@
     "orders": "Commandes",
     "products": "Produits",
     "recipe": "Recettes",
+    "report": "Signalements",
     "logout": "Se déconnecter"
   },
   "orders": {
@@ -37,6 +38,64 @@
       "cancel": "Annuler",
       "alert_success": "Status mis à jour",
       "alert_failed": "Status non mis à jour"
+    }
+  },
+  "recipes": {
+    "non-published": "Produits non publiés",
+    "published": "Produits publiés",
+    "table": {
+      "title": "Titre de la recette",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "publish": {
+      "title": "Publier la recette",
+      "message": "Voulez-vous vraiment publier cette recette ?",
+      "submit": "Publier",
+      "alert": {
+        "success": "Recette publiée",
+        "images": "Veuillez ajouter au moins une image",
+        "failed": "Recette non publiée"
+      }
+    },
+    "unpublished": {
+      "title": "Retirer la recette",
+      "message": "Voulez-vous vraiment retirer cette recette ? Elle ne sera plus visible sur le site.",
+      "submit": "Retirer",
+      "alert": {
+        "success": "Recette retirée"
+      }
+    },
+    "create": {
+      "title": "Créer une recette",
+      "name": "Nom de la recette",
+      "people": "Personnes",
+      "cost": "Coût",
+      "difficulty": "Difficulté",
+      "time": {
+        "preparation": "Préparation",
+        "chill": "Repos",
+        "cooking": "Cuisson",
+        "minutes": "Minutes"
+      },
+      "description": "Description",
+      "alert": {
+        "empty": "Veuillez remplir tous les champs",
+        "success": "Recette créée"
+      }
+    },
+    "edit": {
+      "title": "Modifier une recette",
+      "step": {
+        "add": "Ajouter une étape",
+        "update": "Mettre à jour"
+      }
+    },
+    "button": {
+      "add": "Ajouter une recette",
+      "cancel": "Annuler",
+      "edit": "Editer",
+      "back": "Retour"
     }
   },
   "products": {
@@ -92,5 +151,19 @@
       "publish_btn": "Retirer",
       "alert_success": "Mignardise retirée"
     }
+  },
+  "reports": {
+    "comment": "Commentaire",
+    "reason": "Motif du signalement",
+    "deleteComment": "Supprimer le commentaire",
+    "cancelReport": "Annuler le signalement",
+    "areYouSureDelete": "Etes-vous sûr de vouloir supprimer le commentaire ?",
+    "areYouSureCancel": "Etes-vous sûr de vouloir annuler le signalement ?",
+    "cancel": "Annuler",
+    "yes": "Oui",
+    "alert_cancel_success": "Le signalement à bien été annulé",
+    "alert_cancel_error": "Erreur lors de l'annulation du signalement",
+    "alert_delete_success": "Le commentaire à bien été supprimé",
+    "alert_delete_error": "Erreur lors de la suppression du commentaire"
   }
 }
