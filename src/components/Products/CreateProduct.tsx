@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CreateSweetRequest from '../../hooks/sweets/requests/CreateSweetRequest';
 import { useMutation } from 'react-query';
 import { createSweet } from '../../hooks/sweets/sweetsHooks';
-import ProductModelRow from './models/ProductModelRow';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
@@ -36,9 +35,8 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     : [];
 
   const { mutate } = useMutation(createSweet, {
-    onSuccess: async (data: ProductModelRow) => {
-      console.log(data.name)
-      addToast(`${t('products.add.alert_success')}: ${data.name}`, {
+    onSuccess: async () => {
+       addToast(`${t('products.add.alert_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });

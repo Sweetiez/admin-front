@@ -59,8 +59,6 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
   const [sweetIngredients, setSweetIngredient] =
     useState<any>(sweetIngredientsData);
 
-  console.log('test', sweetIngredientsData);
-
   if (isSweetLoading) return <div>Loading...</div>;
   if (isSweetError) {
     addToast(error.message, { appearance: 'error', autoDismiss: true });
@@ -159,6 +157,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     const response = await updateSweet(request);
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
+      console.log('sweetDataId', sweetData.id)
       await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
       addToast(`${t('products.update.alert_success')}`, {
         appearance: 'success',
