@@ -19,7 +19,8 @@
   "navigation": {
     "dashboard": "Tableau de bord",
     "orders": "Commandes",
-    "products": "Produits",
+    "sweets": "Mignardises",
+    "trays": "Plateaux",
     "recipe": "Recettes",
     "report": "Signalements",
     "logout": "Se déconnecter"
@@ -98,6 +99,12 @@
       "back": "Retour"
     }
   },
+  "ingredients": {
+    "add_btn": "Ajouter un nouveau ingrédient",
+    "alert_success": "Ingrédient {{name}} à été ajouté avec succès",
+    "alert_failed_empty": "Merci de remplir tous les champs",
+    "alert_api_error": "Erreur lors de la création d'un ingrédient"
+  },
   "products": {
     "add_btn": "Ajouter un produit",
     "title_all": "Tous les produits",
@@ -106,8 +113,10 @@
       "title": "Ajouter un produit",
       "name": "Nom",
       "price": "Prix",
+      "quantity":"Quantité",
       "flavor": "Saveur",
       "description": "Description",
+      "ingredients": "Ingrédients",
       "cancel_btn": "Annuler",
       "save_btn": "Créer",
       "alert_success": "Mignardise ajouté avec succès",
