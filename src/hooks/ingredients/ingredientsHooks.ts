@@ -1,7 +1,6 @@
 import CreateIngredientRequest from "../ingredients/requests/CreateIngredientRequest";
 import {authenticatedRequest} from "../common/request";
 import {useQuery} from "react-query";
-import ReportModel from "../../components/Reports/models/ReportModel";
 import Ingredient from "../../components/Products/models/Ingredient";
 
 export function useIngredients() {
