@@ -1,5 +1,3 @@
-import Ingredient from "./Ingredient";
-
 export default class ProductModel {
   id: string | undefined;
   name: string | undefined;

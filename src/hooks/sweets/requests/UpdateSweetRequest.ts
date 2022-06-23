@@ -1,5 +1,3 @@
-import Ingredient from "../../../components/Products/models/Ingredient";
-
 export default class UpdateSweetRequest {
   id: string | undefined;
   name: string | undefined;
