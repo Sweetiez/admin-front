@@ -14,7 +14,6 @@ import {
 import Select from 'react-dropdown-select';
 import '../../assets/css/_dropdown-select.css';
 import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
-import Ingredient from './models/Ingredient';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
