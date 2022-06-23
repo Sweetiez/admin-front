@@ -1,5 +1,3 @@
-import Ingredient from '../../../components/Products/models/Ingredient';
-
 export default class CreateSweetRequest {
   name: string | undefined;
   price: number | undefined;
