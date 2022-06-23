@@ -1,9 +1,9 @@
 import React from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
-import { capitalizeFirstLetter } from '../../hooks/utils/strings';
-import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
-import { createIngredient } from '../../hooks/ingredients/ingredientsHooks';
+import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
+import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
+import { createIngredient } from '../../../hooks/ingredients/ingredientsHooks';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;

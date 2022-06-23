@@ -1,30 +1,30 @@
-import ProductModelRow from './models/ProductModelRow';
+import ProductModelRow from '../models/ProductModelRow';
 import React, { useState } from 'react';
 import {
   deleteSweetImage,
   updateSweet,
   uploadSweetImage,
   useSweetById,
-} from '../../hooks/sweets/sweetsHooks';
+} from '../../../hooks/sweets/sweetsHooks';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient } from 'react-query';
-import UpdateSweetRequest from '../../hooks/sweets/requests/UpdateSweetRequest';
+import UpdateSweetRequest from '../../../hooks/sweets/requests/UpdateSweetRequest';
 import { useTranslation } from 'react-i18next';
-import DeleteImageRequest from '../../hooks/sweets/requests/DeleteImageRequest';
+import DeleteImageRequest from '../../../hooks/sweets/requests/DeleteImageRequest';
 import Select from 'react-dropdown-select';
 import {
   createIngredient,
   useIngredients,
-} from '../../hooks/ingredients/ingredientsHooks';
-import { capitalizeFirstLetter } from '../../hooks/utils/strings';
-import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
+} from '../../../hooks/ingredients/ingredientsHooks';
+import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
+import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
 
 interface ModifyProductProps {
   product: ProductModelRow;
   setOpenedModal: (openedModal: boolean) => void;
 }
 
-const ModifyProduct: React.FC<ModifyProductProps> = ({
+const ModifySweet: React.FC<ModifyProductProps> = ({
   product,
   setOpenedModal,
 }) => {
@@ -126,19 +126,14 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     }
 
     let ingredients: string[] = [];
-
-    // const ingredients = sweetIngredients.map(
-    //   (ingredient: any) => ingredient.value,
-    // );
-
     sweetIngredients.map((ingredient: any) =>
       ingredients.push(ingredient.value),
     );
 
-    const ingredientsId = sweetData.ingredients && sweetData.ingredients.map(ingredient => ingredient.id)
-
-    console.log('modify', ingredients);
-    console.log('ingredientsId modify', ingredientsId);
+    let defaultIngredients: string[] = [];
+    sweetIngredientsData.map((defaultIngredient: any) =>
+        defaultIngredients.push(defaultIngredient.value)
+    );
 
     const request = new UpdateSweetRequest(
       sweetData.id ? sweetData.id : '',
@@ -147,7 +142,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
       quantity ? quantity : sweetData.unitPerPackage,
       event.target.description.value,
       sweetData.images ? sweetData.images : [],
-      ingredients ? ingredients : [],
+      ingredients.length > 0 ? ingredients : defaultIngredients,
       event.target.highlight.value,
       sweetData.state ? sweetData.state : '',
       event.target.flavor.value,
@@ -157,7 +152,6 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     const response = await updateSweet(request);
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
-      console.log('sweetDataId', sweetData.id)
       await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
       addToast(`${t('products.update.alert_success')}`, {
         appearance: 'success',
@@ -285,7 +279,6 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
                 id="unitPerPackage"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="number"
-                value={quantity}
                 defaultValue={sweetData && sweetData.unitPerPackage}
                 onChange={(value) => handelQuantity(Number(value.target.value))}
                 placeholder={t('products.add.unitPerPackage')}
@@ -431,4 +424,4 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
   );
 };
 
-export default ModifyProduct;
+export default ModifySweet;
