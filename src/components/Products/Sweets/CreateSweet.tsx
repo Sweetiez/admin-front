@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import CreateSweetRequest from '../../hooks/sweets/requests/CreateSweetRequest';
+import CreateSweetRequest from '../../../hooks/sweets/requests/CreateSweetRequest';
 import { useMutation } from 'react-query';
-import { createSweet } from '../../hooks/sweets/sweetsHooks';
+import { createSweet } from '../../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
-import { capitalizeFirstLetter } from '../../hooks/utils/strings';
+import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
 import {
   createIngredient,
   useIngredients,
-} from '../../hooks/ingredients/ingredientsHooks';
+} from '../../../hooks/ingredients/ingredientsHooks';
 import Select from 'react-dropdown-select';
-import '../../assets/css/_dropdown-select.css';
-import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
+import '../../../assets/css/_dropdown-select.css';
+import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
 }
-const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
+const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data: ingredientData } = useIngredients();
@@ -288,4 +288,4 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   );
 };
 
-export default CreateProduct;
+export default CreateSweet;

@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeModel from '../Recipes/models/RecipeModel';
+import RecipeModel from './models/RecipeModel';
 import Lottie from 'react-lottie-player';
 import animationJson from '../../assets/lotties/cooking.json';
 import { useTranslation } from 'react-i18next';
