@@ -23,7 +23,8 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/admin" element={<Dashboard />} />
               <Route path="/admin/orders" element={<Orders />} />
-              <Route path="/admin/products" element={<ProductList />} />
+              <Route path="/admin/sweets" element={<ProductList />} />
+              <Route path="/admin/trays" element={<ProductList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
               <Route path="/admin/recipes/:id" element={<ModifyRecipe />} />
               <Route path="/admin/reports" element={<ReportList />} />

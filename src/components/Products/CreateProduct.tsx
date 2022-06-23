@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CreateSweetRequest from '../../hooks/sweets/requests/CreateSweetRequest';
 import { useMutation } from 'react-query';
 import { createSweet } from '../../hooks/sweets/sweetsHooks';
@@ -7,6 +7,14 @@ import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
 import { capitalizeFirstLetter } from '../../hooks/utils/strings';
+import {
+  createIngredient,
+  useIngredients,
+} from '../../hooks/ingredients/ingredientsHooks';
+import Select from 'react-dropdown-select';
+import '../../assets/css/_dropdown-select.css';
+import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
+import Ingredient from './models/Ingredient';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -14,30 +22,86 @@ interface CreateProductProps {
 const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+  const { data: ingredientData } = useIngredients();
   const { addToast } = useToasts();
+  const [createNewIngredient, setCreateNewIngredient] = useState(false);
+  const [newIngredientName, setNewIngredientName] = useState('');
+  const [quatity, setQuatity] = useState(5);
+  const [sweetIngredients, setSweetIngredient] = useState<any>([]);
+
+  const ingredientOptions = ingredientData
+    ? ingredientData.map((ingredient) => ({
+        value: ingredient.id ? ingredient.id : '0',
+        label: ingredient.name ? ingredient.name : '',
+      }))
+    : [];
+
+  console.log(ingredientOptions);
 
   const { mutate } = useMutation(createSweet, {
     onSuccess: async (data: ProductModelRow) => {
-      addToast(`${t('products.add.alert_success')}: ${data.name}`, {
+      addToast(data.name, {
         appearance: 'success',
         autoDismiss: true,
       });
       await queryClient.invalidateQueries('all-sweets');
-      setOpenedModal(false);
     },
     onError: (err: any) => {
       addToast(err.message, { appearance: 'error', autoDismiss: true });
     },
   });
 
+  const handelQuantity = (value: number) => {
+    if (value < 1) value = 1;
+    setQuatity(value);
+  };
+
+  const submitIngredientCreation = async () => {
+    const name = capitalizeFirstLetter(newIngredientName);
+
+    if (name === '') {
+      addToast(`${t('ingredients.alert_failed_empty')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    const request = new CreateIngredientRequest(name);
+
+    try {
+      await createIngredient(request);
+      addToast(`${t('ingredients.alert_success', { name: name })}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      await queryClient.invalidateQueries('all-ingredients');
+      setCreateNewIngredient(false);
+    } catch (e) {
+      addToast(`${t('ingredients.alert_api_error')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
+
   const submitSweetCreation = async (event: any) => {
     event.preventDefault();
     const name = capitalizeFirstLetter(event.target.name.value);
     const price = event.target.price.value;
+    const unitPerPackage = event.target.unitPerPackage.value;
     const flavor = event.target.flavor.value;
     const description = capitalizeFirstLetter(event.target.description.value);
 
-    if (name === '' || price === '' || flavor === '' || description === '') {
+    console.log(name);
+
+    if (
+      name === '' ||
+      price === '' ||
+      flavor === '' ||
+      description === '' ||
+      sweetIngredients.length < 1
+    ) {
       addToast(`${t('products.add.alert_failed_empty')}`, {
         appearance: 'error',
         autoDismiss: true,
@@ -45,10 +109,23 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
       return;
     }
 
+    let ingredients: string[] = [];
+
+    // const ingredients = sweetIngredients.map(
+    //   (ingredient: any) => ingredient.value,
+    // );
+
+    sweetIngredients.map(
+      (ingredient: any) => ingredients.push(ingredient.value)
+    );
+
+    console.log(ingredients)
+
     const request = new CreateSweetRequest(
       name,
       Number(price),
-      [],
+      unitPerPackage,
+      ingredients,
       description,
       flavor,
     );
@@ -99,6 +176,70 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             />
           </div>
 
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.add.ingredients')}
+            </label>
+            {ingredientOptions && (
+              <Select
+                multi
+                values={[]}
+                options={ingredientOptions}
+                color={'#8b5cf6'}
+                onChange={(values) => setSweetIngredient(values)}
+                name="select"
+                dropdownHeight={'150px'}
+              />
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            {createNewIngredient ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+                <input
+                  name="ingredientName"
+                  className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  type="text"
+                  placeholder={t('products.add.name')}
+                  // value={newIngredientName}
+                  onChange={(value) => setNewIngredientName(value.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                  onClick={() => submitIngredientCreation()}
+                >
+                  {t('ingredients.add_btn')}
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setCreateNewIngredient(true);
+                }}
+                className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+              >
+                {t('ingredients.add_btn')}
+              </button>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.add.flavor')}
+            </label>
+            <select
+              id="flavor"
+              className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            >
+              <option>SALTY</option>
+              <option>SWEET</option>
+              <option>MIXED</option>
+            </select>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
@@ -111,18 +252,19 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                 placeholder={t('products.add.price')}
               />
             </div>
+
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.flavor')}
+                {t('products.add.quantity')}
               </label>
-              <select
-                id="flavor"
+              <input
+                id="unitPerPackage"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-              >
-                <option>SALTY</option>
-                <option>SWEET</option>
-                <option>MIXED</option>
-              </select>
+                type="number"
+                value={quatity}
+                onChange={(value) => handelQuantity(Number(value.target.value))}
+                placeholder={t('products.add.unitPerPackage')}
+              />
             </div>
           </div>
 
@@ -137,6 +279,7 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               placeholder={t('products.add.description')}
             />
           </div>
+
           <div className="flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5">
             <button
               type="button"

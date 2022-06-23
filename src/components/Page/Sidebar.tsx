@@ -61,7 +61,7 @@ const Sidebar: React.FC = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/admin/products">
+                    <Link to="/admin/sweets">
                       <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
                         <svg
                           className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
@@ -76,7 +76,28 @@ const Sidebar: React.FC = () => {
                           />
                         </svg>
                         <span className="ml-3 flex-1 whitespace-nowrap">
-                          {t('navigation.products')}
+                          {t('navigation.sweets')}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/trays">
+                      <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
+                        <svg
+                          className="h-6 w-6 text-gray-500"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+                          <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+                        </svg>
+                        <span className="ml-3 flex-1 whitespace-nowrap">
+                          {t('navigation.trays')}
                         </span>
                       </div>
                     </Link>

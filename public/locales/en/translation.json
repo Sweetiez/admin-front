@@ -19,7 +19,8 @@
   "navigation": {
     "dashboard": "Dashboard",
     "orders": "Orders",
-    "products": "Products",
+    "sweets": "Sweets",
+    "trays": "Trays",
     "recipe": "Recipes",
     "report": "Reports",
     "logout": "Logout"
@@ -98,6 +99,12 @@
       "back": "Back"
     }
   },
+  "ingredients": {
+    "add_btn": "Add new Ingredient",
+    "alert_success": "Ingredient {{name}} created successfully",
+    "alert_failed_empty": "Please fill in all fields",
+    "alert_api_error": "Error when creating an ingredient"
+  },
   "products": {
     "add_btn": "Add Product",
     "title_all": "All products",
@@ -106,8 +113,10 @@
       "title": "Create sweet",
       "name": "Name",
       "price": "Price",
+      "quantity":"Quantity",
       "flavor": "Flavor",
       "description": "Description",
+      "ingredients": "Ingredients",
       "cancel_btn": "Cancel",
       "save_btn": "Create",
       "alert_success": "Sweet created successfully",
