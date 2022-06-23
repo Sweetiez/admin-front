@@ -25,25 +25,25 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { addToast } = useToasts();
   const [createNewIngredient, setCreateNewIngredient] = useState(false);
   const [newIngredientName, setNewIngredientName] = useState('');
-  const [quatity, setQuatity] = useState(5);
+  const [quantity, setQuantity] = useState(5);
   const [sweetIngredients, setSweetIngredient] = useState<any>([]);
 
   const ingredientOptions = ingredientData
-    ? ingredientData.map((ingredient) => ({
+    ? ingredientData.map((ingredient: any) => ({
         value: ingredient.id ? ingredient.id : '0',
         label: ingredient.name ? ingredient.name : '',
       }))
     : [];
 
-  console.log(ingredientOptions);
-
   const { mutate } = useMutation(createSweet, {
     onSuccess: async (data: ProductModelRow) => {
-      addToast(data.name, {
+      console.log(data.name)
+      addToast(`${t('products.add.alert_success')}: ${data.name}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       await queryClient.invalidateQueries('all-sweets');
+      setOpenedModal(false);
     },
     onError: (err: any) => {
       addToast(err.message, { appearance: 'error', autoDismiss: true });
@@ -52,7 +52,7 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
   const handelQuantity = (value: number) => {
     if (value < 1) value = 1;
-    setQuatity(value);
+    setQuantity(value);
   };
 
   const submitIngredientCreation = async () => {
@@ -88,11 +88,8 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     event.preventDefault();
     const name = capitalizeFirstLetter(event.target.name.value);
     const price = event.target.price.value;
-    const unitPerPackage = event.target.unitPerPackage.value;
     const flavor = event.target.flavor.value;
     const description = capitalizeFirstLetter(event.target.description.value);
-
-    console.log(name);
 
     if (
       name === '' ||
@@ -109,21 +106,14 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     }
 
     let ingredients: string[] = [];
-
-    // const ingredients = sweetIngredients.map(
-    //   (ingredient: any) => ingredient.value,
-    // );
-
-    sweetIngredients.map(
-      (ingredient: any) => ingredients.push(ingredient.value)
+    sweetIngredients.map((ingredient: any) =>
+      ingredients.push(ingredient.value),
     );
-
-    console.log(ingredients)
 
     const request = new CreateSweetRequest(
       name,
       Number(price),
-      unitPerPackage,
+        quantity,
       ingredients,
       description,
       flavor,
@@ -200,7 +190,6 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   type="text"
                   placeholder={t('products.add.name')}
-                  // value={newIngredientName}
                   onChange={(value) => setNewIngredientName(value.target.value)}
                 />
 
@@ -260,7 +249,7 @@ const CreateProduct: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                 id="unitPerPackage"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="number"
-                value={quatity}
+                value={quantity}
                 onChange={(value) => handelQuantity(Number(value.target.value))}
                 placeholder={t('products.add.unitPerPackage')}
               />

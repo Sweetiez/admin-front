@@ -1,5 +1,5 @@
 import ProductModelRow from './models/ProductModelRow';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   deleteSweetImage,
   updateSweet,
@@ -11,6 +11,13 @@ import { useQueryClient } from 'react-query';
 import UpdateSweetRequest from '../../hooks/sweets/requests/UpdateSweetRequest';
 import { useTranslation } from 'react-i18next';
 import DeleteImageRequest from '../../hooks/sweets/requests/DeleteImageRequest';
+import Select from 'react-dropdown-select';
+import {
+  createIngredient,
+  useIngredients,
+} from '../../hooks/ingredients/ingredientsHooks';
+import { capitalizeFirstLetter } from '../../hooks/utils/strings';
+import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
 
 interface ModifyProductProps {
   product: ProductModelRow;
@@ -29,13 +36,70 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     data: sweetData,
     error,
   } = useSweetById(product.id ? product.id : '');
+  const { data: ingredientData } = useIngredients();
+  const initQuantity = sweetData && sweetData.unitPerPackage;
+  const [quantity, setQuantity] = useState(initQuantity);
   const { addToast } = useToasts();
+  const [createNewIngredient, setCreateNewIngredient] = useState(false);
+  const [newIngredientName, setNewIngredientName] = useState('');
+
+  const ingredientOptions = ingredientData
+    ? ingredientData.map((ingredient) => ({
+        value: ingredient.id ? ingredient.id : '0',
+        label: ingredient.name ? ingredient.name : '',
+      }))
+    : [];
+
+  const sweetIngredientsData = sweetData?.ingredients
+    ? sweetData?.ingredients.map((sweetIngredientData) => ({
+        value: sweetIngredientData.id ? sweetIngredientData.id : '0',
+        label: sweetIngredientData.name ? sweetIngredientData.name : '',
+      }))
+    : [];
+  const [sweetIngredients, setSweetIngredient] =
+    useState<any>(sweetIngredientsData);
+
+  console.log('test', sweetIngredientsData);
 
   if (isSweetLoading) return <div>Loading...</div>;
   if (isSweetError) {
     addToast(error.message, { appearance: 'error', autoDismiss: true });
     return <div>Error...</div>;
   }
+
+  const handelQuantity = (value: number) => {
+    if (value < 1) value = 1;
+    setQuantity(value);
+  };
+
+  const submitIngredientCreation = async () => {
+    const name = capitalizeFirstLetter(newIngredientName);
+
+    if (name === '') {
+      addToast(`${t('ingredients.alert_failed_empty')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    const request = new CreateIngredientRequest(name);
+
+    try {
+      await createIngredient(request);
+      addToast(`${t('ingredients.alert_success', { name: name })}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      await queryClient.invalidateQueries('all-ingredients');
+      setCreateNewIngredient(false);
+    } catch (e) {
+      addToast(`${t('ingredients.alert_api_error')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
 
   async function onSubmitUploadFile(event: any) {
     event.preventDefault();
@@ -63,13 +127,29 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
       return null;
     }
 
+    let ingredients: string[] = [];
+
+    // const ingredients = sweetIngredients.map(
+    //   (ingredient: any) => ingredient.value,
+    // );
+
+    sweetIngredients.map((ingredient: any) =>
+      ingredients.push(ingredient.value),
+    );
+
+    const ingredientsId = sweetData.ingredients && sweetData.ingredients.map(ingredient => ingredient.id)
+
+    console.log('modify', ingredients);
+    console.log('ingredientsId modify', ingredientsId);
+
     const request = new UpdateSweetRequest(
       sweetData.id ? sweetData.id : '',
       event.target.name.value,
       event.target.price.value,
+      quantity ? quantity : sweetData.unitPerPackage,
       event.target.description.value,
       sweetData.images ? sweetData.images : [],
-      sweetData.ingredients ? sweetData.ingredients : [],
+      ingredients ? ingredients : [],
       event.target.highlight.value,
       sweetData.state ? sweetData.state : '',
       event.target.flavor.value,
@@ -136,6 +216,55 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
             />
           </div>
 
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.add.ingredients')}
+            </label>
+            {ingredientOptions && (
+              <Select
+                multi
+                values={sweetIngredientsData}
+                options={ingredientOptions}
+                color={'#8b5cf6'}
+                onChange={(values) => setSweetIngredient(values)}
+                name="select"
+                dropdownHeight={'150px'}
+              />
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            {createNewIngredient ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+                <input
+                  name="ingredientName"
+                  className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  type="text"
+                  placeholder={t('products.add.name')}
+                  onChange={(value) => setNewIngredientName(value.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                  onClick={() => submitIngredientCreation()}
+                >
+                  {t('ingredients.add_btn')}
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setCreateNewIngredient(true);
+                }}
+                className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+              >
+                {t('ingredients.add_btn')}
+              </button>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
@@ -151,18 +280,33 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
             </div>
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.update.flavor')}
+                {t('products.add.quantity')}
               </label>
-              <select
-                id="flavor"
+              <input
+                id="unitPerPackage"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                defaultValue={sweetData?.flavor}
-              >
-                <option>SALTY</option>
-                <option>SWEET</option>
-                <option>MIXED</option>
-              </select>
+                type="number"
+                value={quantity}
+                defaultValue={sweetData && sweetData.unitPerPackage}
+                onChange={(value) => handelQuantity(Number(value.target.value))}
+                placeholder={t('products.add.unitPerPackage')}
+              />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.update.flavor')}
+            </label>
+            <select
+              id="flavor"
+              className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              defaultValue={sweetData?.flavor}
+            >
+              <option>SALTY</option>
+              <option>SWEET</option>
+              <option>MIXED</option>
+            </select>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
@@ -226,11 +370,11 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
               </label>
             </div>
             <div className="flex pt-3">
-              {sweetData?.images?.map((image) => {
+              {sweetData?.images?.map((image, index) => {
                 let component;
                 if (image !== '') {
                   component = (
-                    <div className="mr-3 w-16 h-16">
+                    <div className="mr-3 w-16 h-16" key={index}>
                       <button
                         type="button"
                         onClick={() =>
