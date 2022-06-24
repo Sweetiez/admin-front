@@ -141,6 +141,7 @@
     "col_name": {
       "product": "Name",
       "price": "Price",
+      "quantity": "Quantity",
       "highlight": "Highlight",
       "status": "Status",
       "actions": "Actions"
