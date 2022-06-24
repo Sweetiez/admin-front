@@ -4,6 +4,8 @@ import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
 import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
 import '../../../assets/css/_dropdown-select.css';
+import {ReactSearchAutocomplete} from "react-search-autocomplete";
+import {useSweets} from "../../../hooks/sweets/sweetsHooks";
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -13,6 +15,7 @@ const CreateTray: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
   const [quantity, setQuantity] = useState(5);
+  let { data: sweets } = useSweets();
 
   const submitTrayCreation = async (event: any) => {
     event.preventDefault();
@@ -39,6 +42,62 @@ const CreateTray: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     //
     // console.log(request)
   };
+
+  const handleOnSearch = (string: string, results: any) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result: any) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item: any) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const handleOnClear = () => {
+    console.log("Cleared");
+  };
+
+  const formatResult = (item: any) => {
+    return (
+        <>
+          <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
+          <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+        </>
+    )
+  }
+
+  const movieItems = [
+    {
+      id: 0,
+      title: "Titanic",
+      description: "A movie about love",
+    },
+    {
+      id: 1,
+      title: "Dead Poets Society",
+      description: "A movie about poetry and the meaning of life",
+    },
+    {
+      id: 2,
+      title: "Terminator 2",
+      description: "A robot from the future is sent back in time",
+    },
+    {
+      id: 3,
+      title: "Alien 2",
+      description: "Ripley is back for a new adventure",
+    },
+  ];
 
   return (
     <div className="overflow-x-auto">
@@ -97,17 +156,47 @@ const CreateTray: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
-            <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.price')}
-              </label>
-              <input
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.add.price')}
+            </label>
+            <input
                 id="price"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
                 placeholder={t('products.add.price')}
-              />
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
+            <div className="grid grid-cols-1 col-span-2">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                {t('products.add.quantity')}
+              </label>
+              <ReactSearchAutocomplete
+                  items={sweets}
+                  fuseOptions={{ keys: ["name"] }}
+                  resultStringKeyName="name"
+                  onSearch={handleOnSearch}
+                  onHover={handleOnHover}
+                  onSelect={handleOnSelect}
+                  onFocus={handleOnFocus}
+                  onClear={handleOnClear}
+                  showIcon={false}
+                  styling={{
+                    height: "39px",
+                    border: "2px solid rgba(196, 181, 253, var(--tw-border-opacity))",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    boxShadow: "none",
+                    hoverBackgroundColor: "#d8b4fe",
+                    fontSize: "16px",
+                    iconColor: "#d8b4fe",
+                    lineColor: "#c084fc",
+                    clearIconMargin: "3px 8px 0 0",
+                    zIndex: 2,
+                  }}
+                  />
             </div>
 
             <div className="grid grid-cols-1">
@@ -122,6 +211,17 @@ const CreateTray: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                 onChange={(value) => console.log(Number(value.target.value))}
                 placeholder={t('products.add.unitPerPackage')}
               />
+            </div>
+
+            <div className="grid grid-cols-1">
+              <button
+                  type="button"
+                  onClick={() => {
+                  }}
+                  className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+              >
+                {t('products.add.cancel_btn')}
+              </button>
             </div>
           </div>
 

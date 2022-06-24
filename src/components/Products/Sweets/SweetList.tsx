@@ -63,6 +63,9 @@ const SweetList: React.FC = () => {
               <th className="py-3 px-6 text-left">
                 {t('products.col_name.price')}
               </th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.quantity')}
+              </th>
               <th className="py-3 px-6 text-center">
                 {t('products.col_name.highlight')}
               </th>
@@ -78,7 +81,7 @@ const SweetList: React.FC = () => {
             {sweets
               .filter((product) => product.status !== 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} />
+                <ProductTableRow key={index} _id={index} product={product} isTray={false} />
               ))}
           </tbody>
         </table>
@@ -90,6 +93,9 @@ const SweetList: React.FC = () => {
               </th>
               <th className="py-3 px-6 text-left">
                 {t('products.col_name.price')}
+              </th>
+              <th className="py-3 px-6 text-left">
+                {t('products.col_name.quantity')}
               </th>
               <th className="py-3 px-6 text-center">
                 {t('products.col_name.highlight')}
@@ -106,7 +112,7 @@ const SweetList: React.FC = () => {
             {sweets
               .filter((product) => product.status === 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} />
+                <ProductTableRow key={index} _id={index} product={product} isTray={false} />
               ))}
           </tbody>
         </table>
