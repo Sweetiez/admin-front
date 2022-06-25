@@ -114,14 +114,14 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
     try {
       await createTray(request);
-      addToast(`${t('ingredients.alert_success', { name: name })}`, {
+      await queryClient.invalidateQueries(`all-trays`);
+      addToast(`${t('products.add.alert_tray_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
-      await queryClient.invalidateQueries(`all-trays`);
       setOpenedModal(false);
     } catch (e) {
-      addToast(`${t('ingredients.alert_api_error')}`, {
+      addToast(`${t('products.add.alert_tray_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });

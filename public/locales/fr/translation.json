@@ -123,7 +123,9 @@
       "cancel_btn": "Annuler",
       "add_sweet": "Ajouter",
       "save_btn": "Créer",
-      "alert_success": "Mignardise ajouté avec succès",
+      "alert_sweet_success": "Mignardise ajouté avec succès",
+      "alert_tray_success": "Plateau ajouté avec succès",
+      "alert_tray_failed": "Erreur lors de la création du plateau",
       "alert_failed_empty": "Merci de remplir tous les champs"
     },
     "update": {

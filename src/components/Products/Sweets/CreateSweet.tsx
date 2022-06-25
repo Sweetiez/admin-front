@@ -37,7 +37,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { mutate } = useMutation(createSweet, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('all-sweets');
-      addToast(`${t('products.add.alert_success')}`, {
+      addToast(`${t('products.add.alert_sweet_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });

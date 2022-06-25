@@ -123,7 +123,9 @@
       "cancel_btn": "Cancel",
       "add_sweet": "Add",
       "save_btn": "Create",
-      "alert_success": "Sweet created successfully",
+      "alert_sweet_success": "Sweet created successfully",
+      "alert_tray_success": "Tray created successfully",
+      "alert_tray_failed": "Error while creating tray",
       "alert_failed_empty": "Thanks to fill all fields"
     },
     "update": {
