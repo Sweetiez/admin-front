@@ -115,9 +115,12 @@
       "price": "Price",
       "quantity":"Quantity",
       "flavor": "Flavor",
+      "sweets": "Sweets",
+      "setOf": "(set of {{unitPerPackage}})",
       "description": "Description",
       "ingredients": "Ingredients",
       "cancel_btn": "Cancel",
+      "add_sweet": "Add",
       "save_btn": "Create",
       "alert_success": "Sweet created successfully",
       "alert_failed_empty": "Thanks to fill all fields"
