@@ -37,7 +37,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { mutate } = useMutation(createSweet, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('all-sweets');
-      addToast(`${t('products.add.alert_sweet_success')}`, {
+      addToast(`${t('products.sweets.add.alert_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
@@ -96,7 +96,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
       description === '' ||
       sweetIngredients.length < 1
     ) {
-      addToast(`${t('products.add.alert_failed_empty')}`, {
+      addToast(`${t('products.sweets.add.alert_failed_empty')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -146,26 +146,26 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
-                {t('products.add.title')}
+                {t('products.sweets.add.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.name')}
+              {t('products.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.name')}
+              placeholder={t('products.name')}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.ingredients')}
+              {t('products.ingredients')}
             </label>
             {ingredientOptions && (
               <Select
@@ -187,7 +187,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                   name="ingredientName"
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   type="text"
-                  placeholder={t('products.add.name')}
+                  placeholder={t('products.name')}
                   onChange={(value) => setNewIngredientName(value.target.value)}
                 />
 
@@ -214,7 +214,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.flavor')}
+              {t('products.flavor')}
             </label>
             <select
               id="flavor"
@@ -229,19 +229,19 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.price')}
+                {t('products.price')}
               </label>
               <input
                 id="price"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
-                placeholder={t('products.add.price')}
+                placeholder={t('products.price')}
               />
             </div>
 
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.quantity')}
+                {t('products.quantity')}
               </label>
               <input
                 id="unitPerPackage"
@@ -249,20 +249,20 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                 type="number"
                 value={quantity}
                 onChange={(value) => handelQuantity(Number(value.target.value))}
-                placeholder={t('products.add.unitPerPackage')}
+                placeholder={t('products.quantity')}
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.description')}
+              {t('products.description')}
             </label>
             <input
               id="description"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.description')}
+              placeholder={t('products.description')}
             />
           </div>
 
@@ -274,11 +274,11 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.add.cancel_btn')}
+              {t('products.cancel_btn')}
             </button>
             <input
               type="submit"
-              value={t('products.add.save_btn')}
+              value={t('products.save_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>

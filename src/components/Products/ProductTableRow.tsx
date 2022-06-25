@@ -4,6 +4,7 @@ import Modal from '../utils/Modal';
 import ModifySweet from './Sweets/ModifySweet';
 import PublishModal from './PublishModal';
 import UnPublishModal from './UnPublishModal';
+import ModifyTray from "./Trays/ModifyTray";
 
 interface ProductRowProps {
   _id: number;
@@ -15,7 +16,8 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
   product,
   isTray,
 }) => {
-  const [modifyModalState, setModifyModalState] = useState(false);
+  const [modifySweetModalState, setModifySweetModalState] = useState(false);
+  const [modifyTrayModalState, setModifyTrayModalState] = useState(false);
   const [publishModalState, setPublishModalState] = useState(false);
   const [unPublishModalState, setUnPublishModalState] = useState(false);
 
@@ -136,7 +138,7 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
         <td className="py-3 px-6 text-center">
           <div className="flex item-center justify-center">
             <div
-              onClick={() => setModifyModalState(true)}
+              onClick={() => setModifySweetModalState(true)}
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
               <svg
@@ -168,10 +170,17 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
       </tr>
       <Modal
         modalContent={
-          <ModifySweet product={product} setOpenedModal={setModifyModalState} />
+          <ModifySweet product={product} setOpenedModal={setModifySweetModalState} />
         }
-        modalState={modifyModalState}
-        setModalState={() => setModifyModalState(false)}
+        modalState={modifySweetModalState}
+        setModalState={() => setModifySweetModalState(false)}
+      />
+      <Modal
+          modalContent={
+            <ModifyTray product={product} setOpenedModal={setModifyTrayModalState} />
+          }
+          modalState={modifyTrayModalState}
+          setModalState={() => setModifyTrayModalState(false)}
       />
 
       <Modal

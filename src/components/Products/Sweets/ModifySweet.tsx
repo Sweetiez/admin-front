@@ -112,7 +112,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
     );
 
     await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-    addToast(`${t('products.update.alert_img_upload')}`, {
+    addToast(`${t('products.alert_img_upload')}`, {
       appearance: 'success',
       autoDismiss: true,
     });
@@ -153,13 +153,13 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-      addToast(`${t('products.update.alert_success')}`, {
+      addToast(`${t('products.sweets.update.alert_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       setOpenedModal(false);
     } else {
-      addToast(`${t('products.update.alert_failed')}`, {
+      addToast(`${t('products.sweets.update.alert_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -172,7 +172,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${id}`);
-      addToast(`${t('products.update.alert_img_delete')}`, {
+      addToast(`${t('products.alert_img_delete')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
@@ -191,27 +191,27 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl">
-                {t('products.update.title')}
+                {t('products.sweets.update.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.name')}
+              {t('products.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.update.name')}
+              placeholder={t('products.name')}
               defaultValue={sweetData?.name}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.ingredients')}
+              {t('products.ingredients')}
             </label>
             {ingredientOptions && (
               <Select
@@ -233,7 +233,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                   name="ingredientName"
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   type="text"
-                  placeholder={t('products.add.name')}
+                  placeholder={t('products.name')}
                   onChange={(value) => setNewIngredientName(value.target.value)}
                 />
 
@@ -261,19 +261,19 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.update.price')}
+                {t('products.price')}
               </label>
               <input
                 id="price"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
-                placeholder={t('products.update.price')}
+                placeholder={t('products.price')}
                 defaultValue={sweetData?.price}
               />
             </div>
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.quantity')}
+                {t('products.quantity')}
               </label>
               <input
                 id="unitPerPackage"
@@ -281,14 +281,14 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                 type="number"
                 defaultValue={sweetData && sweetData.unitPerPackage}
                 onChange={(value) => handelQuantity(Number(value.target.value))}
-                placeholder={t('products.add.unitPerPackage')}
+                placeholder={t('products.quantity')}
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.flavor')}
+              {t('products.flavor')}
             </label>
             <select
               id="flavor"
@@ -303,7 +303,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.highlight')}
+              {t('products.highlight')}
             </label>
             <select
               id="highlight"
@@ -318,20 +318,20 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.description')}
+              {t('products.description')}
             </label>
             <input
               id="description"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.update.description')}
+              placeholder={t('products.description')}
               defaultValue={sweetData?.description}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">
-              {t('products.update.img_upload_title')}
+              {t('products.img_upload_title')}
             </label>
             <div className="flex items-center justify-center w-full">
               <label className="flex flex-col border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-purple-300 group">
@@ -351,7 +351,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                     />
                   </svg>
                   <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider">
-                    {t('products.update.img_upload_description')}
+                    {t('products.img_upload_description')}
                   </p>
                 </div>
                 <input
@@ -410,11 +410,11 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.update.cancel_btn')}
+              {t('products.cancel_btn')}
             </button>
             <input
               type="submit"
-              value={t('products.update.modify_btn')}
+              value={t('products.modify_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>
