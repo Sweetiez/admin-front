@@ -97,7 +97,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
       description === '' ||
       sweets.length < 1
     ) {
-      addToast(`${t('products.add.alert_failed_empty')}`, {
+      addToast(`${t('products.trays.add.alert_failed_empty')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -115,13 +115,13 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
     try {
       await createTray(request);
       await queryClient.invalidateQueries(`all-trays`);
-      addToast(`${t('products.add.alert_tray_success')}`, {
+      addToast(`${t('products.trays.add.alert_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       setOpenedModal(false);
     } catch (e) {
-      addToast(`${t('products.add.alert_tray_failed')}`, {
+      addToast(`${t('products.trays.add.alert_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -154,26 +154,26 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
-                {t('products.add.title')}
+                {t('products.trays.add.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.name')}
+              {t('products.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.name')}
+              placeholder={t('products.name')}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.flavor')}
+              {t('products.flavor')}
             </label>
             <select
               id="flavor"
@@ -187,20 +187,20 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.price')}
+              {t('products.price')}
             </label>
             <input
               id="price"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.price')}
+              placeholder={t('products.price')}
             />
           </div>
 
           <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1 col-span-2">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.sweets')}
+                {t('products.sweetsInput')}
               </label>
               <ReactSearchAutocomplete
                 items={sweetsFiltered}
@@ -211,7 +211,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                 onSearch={(value: string)=> setSearching(value)}
                 inputSearchString={searching}
                 showIcon={false}
-                placeholder={t('products.add.search')}
+                placeholder={t('products.search')}
                 styling={{
                   height: '39px',
                   border:
@@ -231,7 +231,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.quantity')}
+                {t('products.quantity')}
               </label>
               <input
                 id="unitPerPackage"
@@ -239,7 +239,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                 type="number"
                 value={quantity}
                 onChange={(value) => handelQuantity(Number(value.target.value))}
-                placeholder={t('products.add.unitPerPackage')}
+                placeholder={t('products.quantity')}
               />
             </div>
 
@@ -251,7 +251,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                 }}
                 className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
               >
-                {t('products.add.add_sweet')}
+                {t('products.add')}
               </button>
             </div>
           </div>
@@ -266,7 +266,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                   <div>
                     <span>
                       {sweet.name}{' '}
-                      {t('products.add.setOf', {
+                      {t('products.setOf', {
                         unitPerPackage: sweet.unitPerPackage,
                       })}{' '}
                       × {/*x{sweet.quantity}*/}
@@ -284,7 +284,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                           Number(value.target.value),
                         )
                       }
-                      placeholder={t('products.add.unitPerPackage')}
+                      placeholder={t('products.quantity')}
                     />
                   </div>
 
@@ -316,13 +316,13 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.description')}
+              {t('products.description')}
             </label>
             <input
               id="description"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.description')}
+              placeholder={t('products.description')}
             />
           </div>
 
@@ -334,11 +334,11 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.add.cancel_btn')}
+              {t('products.cancel_btn')}
             </button>
             <input
               type="submit"
-              value={t('products.add.save_btn')}
+              value={t('products.save_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>

@@ -67,20 +67,20 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
-                {t('products.add.title')}
+                {t('ingredients.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 my-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.name')}
+              {t('products.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.name')}
+              placeholder={t('products.name')}
             />
           </div>
 
@@ -92,11 +92,11 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.add.cancel_btn')}
+              {t('products.cancel_btn')}
             </button>
             <input
               type="submit"
-              value={t('products.add.save_btn')}
+              value={t('products.save_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>

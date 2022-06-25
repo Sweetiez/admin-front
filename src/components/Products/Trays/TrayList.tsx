@@ -30,17 +30,17 @@ const TrayList: React.FC = () => {
             onClick={() => setAddModalState(true)}
             className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
           >
-            {t('products.add_btn')}
+            {t('products.trays.add_btn')}
           </button>
         </div>
       </>
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
         <div className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-5">
-          <div>{t('products.title_all')}</div>
+          <div>{t('products.trays.title_all')}</div>
         </div>
         <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
-          <div>{t('products.title_online')}</div>
+          <div>{t('products.trays.title_online')}</div>
         </div>
         <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
           <thead>

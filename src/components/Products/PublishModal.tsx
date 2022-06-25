@@ -36,10 +36,9 @@ const PublishModal: React.FC<PublishModalProps> = ({
     }
 
     const publishRequest = new PublishSweetRequest(id, highlight);
-    const result = await publishSweet(publishRequest);
-    // refresh sweets
+    await publishSweet(publishRequest);
     await queryClient.invalidateQueries('all-sweets');
-    addToast(`${t('products.publish.alert_success')}: ${result.name.value}`, {
+    addToast(`${t('products.publish.alert_success')}`, {
       appearance: 'info',
       autoDismiss: true,
     });
@@ -85,7 +84,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
             type="button"
             className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            {t('products.publish.publish_btn')}
+            {t('products.publish_btn')}
           </button>
           <button
             onClick={() => {
@@ -94,7 +93,7 @@ const PublishModal: React.FC<PublishModalProps> = ({
             type="button"
             className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            {t('products.publish.cancel_btn')}
+            {t('products.cancel_btn')}
           </button>
         </div>
       </div>
