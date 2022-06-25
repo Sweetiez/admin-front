@@ -61,6 +61,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
   };
 
   const handelItemQuantity = (id:string, value: number) => {
+    if (value < 1) value = 1;
     const existing = sweets.find(s => s.sweetId === id)
     if(existing){
       existing.quantity = value
