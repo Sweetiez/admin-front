@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +7,9 @@ import '../../../assets/css/_dropdown-select.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { useSweets } from '../../../hooks/sweets/sweetsHooks';
 import ProductModel from '../models/ProductModel';
-import CreateTrayRequest from "../../../hooks/trays/requests/CreateTrayRequest";
-import SweetModel from "../models/SweetModel";
-import {createTray} from "../../../hooks/trays/traysHooks";
+import CreateTrayRequest from '../../../hooks/trays/requests/CreateTrayRequest';
+import SweetModel from '../models/SweetModel';
+import { createTray } from '../../../hooks/trays/traysHooks';
 
 interface CreateTrayProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -18,29 +18,43 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
-  const [quantity, setQuantity] = useState(5);
+  const [quantity, setQuantity] = useState(1);
+  const [searching, setSearching] = useState("");
   const [sweets, setSweets] = useState<SweetModel[]>([]);
   const [sweetSelected, setSweetSelected] = useState<ProductModel>();
   let { data: sweetData } = useSweets();
-  let sweetPublished = sweetData?.filter(
-    (sweet) => sweet.status === 'PUBLISHED',
-  );
+
+  let sweetPublished = useMemo(() => sweetData?.filter(
+      (sweet) => sweet.status === 'PUBLISHED',
+  ), [sweetData]);
+
+  const sweetsFiltered =  useMemo(() => {
+    let data = sweetPublished
+    sweets.forEach(s => data = data?.filter(sp => sp.id !== s.sweetId))
+    return data;
+  }, [sweetPublished, sweets]);
+
 
   const addSweet = () => {
-    if(sweetSelected){
+    if (sweetSelected) {
       let sweetItem = {
         sweetId: sweetSelected?.id,
         quantity: quantity,
         name: sweetSelected?.name,
-        unitPerPackage: sweetSelected?.unitPerPackage
+        unitPerPackage: sweetSelected?.unitPerPackage,
       };
-      const existing = sweets.find(s => s.sweetId === sweetSelected?.id)
-      if(existing){
-        existing.quantity ? existing.quantity += quantity : existing.quantity = quantity
-        setSweets([...sweets])
-      }else {
-        setSweets([...sweets, sweetItem])
+      const existing = sweets.find((s) => s.sweetId === sweetSelected?.id);
+      if (existing) {
+        existing.quantity
+          ? (existing.quantity += quantity)
+          : (existing.quantity = quantity);
+        setSweets([...sweets]);
+      } else {
+        setSweets([...sweets, sweetItem]);
       }
+      setQuantity(1)
+      setSweetSelected(undefined)
+      setSearching('')
     }
   };
 
@@ -52,7 +66,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
     setSweetSelected(undefined);
   };
   const handleDeleteSweet = (id: string) => {
-    setSweets(sweets.filter(s=>s.sweetId !== id))
+    setSweets(sweets.filter((s) => s.sweetId !== id));
   };
 
   const handelQuantity = (value: number) => {
@@ -60,12 +74,12 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
     setQuantity(value);
   };
 
-  const handelItemQuantity = (id:string, value: number) => {
+  const handelItemQuantity = (id: string, value: number) => {
     if (value < 1) value = 1;
-    const existing = sweets.find(s => s.sweetId === id)
-    if(existing){
-      existing.quantity = value
-      setSweets([...sweets])
+    const existing = sweets.find((s) => s.sweetId === id);
+    if (existing) {
+      existing.quantity = value;
+      setSweets([...sweets]);
     }
   };
 
@@ -76,7 +90,13 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
     const flavor = event.target.flavor.value;
     const description = capitalizeFirstLetter(event.target.description.value);
 
-    if (name === '' || price === '' || flavor === '' || description === '' || sweets.length < 1) {
+    if (
+      name === '' ||
+      price === '' ||
+      flavor === '' ||
+      description === '' ||
+      sweets.length < 1
+    ) {
       addToast(`${t('products.add.alert_failed_empty')}`, {
         appearance: 'error',
         autoDismiss: true,
@@ -94,7 +114,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
     try {
       await createTray(request);
-      addToast(`${t('ingredients.alert_success', {name: name})}`, {
+      addToast(`${t('ingredients.alert_success', { name: name })}`, {
         appearance: 'success',
         autoDismiss: true,
       });
@@ -177,18 +197,21 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
+          <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1 col-span-2">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
                 {t('products.add.sweets')}
               </label>
               <ReactSearchAutocomplete
-                items={sweetPublished}
+                items={sweetsFiltered}
                 fuseOptions={{ keys: ['name'] }}
                 resultStringKeyName="name"
                 onSelect={handleOnSelect}
                 onClear={handleOnClear}
+                onSearch={(value: string)=> setSearching(value)}
+                inputSearchString={searching}
                 showIcon={false}
+                placeholder={t('products.add.search')}
                 styling={{
                   height: '39px',
                   border:
@@ -234,38 +257,59 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
           </div>
 
           {sweets.length > 0 && (
-            <div className="grid grid-cols-1 mt-1 mx-7">
+            <div className="grid px-4 grid-cols-1 mt-1 mx-7 overflow-auto max-h-36 rounded-lg border border-gray-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ">
               {sweets.map((sweet) => (
-                    <div className="flex items-center my-1" key={sweet.sweetId}><span>
-                      {sweet.name} {t('products.add.setOf', {unitPerPackage: sweet.unitPerPackage})} × {/*x{sweet.quantity}*/}
+                <div
+                  className="flex items-center justify-between my-1"
+                  key={sweet.sweetId}
+                >
+                  <div>
+                    <span>
+                      {sweet.name}{' '}
+                      {t('products.add.setOf', {
+                        unitPerPackage: sweet.unitPerPackage,
+                      })}{' '}
+                      × {/*x{sweet.quantity}*/}
                     </span>
 
-                      <input
-                          id="unitPerPackageItem"
-                          className="mx-1 w-16 h-8 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                          type="number"
-                          value={sweet.quantity}
-                          onChange={(value) => sweet.sweetId && handelItemQuantity(sweet.sweetId, Number(value.target.value))}
-                          placeholder={t('products.add.unitPerPackage')}
-                      />
-
-                      <span className="ml-1" onClick={() => sweet.sweetId && handleDeleteSweet(sweet.sweetId)}>
-                        <svg
-                          className="mt-0.5 ml-0.5 w-4 h-4 text-red-500"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
-                          <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                    </span>
+                    <input
+                      id="unitPerPackageItem"
+                      className="mx-1 w-16 h-8 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      type="number"
+                      value={sweet.quantity}
+                      onChange={(value) =>
+                        sweet.sweetId &&
+                        handelItemQuantity(
+                          sweet.sweetId,
+                          Number(value.target.value),
+                        )
+                      }
+                      placeholder={t('products.add.unitPerPackage')}
+                    />
                   </div>
+
+                  <span
+                    className="ml-1"
+                    onClick={() =>
+                      sweet.sweetId && handleDeleteSweet(sweet.sweetId)
+                    }
+                  >
+                    <svg
+                      className="mt-0.5 ml-0.5 w-4 h-4 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </span>
+                </div>
               ))}
             </div>
           )}

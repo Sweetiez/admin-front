@@ -4,7 +4,6 @@ import Modal from '../utils/Modal';
 import ModifySweet from './Sweets/ModifySweet';
 import PublishModal from './PublishModal';
 import UnPublishModal from './UnPublishModal';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 interface ProductRowProps {
   _id: number;

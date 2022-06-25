@@ -116,6 +116,7 @@
       "quantity":"Quantity",
       "flavor": "Flavor",
       "sweets": "Sweets",
+      "search": "Search...",
       "setOf": "(set of {{unitPerPackage}})",
       "description": "Description",
       "ingredients": "Ingredients",

@@ -116,6 +116,7 @@
       "quantity":"Quantité",
       "flavor": "Saveur",
       "sweets": "Mignardises",
+      "search": "Rechercher...",
       "setOf": "(lot de {{unitPerPackage}})",
       "description": "Description",
       "ingredients": "Ingrédients",
