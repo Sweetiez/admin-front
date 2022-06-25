@@ -115,9 +115,12 @@
       "price": "Prix",
       "quantity":"Quantité",
       "flavor": "Saveur",
+      "sweets": "Mignardises",
+      "setOf": "(lot de {{unitPerPackage}})",
       "description": "Description",
       "ingredients": "Ingrédients",
       "cancel_btn": "Annuler",
+      "add_sweet": "Ajouter",
       "save_btn": "Créer",
       "alert_success": "Mignardise ajouté avec succès",
       "alert_failed_empty": "Merci de remplir tous les champs"

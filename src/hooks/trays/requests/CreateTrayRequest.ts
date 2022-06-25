@@ -1,16 +1,16 @@
-import ProductModel from '../../../components/Products/models/ProductModel';
+import SweetModel from '../../../components/Products/models/SweetModel';
 
 export default class CreateTrayRequest {
   name: string | undefined;
   price: number | undefined;
-  sweets: ProductModel[] | undefined;
+  sweets: SweetModel[] | undefined;
   description: string | undefined;
   flavor: string | undefined;
 
   constructor(
     name: string | undefined,
     price: number | undefined,
-    sweets: ProductModel[] | undefined,
+    sweets: SweetModel[] | undefined,
     description: string | undefined,
     flavor: string | undefined,
   ) {

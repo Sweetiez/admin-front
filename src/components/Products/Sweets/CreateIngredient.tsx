@@ -39,7 +39,6 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
         autoDismiss: true,
       });
     }
-    // mutate(request);
   };
 
   return (

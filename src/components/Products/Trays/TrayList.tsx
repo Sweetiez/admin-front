@@ -104,6 +104,7 @@ const TrayList: React.FC = () => {
         modalContent={<CreateTray setOpenedModal={setAddModalState} />}
         modalState={addModalState}
         setModalState={manageCloseCreateProductModal}
+        persistent={true}
       />
     </Page>
   );
