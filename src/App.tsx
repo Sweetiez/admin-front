@@ -10,7 +10,8 @@ import { ToastProvider } from 'react-toast-notifications';
 import Orders from './components/Orders/Orders';
 import ReportList from './components/Reports/ReportList';
 import ModifyRecipe from './components/Recipes/ModifyRecipe';
-import TrayList from "./components/Products/Trays/TrayList";
+import TrayList from './components/Products/Trays/TrayList';
+import RewardList from './components/rewads/RewardList';
 
 function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function App() {
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/sweets" element={<SweetList />} />
               <Route path="/admin/trays" element={<TrayList />} />
+              <Route path="/admin/rewards" element={<RewardList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
               <Route path="/admin/recipes/:id" element={<ModifyRecipe />} />
               <Route path="/admin/reports" element={<ReportList />} />
