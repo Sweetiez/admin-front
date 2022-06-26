@@ -1,17 +1,17 @@
 import React from 'react';
-import ProductModelRow from './models/ProductModelRow';
-import UnPublishSweetRequest from '../../hooks/sweets/requests/UnPublishSweetRequest';
-import { unPublishSweet } from '../../hooks/sweets/sweetsHooks';
+import ProductModelRow from '../models/ProductModelRow';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
+import UnPublishTrayRequest from "../../../hooks/trays/requests/UnPublishTrayRequest";
+import {unPublishTray} from "../../../hooks/trays/traysHooks";
 
 interface UnPublishModalProps {
   product: ProductModelRow;
   setOpenedModal: (openedModal: boolean) => void;
 }
 
-const UnPublishModal: React.FC<UnPublishModalProps> = ({
+const UnPublishTrayModal: React.FC<UnPublishModalProps> = ({
   product,
   setOpenedModal,
 }) => {
@@ -20,10 +20,9 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
   const { addToast } = useToasts();
 
   async function handleUnPublishSweet(productId: string) {
-    const request = new UnPublishSweetRequest(productId);
-    await unPublishSweet(request);
-    // refresh sweets
-    await queryClient.invalidateQueries('all-sweets');
+    const request = new UnPublishTrayRequest(productId);
+    await unPublishTray(request);
+    await queryClient.invalidateQueries('all-trays');
     addToast(`${t('products.unpublish.alert_success')}`, {
       appearance: 'info',
       autoDismiss: true,
@@ -92,4 +91,4 @@ const UnPublishModal: React.FC<UnPublishModalProps> = ({
   );
 };
 
-export default UnPublishModal;
+export default UnPublishTrayModal;

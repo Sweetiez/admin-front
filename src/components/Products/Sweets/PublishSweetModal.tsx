@@ -1,19 +1,19 @@
 import React from 'react';
-import ProductModelRow from './models/ProductModelRow';
-import PublishSweetRequest from '../../hooks/sweets/requests/PublishSweetRequest';
-import { publishSweet, useSweetById } from '../../hooks/sweets/sweetsHooks';
+import ProductModelRow from '../models/ProductModelRow';
+import { publishSweet, useSweetById } from '../../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import Lottie from 'react-lottie-player';
-import animationJson from '../../assets/lotties/walking-celery.json';
+import animationJson from '../../../assets/lotties/walking-celery.json';
 import { useTranslation } from 'react-i18next';
+import PublishSweetRequest from "../../../hooks/sweets/requests/PublishSweetRequest";
 
 interface PublishModalProps {
   product: ProductModelRow;
   setOpenedModal: (openedModal: boolean) => void;
 }
 
-const PublishModal: React.FC<PublishModalProps> = ({
+const PublishSweetModal: React.FC<PublishModalProps> = ({
   product,
   setOpenedModal,
 }) => {
@@ -101,4 +101,4 @@ const PublishModal: React.FC<PublishModalProps> = ({
   );
 };
 
-export default PublishModal;
+export default PublishSweetModal;
