@@ -1,10 +1,10 @@
 import CreateIngredientRequest from '../ingredients/requests/CreateIngredientRequest';
 import { authenticatedRequest } from '../common/request';
 import { useQuery } from 'react-query';
-import Ingredient from '../../components/Products/models/Ingredient';
+import IngredientModel from '../../components/Products/models/IngredientModel';
 
 export function useIngredients() {
-  return useQuery<Ingredient[], Error>(`all-ingredients`, async () => {
+  return useQuery<IngredientModel[], Error>(`all-ingredients`, async () => {
     const { data } = await authenticatedRequest({
       url: `admin/ingredients`,
     });
