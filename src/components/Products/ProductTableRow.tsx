@@ -2,9 +2,11 @@ import ProductModelRow from './models/ProductModelRow';
 import React, { useState } from 'react';
 import Modal from '../utils/Modal';
 import ModifySweet from './Sweets/ModifySweet';
-import PublishModal from './PublishModal';
-import UnPublishModal from './UnPublishModal';
-import ModifyTray from "./Trays/ModifyTray";
+import PublishSweetModal from './Sweets/PublishSweetModal';
+import UnPublishSweetModal from './Sweets/UnPublishSweetModal';
+import ModifyTray from './Trays/ModifyTray';
+import PublishTrayModal from "./Trays/PublishTrayModal";
+import UnPublishTrayModal from "./Trays/UnPublishTrayModal";
 
 interface ProductRowProps {
   _id: number;
@@ -18,8 +20,10 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
 }) => {
   const [modifySweetModalState, setModifySweetModalState] = useState(false);
   const [modifyTrayModalState, setModifyTrayModalState] = useState(false);
-  const [publishModalState, setPublishModalState] = useState(false);
-  const [unPublishModalState, setUnPublishModalState] = useState(false);
+  const [publishSweetModalState, setPublishSweetModalState] = useState(false);
+  const [unPublishSweetModalState, setUnPublishSweetModalState] = useState(false);
+  const [publishTrayModalState, setPublishTrayModalState] = useState(false);
+  const [unPublishTrayModalState, setUnPublishTrayModalState] = useState(false);
 
   const lineColor = `border-b border-gray-200 ${
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
@@ -138,7 +142,7 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
         <td className="py-3 px-6 text-center">
           <div className="flex item-center justify-center">
             <div
-              onClick={() => setModifySweetModalState(true)}
+              onClick={() =>isTray ?setModifyTrayModalState(true) : setModifySweetModalState(true)}
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
               <svg
@@ -158,8 +162,8 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
             <div
               onClick={
                 isPublished
-                  ? () => setUnPublishModalState(true)
-                  : () => setPublishModalState(true)
+                  ? (isTray ? () => setUnPublishTrayModalState(true) : () => setUnPublishSweetModalState(true))
+                  : (isTray ? () => setPublishTrayModalState(true) : () => setPublishSweetModalState(true))
               }
               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
             >
@@ -170,39 +174,65 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
       </tr>
       <Modal
         modalContent={
-          <ModifySweet product={product} setOpenedModal={setModifySweetModalState} />
+          <ModifySweet
+            product={product}
+            setOpenedModal={setModifySweetModalState}
+          />
         }
         modalState={modifySweetModalState}
         setModalState={() => setModifySweetModalState(false)}
       />
       <Modal
+        modalContent={
+          <ModifyTray
+            product={product}
+            setOpenedModal={setModifyTrayModalState}
+          />
+        }
+        modalState={modifyTrayModalState}
+        setModalState={() => setModifyTrayModalState(false)}
+        persistent={true}
+      />
+
+      <Modal
+        modalContent={
+          <PublishSweetModal
+            product={product}
+            setOpenedModal={setPublishSweetModalState}
+          />
+        }
+        modalState={publishSweetModalState}
+        setModalState={() => setPublishSweetModalState(false)}
+      />
+      <Modal
           modalContent={
-            <ModifyTray product={product} setOpenedModal={setModifyTrayModalState} />
+            <PublishTrayModal
+                product={product}
+                setOpenedModal={setPublishTrayModalState}
+            />
           }
-          modalState={modifyTrayModalState}
-          setModalState={() => setModifyTrayModalState(false)}
+          modalState={publishTrayModalState}
+          setModalState={() => setPublishTrayModalState(false)}
       />
-
       <Modal
         modalContent={
-          <PublishModal
+          <UnPublishSweetModal
             product={product}
-            setOpenedModal={setPublishModalState}
+            setOpenedModal={setUnPublishSweetModalState}
           />
         }
-        modalState={publishModalState}
-        setModalState={() => setPublishModalState(false)}
+        modalState={unPublishSweetModalState}
+        setModalState={() => setUnPublishSweetModalState(false)}
       />
-
       <Modal
-        modalContent={
-          <UnPublishModal
-            product={product}
-            setOpenedModal={setUnPublishModalState}
-          />
-        }
-        modalState={unPublishModalState}
-        setModalState={() => setUnPublishModalState(false)}
+          modalContent={
+            <UnPublishTrayModal
+                product={product}
+                setOpenedModal={setUnPublishTrayModalState}
+            />
+          }
+          modalState={unPublishTrayModalState}
+          setModalState={() => setUnPublishTrayModalState(false)}
       />
     </>
   );

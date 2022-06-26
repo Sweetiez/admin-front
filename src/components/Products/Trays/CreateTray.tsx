@@ -269,7 +269,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                       {t('products.setOf', {
                         unitPerPackage: sweet.unitPerPackage,
                       })}{' '}
-                      × {/*x{sweet.quantity}*/}
+                      ×
                     </span>
 
                     <input

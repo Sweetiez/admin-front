@@ -1,4 +1,4 @@
-import ProductModel from '../../../components/Products/models/ProductModel';
+import SweetModel from '../../../components/Products/models/SweetModel';
 
 export default class UpdateTrayRequest {
   id: string | undefined;
@@ -6,7 +6,7 @@ export default class UpdateTrayRequest {
   price: number | undefined;
   description: string | undefined;
   images: string[] | undefined;
-  sweets: ProductModel[] | undefined;
+  sweets: SweetModel[] | undefined;
   highlight: string | undefined;
   state: string | undefined;
   flavor: string | undefined;
@@ -16,10 +16,9 @@ export default class UpdateTrayRequest {
     id: string | undefined,
     name: string | undefined,
     price: number | undefined,
-    unitPerPackage: number | undefined,
     description: string | undefined,
     images: string[] | undefined,
-    sweets: ProductModel[] | undefined,
+    sweets: SweetModel[] | undefined,
     highlight: string | undefined,
     state: string | undefined,
     flavor: string | undefined,

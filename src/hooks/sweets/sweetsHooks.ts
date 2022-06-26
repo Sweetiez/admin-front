@@ -2,11 +2,11 @@ import { useQuery } from 'react-query';
 import { authenticatedRequest } from '../common/request';
 import ProductModelRow from '../../components/Products/models/ProductModelRow';
 import CreateSweetRequest from './requests/CreateSweetRequest';
-import PublishSweetRequest from './requests/PublishSweetRequest';
 import ProductModel from '../../components/Products/models/ProductModel';
 import UpdateSweetRequest from './requests/UpdateSweetRequest';
-import UnPublishSweetRequest from './requests/UnPublishSweetRequest';
 import DeleteImageRequest from './requests/DeleteImageRequest';
+import PublishSweetRequest from './requests/PublishSweetRequest';
+import UnPublishSweetRequest from './requests/UnPublishSweetRequest';
 
 export function useSweets() {
   return useQuery<ProductModelRow[], Error>(`all-sweets`, async () => {
@@ -46,11 +46,13 @@ export async function publishSweet(publishSweetRequest: PublishSweetRequest) {
   return data;
 }
 
-export async function unPublishSweet(request: UnPublishSweetRequest) {
+export async function unPublishSweet(
+  unPublishSweetRequest: UnPublishSweetRequest,
+) {
   const { data } = await authenticatedRequest({
     url: `admin/sweets/publish`,
     method: 'DELETE',
-    data: request,
+    data: unPublishSweetRequest,
   });
   return data;
 }
