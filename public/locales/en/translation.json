@@ -21,6 +21,7 @@
     "orders": "Orders",
     "sweets": "Sweets",
     "trays": "Trays",
+    "rewards": "Rewards",
     "recipe": "Recipes",
     "report": "Reports",
     "logout": "Logout"
@@ -191,5 +192,45 @@
     "alert_cancel_error": "Error while cancelling the report",
     "alert_delete_success": "The comment has been deleted",
     "alert_delete_error": "Error while deleting the comment"
+  },
+  "rewards": {
+    "non-published": "Non-published rewards",
+    "published": "Published rewards",
+    "button": {
+      "add": "Add reward"
+    },
+    "table": {
+      "title": "Name",
+      "reward": "Reward",
+      "cost": "Cost",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create reward",
+      "name": "Name",
+      "cost": "Cost",
+      "products": "Sweets"
+    },
+    "edit": {
+      "title": "Edit reward",
+      "button": "Modify"
+    },
+    "publish": {
+      "title": "Publish reward",
+      "message": "Are you sure you want to publish this reward?",
+      "submit": "Publish",
+      "alert": {
+        "success": "Reward published",
+        "failed": "Reward publication failed"
+      }
+    },
+    "unpublished": {
+      "title": "Unpublish reward",
+      "message": "Are you sure you want to unpublish this reward? This reward will no longer be available for purchase in the store after this action.",
+      "submit": "Unpublish",
+      "alert": {
+        "success": "Reward unpublished"
+      }
+    }
   }
 }

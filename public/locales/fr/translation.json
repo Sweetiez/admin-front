@@ -21,6 +21,7 @@
     "orders": "Commandes",
     "sweets": "Mignardises",
     "trays": "Plateaux",
+    "rewards": "Récompenses",
     "recipe": "Recettes",
     "report": "Signalements",
     "logout": "Se déconnecter"
@@ -109,7 +110,7 @@
   "products": {
     "name": "Nom",
     "price": "Prix",
-    "quantity":"Quantité",
+    "quantity": "Quantité",
     "highlight": "Mise en avant",
     "flavor": "Saveur",
     "sweetsInput": "Mignardises",
@@ -191,5 +192,49 @@
     "alert_cancel_error": "Erreur lors de l'annulation du signalement",
     "alert_delete_success": "Le commentaire à bien été supprimé",
     "alert_delete_error": "Erreur lors de la suppression du commentaire"
+  },
+  "rewards": {
+    "non-published": "Récompenses non publiés",
+    "published": "Récompenses publié",
+    "button": {
+      "add": "Ajouter une récompense"
+    },
+    "table": {
+      "title": "Nom",
+      "reward": "Récompense",
+      "cost": "Coût",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Créer une récompense",
+      "name": "Nom",
+      "cost": "Coût",
+      "products": "Miganrdises",
+      "alert_success": "Récompense créé avec succès",
+      "alert_failed": "Création de la récompense échoué"
+    },
+    "edit": {
+      "title": "Modifier une récompense",
+      "button": "Modifier",
+      "alert_success": "Récompense modifié avec succès",
+      "alert_failed": "Modification de la récompense échoué"
+    },
+    "publish": {
+      "title": "Publier la récompense",
+      "message": "Êtes-vous sûr de vouloir publier la récompense ? Une fois publiée, cette récompense sera disponible dans la boutique.",
+      "submit": "Publier",
+      "alert": {
+        "success": "Récompense publiée avec succès",
+        "failed": "Erreur lors de la publication de la récompense"
+      }
+    },
+    "unpublished": {
+      "title": "Retirer la récompense de la boutique",
+      "message": "Êtes-vous sûr de vouloir retirer la récompense de la boutique ? La récompense ne sera plus disponible dans la boutique après cette action.",
+      "submit": "Retirer",
+      "alert": {
+        "success": "Récompense retirée avec succès"
+      }
+    }
   }
 }
