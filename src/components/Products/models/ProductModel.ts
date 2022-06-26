@@ -1,4 +1,4 @@
-import Ingredient from './Ingredient';
+import IngredientModel from './IngredientModel';
 
 export default class ProductModel {
   id: string | undefined;
@@ -8,7 +8,7 @@ export default class ProductModel {
   state: string | undefined;
   description: string | undefined;
   images: string[] | undefined;
-  ingredients: Ingredient[] | undefined;
+  ingredients: IngredientModel[] | undefined;
   highlight: string | undefined;
   flavor: string | undefined;
   rating: number | undefined;
