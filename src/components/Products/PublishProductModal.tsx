@@ -1,24 +1,32 @@
 import React from 'react';
-import ProductModelRow from '../models/ProductModelRow';
-import { publishSweet, useSweetById } from '../../../hooks/sweets/sweetsHooks';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import Lottie from 'react-lottie-player';
-import animationJson from '../../../assets/lotties/walking-celery.json';
 import { useTranslation } from 'react-i18next';
-import PublishSweetRequest from "../../../hooks/sweets/requests/PublishSweetRequest";
+import animationJson from '../../assets/lotties/walking-celery.json';
+import ProductModelRow from './models/ProductModelRow';
+import PublishProductRequest from '../../hooks/products/requests/publishProductRequest';
+import {
+  publishProduct,
+  useProductById,
+} from '../../hooks/products/productsHooks';
 
-interface PublishModalProps {
+interface PublishProductModalProps {
   product: ProductModelRow;
   setOpenedModal: (openedModal: boolean) => void;
+  productType: string;
 }
 
-const PublishSweetModal: React.FC<PublishModalProps> = ({
+const PublishProductModal: React.FC<PublishProductModalProps> = ({
   product,
   setOpenedModal,
+  productType,
 }) => {
   const { t } = useTranslation();
-  const { data: sweetData } = useSweetById(product.id ? product.id : '');
+  const { data: productData } = useProductById(
+    product.id ? product.id : '',
+    productType,
+  );
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
 
@@ -35,9 +43,9 @@ const PublishSweetModal: React.FC<PublishModalProps> = ({
       return;
     }
 
-    const publishRequest = new PublishSweetRequest(id, highlight);
-    await publishSweet(publishRequest);
-    await queryClient.invalidateQueries('all-sweets');
+    const publishRequest = new PublishProductRequest(id, highlight);
+    await publishProduct(publishRequest, productType);
+    await queryClient.invalidateQueries(`all-${productType}`);
     addToast(`${t('products.publish.alert_success')}`, {
       appearance: 'info',
       autoDismiss: true,
@@ -78,7 +86,7 @@ const PublishSweetModal: React.FC<PublishModalProps> = ({
               handlePublishSweet(
                 product?.id ? product?.id : '',
                 product?.highlight ? product?.highlight : '',
-                sweetData?.images ? sweetData?.images : [],
+                productData?.images ? productData?.images : [],
               )
             }
             type="button"
@@ -101,4 +109,4 @@ const PublishSweetModal: React.FC<PublishModalProps> = ({
   );
 };
 
-export default PublishSweetModal;
+export default PublishProductModal;
