@@ -1,11 +1,6 @@
 import ProductModelRow from '../models/ProductModelRow';
 import React, { useState } from 'react';
-import {
-  deleteSweetImage,
-  updateSweet,
-  uploadSweetImage,
-  useSweetById,
-} from '../../../hooks/sweets/sweetsHooks';
+import { updateSweet, useSweetById } from '../../../hooks/sweets/sweetsHooks';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient } from 'react-query';
 import UpdateSweetRequest from '../../../hooks/sweets/requests/UpdateSweetRequest';
@@ -18,6 +13,10 @@ import {
 } from '../../../hooks/ingredients/ingredientsHooks';
 import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
 import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
+import {
+  deleteProductImage,
+  uploadProductImage,
+} from '../../../hooks/products/productsHooks';
 
 interface ModifyProductProps {
   product: ProductModelRow;
@@ -106,9 +105,10 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
       return null;
     }
 
-    await uploadSweetImage(
+    await uploadProductImage(
       sweetData.id ? sweetData.id : '',
       event.target.files[0],
+      'sweets',
     );
 
     await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
@@ -132,7 +132,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
     let defaultIngredients: string[] = [];
     sweetIngredientsData.map((defaultIngredient: any) =>
-        defaultIngredients.push(defaultIngredient.value)
+      defaultIngredients.push(defaultIngredient.value),
     );
 
     const request = new UpdateSweetRequest(
@@ -168,7 +168,8 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
   async function onDeleteImage(id: string, url: string) {
     const request = new DeleteImageRequest(url);
-    const response = await deleteSweetImage(id, request);
+    const response = await deleteProductImage(id, request, 'sweets');
+    console.log('onDeleteImage', response)
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${id}`);
@@ -396,7 +397,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                     </div>
                   );
                 } else {
-                  component = <></>;
+                  component = <span key={index}></span>;
                 }
                 return component;
               })}

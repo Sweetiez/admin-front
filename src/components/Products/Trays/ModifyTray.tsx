@@ -5,20 +5,18 @@ import { useTranslation } from 'react-i18next';
 import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
 import '../../../assets/css/_dropdown-select.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import {
-  useSweets,
-} from '../../../hooks/sweets/sweetsHooks';
+import { useSweets } from '../../../hooks/sweets/sweetsHooks';
 import ProductModel from '../models/ProductModel';
 import SweetModel from '../models/SweetModel';
-import {
-  deleteTrayImage,
-  updateTray, uploadTrayImage,
-  useTrayById,
-} from '../../../hooks/trays/traysHooks';
+import { updateTray, useTrayById } from '../../../hooks/trays/traysHooks';
 import ProductModelRow from '../models/ProductModelRow';
 import DeleteImageRequest from '../../../hooks/sweets/requests/DeleteImageRequest';
 import SweetTrayModel from '../models/SweetTrayModel';
 import UpdateTrayRequest from '../../../hooks/trays/requests/UpdateTrayRequest';
+import {
+  deleteProductImage,
+  uploadProductImage,
+} from '../../../hooks/products/productsHooks';
 
 interface ModifyTrayProps {
   product: ProductModelRow;
@@ -195,9 +193,10 @@ const ModifyTray: React.FC<ModifyTrayProps> = ({ setOpenedModal, product }) => {
       return null;
     }
 
-    await uploadTrayImage(
+    await uploadProductImage(
       trayData.id ? trayData.id : '',
       event.target.files[0],
+      'trays',
     );
 
     await queryClient.invalidateQueries(`tray-${trayData.id}`);
@@ -209,7 +208,7 @@ const ModifyTray: React.FC<ModifyTrayProps> = ({ setOpenedModal, product }) => {
 
   async function onDeleteImage(id: string, url: string) {
     const request = new DeleteImageRequest(url);
-    const response = await deleteTrayImage(id, request);
+    const response = await deleteProductImage(id, request, 'trays');
     if (response) {
       await queryClient.invalidateQueries(`all-trays`);
       await queryClient.invalidateQueries(`tray-${id}`);
@@ -506,7 +505,7 @@ const ModifyTray: React.FC<ModifyTrayProps> = ({ setOpenedModal, product }) => {
                     </div>
                   );
                 } else {
-                  component = <></>;
+                  component = <span key={index}></span>;
                 }
                 return component;
               })}

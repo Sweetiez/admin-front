@@ -126,7 +126,7 @@
     "img_upload_title": "Upload image",
     "img_upload_description": "Select an image",
     "alert_img_upload": "Image uploaded successfully",
-    "alert_img_delete": "Failed to delete image",
+    "alert_img_delete": "Image deleted successfully",
     "col_name": {
       "product": "Name",
       "price": "Price",
