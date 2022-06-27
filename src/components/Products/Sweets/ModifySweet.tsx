@@ -1,23 +1,29 @@
-import ProductModelRow from './models/ProductModelRow';
-import React from 'react';
-import {
-  deleteSweetImage,
-  updateSweet,
-  uploadSweetImage,
-  useSweetById,
-} from '../../hooks/sweets/sweetsHooks';
+import ProductModelRow from '../models/ProductModelRow';
+import React, { useState } from 'react';
+import { updateSweet, useSweetById } from '../../../hooks/sweets/sweetsHooks';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient } from 'react-query';
-import UpdateSweetRequest from '../../hooks/sweets/requests/UpdateSweetRequest';
+import UpdateSweetRequest from '../../../hooks/sweets/requests/UpdateSweetRequest';
 import { useTranslation } from 'react-i18next';
-import DeleteImageRequest from '../../hooks/sweets/requests/DeleteImageRequest';
+import DeleteImageRequest from '../../../hooks/sweets/requests/DeleteImageRequest';
+import Select from 'react-dropdown-select';
+import {
+  createIngredient,
+  useIngredients,
+} from '../../../hooks/ingredients/ingredientsHooks';
+import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
+import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
+import {
+  deleteProductImage,
+  uploadProductImage,
+} from '../../../hooks/products/productsHooks';
 
 interface ModifyProductProps {
   product: ProductModelRow;
   setOpenedModal: (openedModal: boolean) => void;
 }
 
-const ModifyProduct: React.FC<ModifyProductProps> = ({
+const ModifySweet: React.FC<ModifyProductProps> = ({
   product,
   setOpenedModal,
 }) => {
@@ -29,13 +35,68 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     data: sweetData,
     error,
   } = useSweetById(product.id ? product.id : '');
+  const { data: ingredientData } = useIngredients();
+  const initQuantity = sweetData && sweetData.unitPerPackage;
+  const [quantity, setQuantity] = useState(initQuantity);
   const { addToast } = useToasts();
+  const [createNewIngredient, setCreateNewIngredient] = useState(false);
+  const [newIngredientName, setNewIngredientName] = useState('');
+
+  const ingredientOptions = ingredientData
+    ? ingredientData.map((ingredient) => ({
+        value: ingredient.id ? ingredient.id : '0',
+        label: ingredient.name ? ingredient.name : '',
+      }))
+    : [];
+
+  const sweetIngredientsData = sweetData?.ingredients
+    ? sweetData?.ingredients.map((sweetIngredientData) => ({
+        value: sweetIngredientData.id ? sweetIngredientData.id : '0',
+        label: sweetIngredientData.name ? sweetIngredientData.name : '',
+      }))
+    : [];
+  const [sweetIngredients, setSweetIngredient] =
+    useState<any>(sweetIngredientsData);
 
   if (isSweetLoading) return <div>Loading...</div>;
   if (isSweetError) {
     addToast(error.message, { appearance: 'error', autoDismiss: true });
     return <div>Error...</div>;
   }
+
+  const handelQuantity = (value: number) => {
+    if (value < 1) value = 1;
+    setQuantity(value);
+  };
+
+  const submitIngredientCreation = async () => {
+    const name = capitalizeFirstLetter(newIngredientName);
+
+    if (name === '') {
+      addToast(`${t('ingredients.alert_failed_empty')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    const request = new CreateIngredientRequest(name);
+
+    try {
+      await createIngredient(request);
+      addToast(`${t('ingredients.alert_success', { name: name })}`, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      await queryClient.invalidateQueries('all-ingredients');
+      setCreateNewIngredient(false);
+    } catch (e) {
+      addToast(`${t('ingredients.alert_api_error')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
 
   async function onSubmitUploadFile(event: any) {
     event.preventDefault();
@@ -44,13 +105,14 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
       return null;
     }
 
-    await uploadSweetImage(
+    await uploadProductImage(
       sweetData.id ? sweetData.id : '',
       event.target.files[0],
+      'sweets',
     );
 
     await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-    addToast(`${t('products.update.alert_img_upload')}`, {
+    addToast(`${t('products.alert_img_upload')}`, {
       appearance: 'success',
       autoDismiss: true,
     });
@@ -63,13 +125,24 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
       return null;
     }
 
+    let ingredients: string[] = [];
+    sweetIngredients.map((ingredient: any) =>
+      ingredients.push(ingredient.value),
+    );
+
+    let defaultIngredients: string[] = [];
+    sweetIngredientsData.map((defaultIngredient: any) =>
+      defaultIngredients.push(defaultIngredient.value),
+    );
+
     const request = new UpdateSweetRequest(
       sweetData.id ? sweetData.id : '',
       event.target.name.value,
       event.target.price.value,
+      quantity ? quantity : sweetData.unitPerPackage,
       event.target.description.value,
       sweetData.images ? sweetData.images : [],
-      sweetData.ingredients ? sweetData.ingredients : [],
+      ingredients.length > 0 ? ingredients : defaultIngredients,
       event.target.highlight.value,
       sweetData.state ? sweetData.state : '',
       event.target.flavor.value,
@@ -80,13 +153,13 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${sweetData.id}`);
-      addToast(`${t('products.update.alert_success')}`, {
+      addToast(`${t('products.sweets.update.alert_success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       setOpenedModal(false);
     } else {
-      addToast(`${t('products.update.alert_failed')}`, {
+      addToast(`${t('products.sweets.update.alert_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
@@ -95,11 +168,12 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
 
   async function onDeleteImage(id: string, url: string) {
     const request = new DeleteImageRequest(url);
-    const response = await deleteSweetImage(id, request);
+    const response = await deleteProductImage(id, request, 'sweets');
+    console.log('onDeleteImage', response)
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${id}`);
-      addToast(`${t('products.update.alert_img_delete')}`, {
+      addToast(`${t('products.alert_img_delete')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
@@ -118,56 +192,119 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl">
-                {t('products.update.title')}
+                {t('products.sweets.update.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.name')}
+              {t('products.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.update.name')}
+              placeholder={t('products.name')}
               defaultValue={sweetData?.name}
             />
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.ingredients')}
+            </label>
+            {ingredientOptions && (
+              <Select
+                multi
+                values={sweetIngredientsData}
+                options={ingredientOptions}
+                color={'#8b5cf6'}
+                onChange={(values) => setSweetIngredient(values)}
+                name="select"
+                dropdownHeight={'150px'}
+              />
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            {createNewIngredient ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+                <input
+                  name="ingredientName"
+                  className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  type="text"
+                  placeholder={t('products.name')}
+                  onChange={(value) => setNewIngredientName(value.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                  onClick={() => submitIngredientCreation()}
+                >
+                  {t('ingredients.add_btn')}
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setCreateNewIngredient(true);
+                }}
+                className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+              >
+                {t('ingredients.add_btn')}
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.update.price')}
+                {t('products.price')}
               </label>
               <input
                 id="price"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
-                placeholder={t('products.update.price')}
+                placeholder={t('products.price')}
                 defaultValue={sweetData?.price}
               />
             </div>
             <div className="grid grid-cols-1">
               <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.update.flavor')}
+                {t('products.quantity')}
               </label>
-              <select
-                id="flavor"
+              <input
+                id="unitPerPackage"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                defaultValue={sweetData?.flavor}
-              >
-                <option>SALTY</option>
-                <option>SWEET</option>
-                <option>MIXED</option>
-              </select>
+                type="number"
+                defaultValue={sweetData && sweetData.unitPerPackage}
+                onChange={(value) => handelQuantity(Number(value.target.value))}
+                placeholder={t('products.quantity')}
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.highlight')}
+              {t('products.flavor')}
+            </label>
+            <select
+              id="flavor"
+              className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              defaultValue={sweetData?.flavor}
+            >
+              <option>SALTY</option>
+              <option>SWEET</option>
+              <option>MIXED</option>
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              {t('products.highlight')}
             </label>
             <select
               id="highlight"
@@ -182,20 +319,20 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.update.description')}
+              {t('products.description')}
             </label>
             <input
               id="description"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.update.description')}
+              placeholder={t('products.description')}
               defaultValue={sweetData?.description}
             />
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
             <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">
-              {t('products.update.img_upload_title')}
+              {t('products.img_upload_title')}
             </label>
             <div className="flex items-center justify-center w-full">
               <label className="flex flex-col border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-purple-300 group">
@@ -215,7 +352,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
                     />
                   </svg>
                   <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider">
-                    {t('products.update.img_upload_description')}
+                    {t('products.img_upload_description')}
                   </p>
                 </div>
                 <input
@@ -226,11 +363,11 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
               </label>
             </div>
             <div className="flex pt-3">
-              {sweetData?.images?.map((image) => {
+              {sweetData?.images?.map((image, index) => {
                 let component;
                 if (image !== '') {
                   component = (
-                    <div className="mr-3 w-16 h-16">
+                    <div className="mr-3 w-16 h-16" key={index}>
                       <button
                         type="button"
                         onClick={() =>
@@ -260,7 +397,7 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
                     </div>
                   );
                 } else {
-                  component = <></>;
+                  component = <span key={index}></span>;
                 }
                 return component;
               })}
@@ -274,11 +411,11 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.update.cancel_btn')}
+              {t('products.cancel_btn')}
             </button>
             <input
               type="submit"
-              value={t('products.update.modify_btn')}
+              value={t('products.modify_btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>
@@ -288,4 +425,4 @@ const ModifyProduct: React.FC<ModifyProductProps> = ({
   );
 };
 
-export default ModifyProduct;
+export default ModifySweet;

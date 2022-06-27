@@ -3,13 +3,15 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
-import ProductList from './components/Products/ProductList';
+import SweetList from './components/Products/Sweets/SweetList';
 import RecipeList from './components/Recipes/RecipeList';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastProvider } from 'react-toast-notifications';
 import Orders from './components/Orders/Orders';
 import ReportList from './components/Reports/ReportList';
 import ModifyRecipe from './components/Recipes/ModifyRecipe';
+import TrayList from './components/Products/Trays/TrayList';
+import RewardList from './components/rewads/RewardList';
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,7 +25,9 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/admin" element={<Dashboard />} />
               <Route path="/admin/orders" element={<Orders />} />
-              <Route path="/admin/products" element={<ProductList />} />
+              <Route path="/admin/sweets" element={<SweetList />} />
+              <Route path="/admin/trays" element={<TrayList />} />
+              <Route path="/admin/rewards" element={<RewardList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
               <Route path="/admin/recipes/:id" element={<ModifyRecipe />} />
               <Route path="/admin/reports" element={<ReportList />} />

@@ -1,70 +1,69 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Page from '../Page/Page';
-import ProductModelRow from './models/ProductModelRow';
-import CreateProduct from './CreateProduct';
-import { Dialog, Transition } from '@headlessui/react';
-import { useSweets } from '../../hooks/sweets/sweetsHooks';
-import ModifyProduct from './ModifyProduct';
-import PublishModal from './PublishModal';
-import UnPublishModal from './UnPublishModal';
-import { useTranslation } from 'react-i18next';
 import AccessRoleController from '../Auth/AccessRoleController';
 import { Role } from '../../hooks/auth/access/Roles';
+import { useTranslation } from 'react-i18next';
 import Modal from '../utils/Modal';
+import { useRewards } from '../../hooks/rewards/rewardHooks';
+import RewardModel from './models/RewardModel';
+import RewardForm from './modals/RewardForm';
+import PublishRewardModal from './modals/PublishRewardModal';
+import UnPublishRewardModal from './modals/UnPublishRewardModal';
 
-const ProductList: React.FC = () => {
+const RewardList: React.FC = () => {
   const { t } = useTranslation();
   const [addModalState, setAddModalState] = useState(false);
-  let { data: sweets } = useSweets();
+  let { data: rewards } = useRewards();
 
-  if (sweets === undefined) {
-    sweets = [];
+  if (rewards === undefined) {
+    rewards = [];
   }
 
   return (
     <Page>
       <>
         <AccessRoleController redirect="/" role={Role.ADMIN} />
-        <button
-          onClick={() => setAddModalState(true)}
-          className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
-        >
-          {t('products.add_btn')}
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={() => setAddModalState(true)}
+            className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+          >
+            {t('rewards.button.add')}
+          </button>
+        </div>
       </>
+      <AccessRoleController redirect="/" role={Role.ADMIN} />
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
         <div className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-5">
-          <div>{t('products.title_all')}</div>
+          <div>{t('rewards.non-published')}</div>
         </div>
         <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
-          <div>{t('products.title_online')}</div>
+          <div>{t('rewards.published')}</div>
         </div>
+
         <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
-                {t('products.col_name.product')}
-              </th>
-              <th className="py-3 px-6 text-left">
-                {t('products.col_name.price')}
+                {t('rewards.table.title')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.highlight')}
+                {t('rewards.table.reward')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.status')}
+                {t('rewards.table.cost')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.actions')}
+                {t('rewards.table.actions')}
               </th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {sweets
-              .filter((product) => product.status !== 'PUBLISHED')
-              .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} />
+            {rewards
+              .filter((reward) => reward.state !== 'PUBLISHED')
+              .map((reward, index) => (
+                <RewardTableRow reward={reward} key={index} _id={index} />
               ))}
           </tbody>
         </table>
@@ -72,81 +71,45 @@ const ProductList: React.FC = () => {
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
-                {t('products.col_name.product')}
-              </th>
-              <th className="py-3 px-6 text-left">
-                {t('products.col_name.price')}
+                {t('rewards.table.title')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.highlight')}
+                {t('rewards.table.reward')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.status')}
+                {t('rewards.table.cost')}
               </th>
               <th className="py-3 px-6 text-center">
-                {t('products.col_name.actions')}
+                {t('rewards.table.actions')}
               </th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {sweets
-              .filter((product) => product.status === 'PUBLISHED')
-              .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} />
+            {rewards
+              .filter((reward) => reward.state === 'PUBLISHED')
+              .map((reward, index) => (
+                <RewardTableRow reward={reward} key={index} _id={index} />
               ))}
           </tbody>
         </table>
       </div>
 
-      <Transition.Root show={addModalState} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed z-10 inset-0 overflow-y-auto"
-          onClose={setAddModalState}
-        >
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-            </Transition.Child>
-            <span
-              className="hidden sm:inline-block sm:align-middle sm:h-screen"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <CreateProduct setOpenedModal={setAddModalState} />
-              </div>
-            </Transition.Child>
-          </div>
-        </Dialog>
-      </Transition.Root>
+      <Modal
+        modalContent={<RewardForm setOpenedModal={setAddModalState} />}
+        modalState={addModalState}
+        setModalState={() => setAddModalState(false)}
+        persistent={true}
+      />
     </Page>
   );
 };
 
-interface ProductRowProps {
+interface RewardTableRowProps {
   _id: number;
-  product: ProductModelRow;
+  reward: RewardModel;
 }
-const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
+
+const RewardTableRow: React.FC<RewardTableRowProps> = ({ _id, reward }) => {
   const [modifyModalState, setModifyModalState] = useState(false);
   const [publishModalState, setPublishModalState] = useState(false);
   const [unPublishModalState, setUnPublishModalState] = useState(false);
@@ -155,22 +118,7 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
   } hover:bg-gray-100`;
 
-  let statusStyle: string;
-  switch (product.status) {
-    case 'PUBLISHED':
-      statusStyle = 'bg-green-200 text-green-600';
-      break;
-    case 'CREATED':
-      statusStyle = 'bg-indigo-200 text-indigo-600';
-      break;
-    case 'DELETED':
-      statusStyle = 'bg-red-200 text-red-600';
-      break;
-    default:
-      statusStyle = 'bg-brown-200 text-brown-600';
-  }
-
-  const isPublished = product.status === 'PUBLISHED';
+  const isPublished = reward.state === 'PUBLISHED';
 
   const publishSVG = (
     <svg
@@ -240,23 +188,14 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
       <tr className={lineColor}>
         <td className="py-3 px-6 text-left">
           <div className="flex items-center">
-            <span className="font-medium">{product.name}</span>
+            <span className="font-medium">{reward.name}</span>
           </div>
         </td>
         <td className="py-3 px-6 text-left">
-          <div className="flex items-center">
-            <span>{product.price} €</span>
-          </div>
+          <div className="flex items-center">{reward.productName}</div>
         </td>
-        <td className="py-3 px-6 text-center">
-          <div className="flex items-center justify-center">
-            <span>{product.highlight}</span>
-          </div>
-        </td>
-        <td className="py-3 px-6 text-center">
-          <span className={`${statusStyle} py-1 px-3 rounded-full text-xs`}>
-            {product.status}
-          </span>
+        <td className="py-3 px-6 text-left">
+          <div className="flex items-center">{reward.cost}</div>
         </td>
         <td className="py-3 px-6 text-center">
           <div className="flex item-center justify-center">
@@ -293,30 +232,26 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
       </tr>
       <Modal
         modalContent={
-          <ModifyProduct
-            product={product}
-            setOpenedModal={setModifyModalState}
-          />
+          <RewardForm reward={reward} setOpenedModal={setModifyModalState} />
         }
         modalState={modifyModalState}
         setModalState={() => setModifyModalState(false)}
+        persistent={true}
       />
-
       <Modal
         modalContent={
-          <PublishModal
-            product={product}
+          <PublishRewardModal
+            reward={reward}
             setOpenedModal={setPublishModalState}
           />
         }
         modalState={publishModalState}
         setModalState={() => setPublishModalState(false)}
       />
-
       <Modal
         modalContent={
-          <UnPublishModal
-            product={product}
+          <UnPublishRewardModal
+            reward={reward}
             setOpenedModal={setUnPublishModalState}
           />
         }
@@ -327,4 +262,4 @@ const ProductTableRow: React.FC<ProductRowProps> = ({ _id, product }) => {
   );
 };
 
-export default ProductList;
+export default RewardList;

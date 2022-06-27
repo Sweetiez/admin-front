@@ -19,7 +19,9 @@
   "navigation": {
     "dashboard": "Tableau de bord",
     "orders": "Commandes",
-    "products": "Produits",
+    "sweets": "Mignardises",
+    "trays": "Plateaux",
+    "rewards": "Récompenses",
     "recipe": "Recettes",
     "report": "Signalements",
     "logout": "Se déconnecter"
@@ -98,58 +100,83 @@
       "back": "Retour"
     }
   },
+  "ingredients": {
+    "title": "Ajouter un ingrédient",
+    "add_btn": "Ajouter un nouveau ingrédient",
+    "alert_success": "Ingrédient {{name}} à été ajouté avec succès",
+    "alert_failed_empty": "Merci de remplir tous les champs",
+    "alert_api_error": "Erreur lors de la création d'un ingrédient"
+  },
   "products": {
-    "add_btn": "Ajouter un produit",
-    "title_all": "Tous les produits",
-    "title_online": "Produits en ligne",
-    "add": {
-      "title": "Ajouter un produit",
-      "name": "Nom",
-      "price": "Prix",
-      "flavor": "Saveur",
-      "description": "Description",
-      "cancel_btn": "Annuler",
-      "save_btn": "Créer",
-      "alert_success": "Mignardise ajouté avec succès",
-      "alert_failed_empty": "Merci de remplir tous les champs"
-    },
-    "update": {
-      "title": "Modifier un produit",
-      "name": "Nom",
-      "price": "Prix",
-      "flavor": "Saveur",
-      "highlight": "Mise en avant",
-      "description": "Description",
-      "img_upload_title": "Ajouté une image",
-      "img_upload_description": "Sélectionner une image",
-      "cancel_btn": "Annuler",
-      "modify_btn": "Modifier",
-      "alert_success": "Mignardise modifié succès",
-      "alert_img_upload": "Image ajouté avec succès",
-      "alert_img_delete": "Image supprimé avec succès",
-      "alert_failed": "Erreur lors de la modification de la mignardise"
-    },
+    "name": "Nom",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "highlight": "Mise en avant",
+    "flavor": "Saveur",
+    "sweetsInput": "Mignardises",
+    "search": "Rechercher...",
+    "setOf": "(lot de {{unitPerPackage}})",
+    "description": "Description",
+    "ingredients": "Ingrédients",
+    "add": "Ajouter",
+    "save_btn": "Créer",
+    "cancel_btn": "Annuler",
+    "modify_btn": "Modifier",
+    "publish_btn": "Publier",
+    "unpublish_btn": "Retirer",
+    "img_upload_title": "Ajouté une image",
+    "img_upload_description": "Sélectionner une image",
+    "alert_img_upload": "Image ajouté avec succès",
+    "alert_img_delete": "Image supprimé avec succès",
     "col_name": {
       "product": "Nom",
       "price": "Prix",
+      "quantity": "Quantité",
       "highlight": "Mise en avant",
       "status": "Status",
       "actions": "Actions"
     },
+    "trays": {
+      "add_btn": "Ajouter un plateau",
+      "title_all": "Tous les plateaux",
+      "title_online": "Plateaux en ligne",
+      "add": {
+        "title": "Ajouter un plateau",
+        "alert_success": "Plateau ajouté avec succès",
+        "alert_failed": "Erreur lors de la création du plateau",
+        "alert_failed_empty": "Merci de remplir tous les champs"
+      },
+      "update": {
+        "title": "Modifier un plateau",
+        "alert_success": "Plateau modifié succès",
+        "alert_failed": "Erreur lors de la modification du plateau"
+      }
+    },
+    "sweets": {
+      "add_btn": "Ajouter une mignardise",
+      "title_all": "Tous les migardises",
+      "title_online": "Mignardises en ligne",
+      "add": {
+        "title": "Ajouter une mignardise",
+        "alert_success": "Mignardise ajouté avec succès",
+        "alert_failed_empty": "Merci de remplir tous les champs"
+      },
+      "update": {
+        "title": "Modifier une mignardise",
+        "alert_success": "Mignardise modifié succès",
+        "alert_failed": "Erreur lors de la modification de la mignardise"
+      }
+    },
     "publish": {
-      "title": "Publier la mignardise",
-      "description": "Êtes-vous vraiment certain de vouloir publier la mignardise ? Cette mignardise sera disponible à l'achat dans la boutique après cette action.",
-      "cancel_btn": "Annuler",
-      "publish_btn": "Publier",
-      "alert_success": "Mignardise publiée",
-      "alert_fail_images": "Merci d'ajouter au moins une image à la mignardise"
+      "title": "Publier le produit",
+      "description": "Êtes-vous vraiment certain de vouloir publier le produit ? Ce produit sera disponible à l'achat dans la boutique après cette action.",
+      "alert_success": "Produit publié",
+      "alert_fail_images": "Merci d'ajouter au moins une image au produit"
     },
     "unpublish": {
-      "title": "Retirer la mignadise de la boutique",
-      "description": "Êtes-vous vraiment certain de vouloir retirer la mignardise de la boutique ? Cette mignardise ne sera plus disponible à l'achat dans la boutique après cette action.",
-      "cancel_btn": "Annuler",
-      "publish_btn": "Retirer",
-      "alert_success": "Mignardise retirée"
+      "title": "Retirer le produit de la boutique",
+      "description": "Êtes-vous vraiment certain de vouloir retirer le produit de la boutique ? Ce produit ne sera plus disponible à l'achat dans la boutique après cette action.",
+      "alert_success": "Produit retirée"
     }
   },
   "reports": {
@@ -165,5 +192,49 @@
     "alert_cancel_error": "Erreur lors de l'annulation du signalement",
     "alert_delete_success": "Le commentaire à bien été supprimé",
     "alert_delete_error": "Erreur lors de la suppression du commentaire"
+  },
+  "rewards": {
+    "non-published": "Récompenses non publiés",
+    "published": "Récompenses publié",
+    "button": {
+      "add": "Ajouter une récompense"
+    },
+    "table": {
+      "title": "Nom",
+      "reward": "Récompense",
+      "cost": "Coût",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Créer une récompense",
+      "name": "Nom",
+      "cost": "Coût",
+      "products": "Miganrdises",
+      "alert_success": "Récompense créé avec succès",
+      "alert_failed": "Création de la récompense échoué"
+    },
+    "edit": {
+      "title": "Modifier une récompense",
+      "button": "Modifier",
+      "alert_success": "Récompense modifié avec succès",
+      "alert_failed": "Modification de la récompense échoué"
+    },
+    "publish": {
+      "title": "Publier la récompense",
+      "message": "Êtes-vous sûr de vouloir publier la récompense ? Une fois publiée, cette récompense sera disponible dans la boutique.",
+      "submit": "Publier",
+      "alert": {
+        "success": "Récompense publiée avec succès",
+        "failed": "Erreur lors de la publication de la récompense"
+      }
+    },
+    "unpublished": {
+      "title": "Retirer la récompense de la boutique",
+      "message": "Êtes-vous sûr de vouloir retirer la récompense de la boutique ? La récompense ne sera plus disponible dans la boutique après cette action.",
+      "submit": "Retirer",
+      "alert": {
+        "success": "Récompense retirée avec succès"
+      }
+    }
   }
 }

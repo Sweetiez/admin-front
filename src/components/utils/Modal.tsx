@@ -5,12 +5,14 @@ interface ModalProps {
   modalContent: ReactComponentElement<any>;
   modalState: boolean;
   setModalState: () => void;
+  persistent?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
   modalContent,
   modalState,
   setModalState,
+    persistent
 }) => {
   return (
     <>
@@ -18,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({
         <Dialog
           as="div"
           className="fixed z-50 inset-0 overflow-y-auto"
-          onClose={setModalState}
+          onClose={persistent ? () => {}: setModalState}
         >
           <div className="flex items-end justify-center min-h-screen w-fit pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child

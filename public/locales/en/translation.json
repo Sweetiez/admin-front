@@ -19,7 +19,9 @@
   "navigation": {
     "dashboard": "Dashboard",
     "orders": "Orders",
-    "products": "Products",
+    "sweets": "Sweets",
+    "trays": "Trays",
+    "rewards": "Rewards",
     "recipe": "Recipes",
     "report": "Reports",
     "logout": "Logout"
@@ -98,58 +100,83 @@
       "back": "Back"
     }
   },
+  "ingredients": {
+    "title": "Add ingredient",
+    "add_btn": "Add new Ingredient",
+    "alert_success": "Ingredient {{name}} created successfully",
+    "alert_failed_empty": "Please fill in all fields",
+    "alert_api_error": "Error when creating an ingredient"
+  },
   "products": {
-    "add_btn": "Add Product",
-    "title_all": "All products",
-    "title_online": "Online products",
-    "add": {
-      "title": "Create sweet",
-      "name": "Name",
-      "price": "Price",
-      "flavor": "Flavor",
-      "description": "Description",
-      "cancel_btn": "Cancel",
-      "save_btn": "Create",
-      "alert_success": "Sweet created successfully",
-      "alert_failed_empty": "Thanks to fill all fields"
-    },
-    "update": {
-      "title": "Product modification",
-      "name": "Name",
-      "price": "Price",
-      "flavor": "Flavor",
-      "highlight": "Highlight",
-      "description": "Description",
-      "img_upload_title": "Upload image",
-      "img_upload_description": "Select an image",
-      "cancel_btn": "Cancel",
-      "modify_btn": "Modify",
-      "alert_success": "Sweet modified successfully",
-      "alert_img_upload": "Image uploaded successfully",
-      "alert_img_delete": "Failed to delete image",
-      "alert_failed": "Error while modifying sweet"
-    },
+    "name": "Name",
+    "price": "Price",
+    "quantity": "Quantity",
+    "highlight": "Highlight",
+    "flavor": "Flavor",
+    "sweetsInput": "Sweets",
+    "search": "Search...",
+    "setOf": "(set of {{unitPerPackage}})",
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "add": "Add",
+    "save_btn": "Create",
+    "cancel_btn": "Cancel",
+    "modify_btn": "Modify",
+    "publish_btn": "Publish",
+    "unpublish_btn": "Unpublish",
+    "img_upload_title": "Upload image",
+    "img_upload_description": "Select an image",
+    "alert_img_upload": "Image uploaded successfully",
+    "alert_img_delete": "Image deleted successfully",
     "col_name": {
       "product": "Name",
       "price": "Price",
+      "quantity": "Quantity",
       "highlight": "Highlight",
       "status": "Status",
       "actions": "Actions"
     },
+    "trays": {
+      "add_btn": "Add tray",
+      "title_all": "All trays",
+      "title_online": "Online trays",
+      "add": {
+        "title": "Create tray",
+        "alert_success": "Tray created successfully",
+        "alert_failed": "Error while creating tray",
+        "alert_failed_empty": "Thanks to fill all fields"
+      },
+      "update": {
+        "title": "Tray modification",
+        "alert_success": "Tray modified successfully",
+        "alert_failed": "Error while modifying tray"
+      }
+    },
+    "sweets": {
+      "add_btn": "Add sweet",
+      "title_all": "All sweets",
+      "title_online": "Online sweets",
+      "add": {
+        "title": "Create sweet",
+        "alert_success": "Sweet created successfully",
+        "alert_failed_empty": "Thanks to fill all fields"
+      },
+      "update": {
+        "title": "Product modification",
+        "alert_success": "Sweet modified successfully",
+        "alert_failed": "Error while modifying sweet"
+      }
+    },
     "publish": {
-      "title": "Publish the sweet",
-      "description": "Are you really sure you want to publish the mignardise? This mignardise will be available for purchase in the store after this action.",
-      "cancel_btn": "Cancel",
-      "publish_btn": "Publish",
-      "alert_success": "Sweet published",
+      "title": "Publish the product",
+      "description": "Are you really sure you want to publish the product? This product will be available for purchase in the store after this action.",
+      "alert_success": "Product published",
       "alert_fail_images": "Thanks to add at least one image"
     },
     "unpublish": {
-      "title": "Remove the sweet from the store",
-      "description": "Are you sure you want to remove the sweet from the store? This sweet will no longer be available for purchase in the store after this action.",
-      "cancel_btn": "Cancel",
-      "publish_btn": "Unpublish",
-      "alert_success": "Sweet unpublished"
+      "title": "Remove the product from the store",
+      "description": "Are you sure you want to remove the product from the store? This product will no longer be available for purchase in the store after this action.",
+      "alert_success": "Product unpublished"
     }
   },
   "reports": {
@@ -165,5 +192,45 @@
     "alert_cancel_error": "Error while cancelling the report",
     "alert_delete_success": "The comment has been deleted",
     "alert_delete_error": "Error while deleting the comment"
+  },
+  "rewards": {
+    "non-published": "Non-published rewards",
+    "published": "Published rewards",
+    "button": {
+      "add": "Add reward"
+    },
+    "table": {
+      "title": "Name",
+      "reward": "Reward",
+      "cost": "Cost",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create reward",
+      "name": "Name",
+      "cost": "Cost",
+      "products": "Sweets"
+    },
+    "edit": {
+      "title": "Edit reward",
+      "button": "Modify"
+    },
+    "publish": {
+      "title": "Publish reward",
+      "message": "Are you sure you want to publish this reward?",
+      "submit": "Publish",
+      "alert": {
+        "success": "Reward published",
+        "failed": "Reward publication failed"
+      }
+    },
+    "unpublished": {
+      "title": "Unpublish reward",
+      "message": "Are you sure you want to unpublish this reward? This reward will no longer be available for purchase in the store after this action.",
+      "submit": "Unpublish",
+      "alert": {
+        "success": "Reward unpublished"
+      }
+    }
   }
 }

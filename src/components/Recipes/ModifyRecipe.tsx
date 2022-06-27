@@ -21,7 +21,7 @@ import { capitalizeFirstLetter } from '../../hooks/utils/strings';
 import ProductModelRow from '../Products/models/ProductModelRow';
 import UpdateRecipeRequest from '../../hooks/recipes/requests/UpdateRecipeRequest';
 import Modal from '../utils/Modal';
-import AddRecipeStepModal from '../Products/AddRecipeStepModal';
+import AddRecipeStepModal from './AddRecipeStepModal';
 
 const ModifyRecipe: React.FC = () => {
   const queryClient = useQueryClient();

@@ -1,14 +1,13 @@
-import IngredientModel from './IngredientModel';
+import SweetTrayModel from './SweetTrayModel';
 
-export default class ProductModel {
+export default class TrayModel {
   id: string | undefined;
   name: string | undefined;
   price: number | undefined;
-  unitPerPackage: number | undefined;
   state: string | undefined;
   description: string | undefined;
+  sweets: SweetTrayModel[] | undefined;
   images: string[] | undefined;
-  ingredients: IngredientModel[] | undefined;
   highlight: string | undefined;
   flavor: string | undefined;
   rating: number | undefined;
