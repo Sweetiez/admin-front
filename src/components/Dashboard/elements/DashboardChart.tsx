@@ -67,13 +67,13 @@ const DashboardChart: React.FC<DashboardChartProps> = ({
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+    <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
       <div className="flex items-center justify-between mb-4">
         <div className="flex-shrink-0">
-          <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+          <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900 dark:text-white">
             {infos?.monthlySales?.toFixed(2)} €
           </span>
-          <h3 className="text-base font-normal text-gray-500">
+          <h3 className="text-base font-normal text-gray-500 dark:text-gray-200">
             {t('dashboard.chart.title')}
           </h3>
         </div>

@@ -11,19 +11,19 @@ const DashboardOrders: React.FC<DashboardOrdersProps> = ({ minimalOrder }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+    <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 dark:text-white">
             {t('dashboard.orders.title')}
           </h3>
-          <span className="text-base font-normal text-gray-500">
+          <span className="text-base font-normal text-gray-500 dark:text-gray-200">
             {t('dashboard.orders.subtitle')}
           </span>
         </div>
         <div className="flex items-center justify-between mb-4">
           <Link to="/admin/orders">
-            <div className="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
+            <div className="text-sm font-medium text-cyan-600 dark:text-gray-200 dark:hover:bg-black hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
               {t('dashboard.orders.button')}
             </div>
           </Link>
@@ -34,38 +34,38 @@ const DashboardOrders: React.FC<DashboardOrdersProps> = ({ minimalOrder }) => {
           <div className="align-middle inline-block min-w-full">
             <div className="shadow overflow-hidden sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th
                       scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white"
                     >
                       {t('dashboard.orders.th_client')}
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white"
                     >
                       {t('dashboard.orders.th_pickup_date')}
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-white"
                     >
                       {t('dashboard.orders.th_price')}
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white">
+                <tbody className="bg-white dark:bg-gray-500">
                   {minimalOrder.map((order, index) => (
                     <tr key={index}>
-                      <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                      <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900 dark:text-white">
                         <span className="font-semibold">{order.email}</span>
                       </td>
-                      <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                      <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500 text-gray-200 dark:text-white">
                         {order.pickupDate}
                       </td>
-                      <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                      <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900 dark:text-white">
                         {order.total} €
                       </td>
                     </tr>
