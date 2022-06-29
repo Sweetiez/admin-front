@@ -22,22 +22,24 @@ const RecipeList: React.FC = () => {
 
   return (
     <Page>
-      <>
+      <div className="pt-4">
         <AccessRoleController redirect="/" role={Role.ADMIN} />
-        <button
-          onClick={() => setAddModalState(true)}
-          className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
-        >
-          {t('recipes.button.add')}
-        </button>
-      </>
+        <div className="flex justify-center">
+          <button
+            onClick={() => setAddModalState(true)}
+            className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+          >
+            {t('recipes.button.add')}
+          </button>
+        </div>
+      </div>
       <AccessRoleController redirect="/" role={Role.ADMIN} />
-      <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
+      <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4 ">
         <div className="col-start-1 col-end-2"></div>
-        <div className="col-start-2 col-end-5">
+        <div className="col-start-2 col-end-5 font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
           <div>{t('recipes.non-published')}</div>
         </div>
-        <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
+        <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8 font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
           <div>{t('recipes.published')}</div>
         </div>
 
