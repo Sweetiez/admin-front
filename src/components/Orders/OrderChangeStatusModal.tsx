@@ -44,12 +44,12 @@ const OrderChangeStatusModal: React.FC<OrderChangeStatusModalProps> = ({
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <form onSubmit={handleOrderStatusUpdate}>
-          <h3 className="pl-4 pt-4">
+          <h3 className="pl-4 pt-4 dark:text-white">
             {t('orders.status-modal.client-ref')} : {order.id}
           </h3>
-          <h3 className="pl-4 pt-4">
+          <h3 className="pl-4 pt-4 dark:text-white">
             {t('orders.status-modal.client-contact')} : {order.email} |{' '}
             {order.phone}
           </h3>
