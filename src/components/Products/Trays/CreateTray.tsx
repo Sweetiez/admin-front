@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
@@ -19,21 +19,21 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
   const [quantity, setQuantity] = useState(1);
-  const [searching, setSearching] = useState("");
+  const [searching, setSearching] = useState('');
   const [sweets, setSweets] = useState<SweetModel[]>([]);
   const [sweetSelected, setSweetSelected] = useState<ProductModel>();
   let { data: sweetData } = useSweets();
 
-  let sweetPublished = useMemo(() => sweetData?.filter(
-      (sweet) => sweet.status === 'PUBLISHED',
-  ), [sweetData]);
+  let sweetPublished = useMemo(
+    () => sweetData?.filter((sweet) => sweet.status === 'PUBLISHED'),
+    [sweetData],
+  );
 
-  const sweetsFiltered =  useMemo(() => {
-    let data = sweetPublished
-    sweets.forEach(s => data = data?.filter(sp => sp.id !== s.sweetId))
+  const sweetsFiltered = useMemo(() => {
+    let data = sweetPublished;
+    sweets.forEach((s) => (data = data?.filter((sp) => sp.id !== s.sweetId)));
     return data;
   }, [sweetPublished, sweets]);
-
 
   const addSweet = () => {
     if (sweetSelected) {
@@ -52,9 +52,9 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
       } else {
         setSweets([...sweets, sweetItem]);
       }
-      setQuantity(1)
-      setSweetSelected(undefined)
-      setSearching('')
+      setQuantity(1);
+      setSweetSelected(undefined);
+      setSearching('');
     }
   };
 
@@ -130,7 +130,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <div className="flex justify-center py-4">
           <div className="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
             <svg
@@ -153,14 +153,14 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
         <form onSubmit={submitTrayCreation}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {t('products.trays.add.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.name')}
             </label>
             <input
@@ -172,7 +172,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.flavor')}
             </label>
             <select
@@ -186,7 +186,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.price')}
             </label>
             <input
@@ -199,7 +199,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
 
           <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1 col-span-2">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.sweetsInput')}
               </label>
               <ReactSearchAutocomplete
@@ -208,7 +208,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                 resultStringKeyName="name"
                 onSelect={handleOnSelect}
                 onClear={handleOnClear}
-                onSearch={(value: string)=> setSearching(value)}
+                onSearch={(value: string) => setSearching(value)}
                 inputSearchString={searching}
                 showIcon={false}
                 placeholder={t('products.search')}
@@ -230,7 +230,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
             </div>
 
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.quantity')}
               </label>
               <input
@@ -264,7 +264,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
                   key={sweet.sweetId}
                 >
                   <div>
-                    <span>
+                    <span className="dark:text-gray-200">
                       {sweet.name}{' '}
                       {t('products.setOf', {
                         unitPerPackage: sweet.unitPerPackage,
@@ -315,7 +315,7 @@ const CreateTray: React.FC<CreateTrayProps> = ({ setOpenedModal }) => {
           )}
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.description')}
             </label>
             <input
