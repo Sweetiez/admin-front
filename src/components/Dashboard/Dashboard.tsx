@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
       <AccessRoleController redirect="/" role={Role.ADMIN} />
       <div
         id="main-content"
-        className="h-full w-full bg-gray-50 relative overflow-y-auto"
+        className="h-full w-full bg-gray-50 relative overflow-y-auto dark:bg-gray-900"
       >
         <div className="pt-6 px-4">
           <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">

@@ -43,9 +43,9 @@ const DashboardBestSales: React.FC<DashboardBestSalesProps> = ({
   };
 
   return (
-    <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
+    <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full dark:bg-gray-800">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold leading-none text-gray-900">
+        <h3 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
           {t('dashboard.sales.title')}
         </h3>
       </div>
