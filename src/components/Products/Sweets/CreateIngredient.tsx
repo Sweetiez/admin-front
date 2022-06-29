@@ -43,7 +43,7 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <div className="flex justify-center py-4">
           <div className="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
             <svg
@@ -66,14 +66,14 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
         <form onSubmit={submitIngredientCreation}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {t('ingredients.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 my-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.name')}
             </label>
             <input

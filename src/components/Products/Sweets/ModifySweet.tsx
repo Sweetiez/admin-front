@@ -169,7 +169,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
   async function onDeleteImage(id: string, url: string) {
     const request = new DeleteImageRequest(url);
     const response = await deleteProductImage(id, request, 'sweets');
-    console.log('onDeleteImage', response)
+    console.log('onDeleteImage', response);
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
       await queryClient.invalidateQueries(`sweet-${id}`);
@@ -187,18 +187,18 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <form onSubmit={handleModifySweet}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="pt-5 text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {t('products.sweets.update.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.name')}
             </label>
             <input
@@ -211,7 +211,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.ingredients')}
             </label>
             {ingredientOptions && (
@@ -261,7 +261,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.price')}
               </label>
               <input
@@ -273,7 +273,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
               />
             </div>
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.quantity')}
               </label>
               <input
@@ -288,7 +288,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.flavor')}
             </label>
             <select
@@ -303,7 +303,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.highlight')}
             </label>
             <select
@@ -318,7 +318,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.description')}
             </label>
             <input
@@ -331,7 +331,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1 dark:text-white">
               {t('products.img_upload_title')}
             </label>
             <div className="flex items-center justify-center w-full">
@@ -351,7 +351,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                       d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                     />
                   </svg>
-                  <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider">
+                  <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider dark:text-white">
                     {t('products.img_upload_description')}
                   </p>
                 </div>
