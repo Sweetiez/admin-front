@@ -236,5 +236,28 @@
         "success": "Récompense retirée avec succès"
       }
     }
+  },
+  "dashboard": {
+    "chart": {
+      "title": "Ventes du mois",
+      "label": "Revenus"
+    },
+    "orders": {
+      "title": "Prochaines commandes",
+      "subtitle": "Liste des 10 prochaines commandes à venir",
+      "button": "Voir tout",
+      "th_client": "Client",
+      "th_pickup_date": "Date de récupération",
+      "th_price": "Prix"
+    },
+    "infos": {
+      "accounts": "Comptes créés",
+      "trays": "Plateaux en ligne",
+      "sweets": "Mignardises en ligne",
+      "recipes": "Recettes en ligne"
+    },
+    "sales": {
+      "title": "Produits les plus vendues"
+    }
   }
 }
