@@ -7,11 +7,11 @@ import DashboardOrders from './elements/DashboardOrders';
 import DashboardCard from './elements/DashboardCard';
 import { useDashboard } from '../../hooks/dashboards/dashboardHooks';
 import DashboardBestSales from './elements/DashboardBestSales';
+import { useTranslation } from 'react-i18next';
 
 const Dashboard: React.FC = () => {
+  const { t } = useTranslation();
   const { data: dashboardData } = useDashboard();
-
-  console.log(dashboardData);
 
   return (
     <Page>
@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
             <DashboardCard
-              title={'Nombres de comptes créés'}
+              title={t('dashboard.infos.accounts')}
               value={
                 dashboardData?.informations?.accounts
                   ? dashboardData?.informations?.accounts
@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
               }
             />
             <DashboardCard
-              title={'Plateaux en ligne'}
+              title={t('dashboard.infos.trays')}
               value={
                 dashboardData?.informations?.publishedTrays
                   ? dashboardData?.informations?.publishedTrays
@@ -58,7 +58,7 @@ const Dashboard: React.FC = () => {
               }
             />
             <DashboardCard
-              title={'Mignardises en ligne'}
+              title={t('dashboard.infos.sweets')}
               value={
                 dashboardData?.informations?.publishedSweets
                   ? dashboardData?.informations?.publishedSweets
@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
               }
             />
             <DashboardCard
-              title={'Recettes en ligne'}
+              title={t('dashboard.infos.recipes')}
               value={
                 dashboardData?.informations?.publishedRecipes
                   ? dashboardData?.informations?.publishedRecipes
