@@ -14,9 +14,9 @@ const Orders: React.FC = () => {
   return (
     <Page>
       <AccessRoleController redirect="/" role={Role.ADMIN} />
-      <div className="bg-gray-100 flex-auto items-center md:px-40 py-6">
+      <div className="bg-gray-100 flex-auto items-center md:px-40 py-6 dark:bg-gray-900">
         <div className="flex justify-between ">
-          <div className="font-dark font-bold pt-4 align font-birthstone text-5xl">
+          <div className="font-dark font-bold pt-4 align font-birthstone text-5xl dark:text-white">
             {t('orders.title')}
           </div>
           <div className="flex justify-center">
@@ -32,7 +32,7 @@ const Orders: React.FC = () => {
                 id="flexSwitchCheckDefault"
               />
               <label
-                className="form-check-label inline-block text-gray-800"
+                className="form-check-label inline-block text-gray-800 dark:text-white"
                 htmlFor="flexSwitchCheckDefault"
               >
                 {t('orders.checkbox-label')}

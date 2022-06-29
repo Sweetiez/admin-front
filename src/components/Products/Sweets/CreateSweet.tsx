@@ -122,7 +122,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <div className="flex justify-center py-4">
           <div className="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
             <svg
@@ -145,14 +145,14 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
         <form onSubmit={submitSweetCreation}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {t('products.sweets.add.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.name')}
             </label>
             <input
@@ -164,7 +164,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.ingredients')}
             </label>
             {ingredientOptions && (
@@ -213,7 +213,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.flavor')}
             </label>
             <select
@@ -228,7 +228,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.price')}
               </label>
               <input
@@ -240,7 +240,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             </div>
 
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('products.quantity')}
               </label>
               <input
@@ -255,7 +255,7 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('products.description')}
             </label>
             <input

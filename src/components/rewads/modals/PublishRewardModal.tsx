@@ -34,7 +34,7 @@ const PublishRewardModal: React.FC<PublishRewardModalProps> = ({
 
   return (
     <>
-      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-gray-800">
         <div className="sm:flex sm:items-start">
           <Lottie
             className="h-fit w-fit"
@@ -44,20 +44,20 @@ const PublishRewardModal: React.FC<PublishRewardModalProps> = ({
           />
           <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
             <h3
-              className="text-lg leading-6 font-medium text-gray-900"
+              className="text-lg leading-6 font-medium text-gray-900 dark:text-white"
               id="modal-title"
             >
               {t('rewards.publish.title')}
             </h3>
             <div className="mt-2">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-200">
                 {t('rewards.publish.message')}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+      <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse dark:bg-gray-900">
         <button
           onClick={() => handlePublishReward(reward?.id ? reward.id : '')}
           type="button"

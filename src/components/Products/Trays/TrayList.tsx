@@ -6,7 +6,7 @@ import AccessRoleController from '../../Auth/AccessRoleController';
 import { Role } from '../../../hooks/auth/access/Roles';
 import Modal from '../../utils/Modal';
 import { useTrays } from '../../../hooks/trays/traysHooks';
-import ProductTableRow from "../ProductTableRow";
+import ProductTableRow from '../ProductTableRow';
 
 const TrayList: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ const TrayList: React.FC = () => {
 
   return (
     <Page>
-      <>
+      <div className="pt-4">
         <AccessRoleController redirect="/" role={Role.ADMIN} />
         <div className="flex justify-center">
           <button
@@ -33,14 +33,18 @@ const TrayList: React.FC = () => {
             {t('products.trays.add_btn')}
           </button>
         </div>
-      </>
+      </div>
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
         <div className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-5">
-          <div>{t('products.trays.title_all')}</div>
+          <div className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
+            {t('products.trays.title_all')}
+          </div>
         </div>
         <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
-          <div>{t('products.trays.title_online')}</div>
+          <div className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
+            {t('products.trays.title_online')}
+          </div>
         </div>
         <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
           <thead>
@@ -66,7 +70,12 @@ const TrayList: React.FC = () => {
             {sweets
               .filter((product) => product.status !== 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} isTray={true}/>
+                <ProductTableRow
+                  key={index}
+                  _id={index}
+                  product={product}
+                  isTray={true}
+                />
               ))}
           </tbody>
         </table>
@@ -94,7 +103,12 @@ const TrayList: React.FC = () => {
             {sweets
               .filter((product) => product.status === 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} isTray={true}/>
+                <ProductTableRow
+                  key={index}
+                  _id={index}
+                  product={product}
+                  isTray={true}
+                />
               ))}
           </tbody>
         </table>

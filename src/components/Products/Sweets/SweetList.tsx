@@ -29,7 +29,7 @@ const SweetList: React.FC = () => {
 
   return (
     <Page>
-      <>
+      <div className="pt-4">
         <AccessRoleController redirect="/" role={Role.ADMIN} />
         <div className="flex justify-center">
           <button
@@ -45,14 +45,18 @@ const SweetList: React.FC = () => {
             {t('ingredients.add_btn')}
           </button>
         </div>
-      </>
+      </div>
       <div className="pt-4 grid grid-cols-8 grid-flow-col gap-4">
         <div className="col-start-1 col-end-2"></div>
         <div className="col-start-2 col-end-5">
-          <div>{t('products.sweets.title_all')}</div>
+          <div className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
+            {t('products.sweets.title_all')}
+          </div>
         </div>
         <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
-          <div>{t('products.sweets.title_online')}</div>
+          <div className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
+            {t('products.sweets.title_online')}
+          </div>
         </div>
         <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
           <thead>
@@ -81,7 +85,12 @@ const SweetList: React.FC = () => {
             {sweets
               .filter((product) => product.status !== 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} isTray={false} />
+                <ProductTableRow
+                  key={index}
+                  _id={index}
+                  product={product}
+                  isTray={false}
+                />
               ))}
           </tbody>
         </table>
@@ -112,7 +121,12 @@ const SweetList: React.FC = () => {
             {sweets
               .filter((product) => product.status === 'PUBLISHED')
               .map((product, index) => (
-                <ProductTableRow key={index} _id={index} product={product} isTray={false} />
+                <ProductTableRow
+                  key={index}
+                  _id={index}
+                  product={product}
+                  isTray={false}
+                />
               ))}
           </tbody>
         </table>

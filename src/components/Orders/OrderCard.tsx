@@ -18,15 +18,17 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
     const [year, month, day] = date.split('-');
     [day, month, year].join('/');
     return (
-      <span className="font-semibold ml-1">{[day, month, year].join('/')}</span>
+      <span className="font-semibold ml-1 dark:text-white">
+        {[day, month, year].join('/')}
+      </span>
     );
   }
 
   return (
     <>
       <button onClick={() => setUpdateStatusModal(true)}>
-        <div className="mx-auto p-6 bg-white border my-2 rounded w-full shadow">
-          <div className="flex justify-between ">
+        <div className="mx-auto p-6 bg-white border my-2 rounded w-full shadow dark:bg-gray-700">
+          <div className="flex justify-between dark:text-white">
             <h3>
               {order.firstName} {order.lastName}
             </h3>
@@ -49,7 +51,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
               )}
             </div>
           </div>
-          <div className="flex justify-between ">
+          <div className="flex justify-between dark:text-white">
             <h3>
               {order.email} {order.phone}
             </h3>
@@ -59,7 +61,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
           </div>
 
           <div>
-            <p>
+            <p className="dark:text-white">
               {order?.products!.map((product: OrderedProductModel) => (
                 <>
                   <span>{product.name + ' ×  ' + product.quantity}</span>
@@ -70,7 +72,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
           </div>
           <div className="flex justify-end">
             <span className="text-gold-100 mr-1">{t('orders.totalPrice')}</span>
-            {order.totalPrice + '€'}
+            <span className="dark:text-white">{order.totalPrice + '€'}</span>
           </div>
         </div>
       </button>
