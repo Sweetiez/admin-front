@@ -232,5 +232,28 @@
         "success": "Reward unpublished"
       }
     }
+  },
+  "dashboard": {
+    "chart": {
+      "title": "Sales of this month",
+      "label": "Earnings"
+    },
+    "orders": {
+      "title": "Upcoming orders",
+      "subtitle": "List of upcoming orders",
+      "button": "View all",
+      "th_client": "Client",
+      "th_pickup_date": "Pickup date",
+      "th_price": "Price"
+    },
+    "infos": {
+      "accounts": "Created accounts",
+      "trays": "Online trays",
+      "sweets": "Online sweets",
+      "recipes": "Online recipes"
+    },
+    "sales": {
+      "title": "Best sellers"
+    }
   }
 }

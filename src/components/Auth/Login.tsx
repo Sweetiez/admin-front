@@ -57,7 +57,7 @@ const Login: React.FC = () => {
           appearance: 'info',
           autoDismiss: true,
         });
-        navigate('/admin/products');
+        navigate('/admin');
       }
     } catch (e) {
       addToast(`${t('login.alert_failed_incorrect')}`, {
