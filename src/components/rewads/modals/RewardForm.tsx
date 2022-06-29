@@ -32,9 +32,7 @@ const RewardForm: React.FC<CreateRewardProps> = ({
   const { data: sweet } = useSweetById(
     reward?.productId ? reward.productId : '',
   );
-  const [formTitle, setFormTitle] = useState<string>(
-    t('products.trays.add.title'),
-  );
+  const [formTitle, setFormTitle] = useState<string>(t('rewards.create.title'));
   const [nameDefaultValue, setNameDefaultValue] = useState<string>();
   const [costDefaultValue, setCostDefaultValue] = useState<number>();
 
@@ -169,7 +167,7 @@ const RewardForm: React.FC<CreateRewardProps> = ({
 
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <div className="flex justify-center py-4">
           <div className="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
             <svg
@@ -196,14 +194,14 @@ const RewardForm: React.FC<CreateRewardProps> = ({
         >
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {formTitle}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('rewards.create.name')}
             </label>
             <input
@@ -216,7 +214,7 @@ const RewardForm: React.FC<CreateRewardProps> = ({
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('rewards.create.cost')}
             </label>
             <input
@@ -230,7 +228,7 @@ const RewardForm: React.FC<CreateRewardProps> = ({
 
           <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1 col-span-3">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('rewards.create.products')}
               </label>
             </div>
@@ -280,7 +278,7 @@ const RewardForm: React.FC<CreateRewardProps> = ({
           )}
 
           {sweets.length > 0 && (
-            <div className="grid px-4 grid-cols-1 mt-1 mx-7 overflow-auto max-h-36 rounded-lg border border-gray-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ">
+            <div className="dark:text-gray-200 grid px-4 grid-cols-1 mt-1 mx-7 overflow-auto max-h-36 rounded-lg border border-gray-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ">
               {sweets.map((sweet) => (
                 <div
                   className="flex items-center justify-between my-1"
