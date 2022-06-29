@@ -3,7 +3,7 @@ import useDarkMode from 'use-dark-mode';
 import frenchFlag from './../../assets/icons/frenchFlag.png';
 import englishFlag from './../../assets/icons/englishFlag.png';
 import i18n from 'i18next';
-import './header.css';
+import '../../assets/css/header.css';
 
 const Header: React.FC = () => {
   const darkMode = useDarkMode(false);
