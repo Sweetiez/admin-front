@@ -91,6 +91,10 @@
       "step": {
         "add": "Add step",
         "update": "Update steps"
+      },
+      "alert": {
+        "empty": "Thanks to fill all fields",
+        "success": "Recipe updated"
       }
     },
     "button": {

@@ -38,7 +38,7 @@ const ModifyRecipe: React.FC = () => {
 
   const { mutate } = useMutation(updateRecipe, {
     onSuccess: async (data: ProductModelRow) => {
-      addToast(`${t('recipes.create.alert.success')}: ${data.name}`, {
+      addToast(`${t('recipes.edit.alert.success')}`, {
         appearance: 'success',
         autoDismiss: true,
       });
@@ -136,7 +136,7 @@ const ModifyRecipe: React.FC = () => {
 
   return (
     <Page>
-      <div className="flex justify-between">
+      <div className="flex justify-between dark:bg-gray-800">
         <div className="w-4/6">
           <form onSubmit={submitRecipeModification}>
             <div className="flex justify-between">
@@ -147,7 +147,7 @@ const ModifyRecipe: React.FC = () => {
                 {t('recipes.button.back')}
               </Link>
               <div className="flex">
-                <h1 className="m-3 text-gray-600 font-bold md:text-2xl text-xl">
+                <h1 className="m-3 text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                   {t('recipes.edit.title')}
                 </h1>
               </div>
@@ -155,14 +155,14 @@ const ModifyRecipe: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 mt-5 mx-7">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.name')}
               </label>
               <input
                 id="name"
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 type="text"
-                placeholder={t('products.add.name')}
+                placeholder={t('recipes.create.name')}
                 defaultValue={recipe?.title}
                 required
               />
@@ -170,7 +170,7 @@ const ModifyRecipe: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 mt-5 mx-7">
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.people')}
                 </label>
                 <input
@@ -183,7 +183,7 @@ const ModifyRecipe: React.FC = () => {
                 />
               </div>
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.cost')}
                 </label>
                 <input
@@ -196,7 +196,7 @@ const ModifyRecipe: React.FC = () => {
                 />
               </div>
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.difficulty')}
                 </label>
                 <select
@@ -214,7 +214,7 @@ const ModifyRecipe: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 mt-5 mx-7">
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.time.preparation')}
                 </label>
                 <input
@@ -227,7 +227,7 @@ const ModifyRecipe: React.FC = () => {
                 />
               </div>
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.time.chill')}
                 </label>
                 <input
@@ -240,7 +240,7 @@ const ModifyRecipe: React.FC = () => {
                 />
               </div>
               <div className="grid grid-cols-1">
-                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+                <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                   {t('recipes.create.time.cooking')}
                 </label>
                 <input
@@ -255,15 +255,15 @@ const ModifyRecipe: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 mt-5 mx-7">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-                {t('products.add.description')}
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
+                {t('products.description')}
               </label>
               <div className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                   <textarea
                     id="description"
                     className="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                    placeholder={`${t('products.add.description')}...`}
+                    placeholder={`${t('products.description')}...`}
                     defaultValue={recipe?.description}
                     required
                   ></textarea>
@@ -271,8 +271,8 @@ const ModifyRecipe: React.FC = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 mt-5 mx-7">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">
-                {t('products.update.img_upload_title')}
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1 dark:text-white">
+                {t('products.img_upload_title')}
               </label>
               <div className="flex items-center justify-center w-full">
                 <label className="flex flex-col border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-purple-300 group">
@@ -291,8 +291,8 @@ const ModifyRecipe: React.FC = () => {
                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider">
-                      {t('products.update.img_upload_description')}
+                    <p className="lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider dark:text-gray-200">
+                      {t('products.img_upload_description')}
                     </p>
                   </div>
                   <input
@@ -350,7 +350,7 @@ const ModifyRecipe: React.FC = () => {
           </form>
         </div>
         <div className="w-2/6">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-gray-800">
             <div className="flex justify-between">
               <button
                 onClick={() => setAddStepModal(true)}
@@ -366,7 +366,7 @@ const ModifyRecipe: React.FC = () => {
               </button>
               <div></div>
             </div>
-            <div className="w-auto">
+            <div className="w-auto dark:bg-gray-800">
               <List
                 values={items}
                 onChange={({ oldIndex, newIndex }) => {
