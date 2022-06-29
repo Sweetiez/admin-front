@@ -91,6 +91,10 @@
       "step": {
         "add": "Ajouter une étape",
         "update": "Mettre à jour"
+      },
+      "alert": {
+        "empty": "Veuillez remplir tous les champs",
+        "success": "Mise à jour réussie"
       }
     },
     "button": {

@@ -58,7 +58,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   };
   return (
     <div className="overflow-x-auto">
-      <div className="grid bg-white rounded-lg shadow-xl w-fit">
+      <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <div className="flex justify-center py-4">
           <Lottie
             className="h-32 w-fit"
@@ -71,28 +71,28 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
         <form onSubmit={submitRecipeCreation}>
           <div className="flex justify-center">
             <div className="flex">
-              <h1 className="text-gray-600 font-bold md:text-2xl text-xl">
+              <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
                 {t('recipes.create.title')}
               </h1>
             </div>
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
               {t('recipes.create.name')}
             </label>
             <input
               id="name"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="text"
-              placeholder={t('products.add.name')}
+              placeholder={t('recipes.create.name')}
               required
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.people')}
               </label>
               <input
@@ -104,7 +104,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               />
             </div>
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.cost')}
               </label>
               <input
@@ -116,7 +116,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               />
             </div>
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.difficulty')}
               </label>
               <select
@@ -133,7 +133,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.time.preparation')}
               </label>
               <input
@@ -145,7 +145,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               />
             </div>
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.time.chill')}
               </label>
               <input
@@ -157,7 +157,7 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               />
             </div>
             <div className="grid grid-cols-1">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
+              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
                 {t('recipes.create.time.cooking')}
               </label>
               <input
@@ -171,15 +171,15 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
           </div>
 
           <div className="grid grid-cols-1 mt-5 mx-7">
-            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
-              {t('products.add.description')}
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
+              {t('products.description')}
             </label>
             <div className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
               <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                 <textarea
                   id="description"
                   className="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                  placeholder={`${t('products.add.description')}...`}
+                  placeholder={`${t('products.description')}...`}
                   required
                 ></textarea>
               </div>
@@ -194,11 +194,11 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               }}
               className="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             >
-              {t('products.add.cancel_btn')}
+              {t('recipes.button.cancel')}
             </button>
             <input
               type="submit"
-              value={t('products.add.save_btn')}
+              value={t('recipes.button.add')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>
