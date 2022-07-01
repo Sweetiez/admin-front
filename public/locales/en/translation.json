@@ -184,6 +184,7 @@
     }
   },
   "reports": {
+    "no_reports": "Congratulations! There are no reports yet.",
     "comment": "Comment",
     "reason": "Reason of report",
     "deleteComment": "Delete comment",

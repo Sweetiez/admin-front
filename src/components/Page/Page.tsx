@@ -15,7 +15,7 @@ const Page: React.FC<PageProps> = ({ children }) => {
         id="main-content"
         className="h-full w-fit bg-gray-50 relative overflow-y-auto lg:ml-64"
       >
-        <main className="pt-16 w-fit h-screen dark:bg-gray-600">
+        <main className="pt-16 w-fit h-screen bg-gray-100 dark:bg-gray-600">
           {children}
         </main>
       </div>

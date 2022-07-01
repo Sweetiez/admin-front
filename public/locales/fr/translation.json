@@ -184,6 +184,7 @@
     }
   },
   "reports": {
+    "no_reports": "Bravo ! Vous n'avez aucun signalement à traiter.",
     "comment": "Commentaire",
     "reason": "Motif du signalement",
     "deleteComment": "Supprimer le commentaire",
