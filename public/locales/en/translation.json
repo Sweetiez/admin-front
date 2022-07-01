@@ -24,6 +24,7 @@
     "rewards": "Rewards",
     "recipe": "Recipes",
     "report": "Reports",
+    "events": "Events",
     "logout": "Logout"
   },
   "orders": {
@@ -258,7 +259,8 @@
       "recipes": "Online recipes"
     },
     "sales": {
-      "title": "Best sellers"
+      "title": "Best sellers this month",
+      "empty": "No sales yet"
     }
   }
 }
