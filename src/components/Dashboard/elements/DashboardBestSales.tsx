@@ -3,6 +3,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import DashboardSaleModel from '../models/DashboardSaleModel';
 import { useTranslation } from 'react-i18next';
+import Lottie from 'react-lottie-player';
+import animationJson from '../../../assets/lotties/empty-cart.json';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,14 +52,30 @@ const DashboardBestSales: React.FC<DashboardBestSalesProps> = ({
         </h3>
       </div>
       <div className="flow-root">
-        <Doughnut
-          height="50%"
-          data={data}
-          options={{
-            responsive: true,
-            maintainAspectRatio: true,
-          }}
-        />
+        {bestSales?.length && bestSales?.length > 0 ? (
+          <Doughnut
+            height="50%"
+            data={data}
+            options={{
+              responsive: true,
+              maintainAspectRatio: true,
+            }}
+          />
+        ) : (
+          <>
+            <Lottie
+              className="h-96 w-fit"
+              loop={false}
+              animationData={animationJson}
+              play
+            />
+            <div className="flex justify-center">
+              <h3 className="text-base font-normal text-gray-500 dark:text-gray-200">
+                {t('dashboard.sales.empty')}
+              </h3>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -24,6 +24,7 @@
     "rewards": "Récompenses",
     "recipe": "Recettes",
     "report": "Signalements",
+    "events": "Evénements",
     "logout": "Se déconnecter"
   },
   "orders": {
@@ -262,7 +263,8 @@
       "recipes": "Recettes en ligne"
     },
     "sales": {
-      "title": "Produits les plus vendues"
+      "title": "Les plus vendues ce mois",
+      "empty": "Aucun produit n'a été vendu ce mois-ci"
     }
   }
 }
