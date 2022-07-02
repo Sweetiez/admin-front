@@ -245,7 +245,7 @@
   },
   "dashboard": {
     "chart": {
-      "title": "Ventes du mois",
+      "title": "Ventes par mois",
       "label": "Revenus"
     },
     "orders": {
@@ -265,6 +265,26 @@
     "sales": {
       "title": "Les plus vendues ce mois",
       "empty": "Aucun produit n'a été vendu ce mois-ci"
+    }
+  },
+  "events": {
+    "spaces": {
+      "title": "Ajouter un lieux",
+      "btn_add": "Ajouter un lieu",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipCode": "Code postal",
+      "places": "Places disponibles",
+      "success": "Lieu ajouté avec succès"
+    },
+    "face": {
+      "title": "Titre",
+      "description": "Description",
+      "startDateTime": "Date & Heure de début",
+      "duration": "Durée (en heures)",
+      "space": "Lieu",
+      "animator": "Animateur",
+      "btn_add": "Ajouter un événement physique"
     }
   }
 }

@@ -241,7 +241,7 @@
   },
   "dashboard": {
     "chart": {
-      "title": "Sales of this month",
+      "title": "Sales per month",
       "label": "Earnings"
     },
     "orders": {
@@ -261,6 +261,26 @@
     "sales": {
       "title": "Best sellers this month",
       "empty": "No sales yet"
+    }
+  },
+  "events": {
+    "spaces": {
+      "title": "Add a space",
+      "btn_add": "Add a space",
+      "address": "Address",
+      "city": "City",
+      "zipCode": "Zip Code",
+      "places": "Available places",
+      "success": "Place added successfully"
+    },
+    "face": {
+      "title": "Title",
+      "description": "Description",
+      "startDateTime": "Start date & time",
+      "duration": "Duration (in hours)",
+      "space": "Space",
+      "animator": "Animator",
+      "btn_add": "Add a physical event"
     }
   }
 }
