@@ -8,6 +8,7 @@ import {
 import { useQueryClient } from 'react-query';
 import Modal from '../utils/Modal';
 import ReScheduleEvent from './Face/modals/ReScheduleEvent';
+import { formatDate } from '../../hooks/utils/strings';
 
 interface EventCardProps {
   event: EventModel;
@@ -36,10 +37,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         </h3>
         <h3 className="dark:text-white">
           {t('events.main_face_event_cart.schedule', {
-            start: event.schedule?.start,
-            end: event.schedule?.end,
+            start: formatDate(
+              event.schedule?.start ? event.schedule.start : '',
+            ),
+            end: formatDate(event.schedule?.end ? event.schedule.end : ''),
           })}
-          {/*Du {event.schedule?.start} au {event.schedule?.end}*/}
         </h3>
         <h3 className="dark:text-white">
           {t('events.main_face_event_cart.availability', {
