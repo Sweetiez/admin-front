@@ -13,7 +13,7 @@ const FaceEvent: React.FC = () => {
   const { data: faceEvents } = useFaceEvent();
 
   return (
-    <>
+    <div className="bg-gray-100 dark:bg-gray-600">
       <div className="pt-4 flex justify-center">
         <button
           onClick={() => setAddSpaceModalState(true)}
@@ -55,7 +55,7 @@ const FaceEvent: React.FC = () => {
         setModalState={() => setAddEventModalState(false)}
         persistent={true}
       />
-    </>
+    </div>
   );
 };
 
