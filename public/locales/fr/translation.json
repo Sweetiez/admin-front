@@ -304,6 +304,7 @@
       "description": "Description",
       "startDateTime": "Date & Heure de début",
       "duration": "Durée (en heures)",
+      "places": "Available places",
       "animator": "Animateur",
       "btn_add": "Ajouter un événement en ligne"
     },
