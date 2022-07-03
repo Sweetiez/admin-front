@@ -1,17 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import FaceEventModel from '../models/FaceEventModel';
 import { useToasts } from 'react-toast-notifications';
 import ReScheduleEventRequest from '../../../../hooks/events/requests/ReScheduleEventRequest';
-import { reScheduleFaceEvent } from '../../../../hooks/events/faceEventHooks';
 import { useQueryClient } from 'react-query';
+import OnlineEventModel from '../models/OnlineEventModel';
+import { reScheduleOnlineEvent } from '../../../../hooks/events/onlineEventHooks';
 
-interface ReScheduleEventProps {
+interface ReScheduleOnlineEventProps {
   setOpenedModal: (openedModal: boolean) => void;
-  eventData: FaceEventModel;
+  eventData: OnlineEventModel;
 }
 
-const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
+const ReScheduleOnlineEvent: React.FC<ReScheduleOnlineEventProps> = ({
   eventData,
   setOpenedModal,
 }) => {
@@ -37,7 +37,8 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
       startDateTime,
       duration,
     );
-    const response = await reScheduleFaceEvent(request);
+
+    const response = await reScheduleOnlineEvent(request);
 
     if (response) {
       addToast(`${t('events.notification.event_updated')}`, {
@@ -45,7 +46,7 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
         autoDismiss: true,
       });
       setOpenedModal(false);
-      await queryClient.invalidateQueries(`all-face-events`);
+      await queryClient.invalidateQueries(`all-online-events`);
     } else {
       addToast(`${t('events.notification.event_failed')}`, {
         appearance: 'error',
@@ -57,14 +58,7 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
   return (
     <div className="overflow-x-auto">
       <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
-        <div className="flex justify-center py-4">
-          {/*<Lottie*/}
-          {/*  className="h-32 w-fit"*/}
-          {/*  loop*/}
-          {/*  animationData={animationJson}*/}
-          {/*  play*/}
-          {/*/>*/}
-        </div>
+        <div className="flex justify-center py-4"></div>
 
         <form onSubmit={submitReSchedule}>
           <div className="flex justify-center">
@@ -123,4 +117,4 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
   );
 };
 
-export default ReScheduleEvent;
+export default ReScheduleOnlineEvent;
