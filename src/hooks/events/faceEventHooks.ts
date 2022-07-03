@@ -1,7 +1,7 @@
 import { authenticatedRequest } from '../common/request';
 import CreateFaceEventRequest from './requests/CreateFaceEventRequest';
 import { useQuery } from 'react-query';
-import EventModel from '../../components/rewads/models/EventModel';
+import FaceEventModel from '../../components/Events/Face/models/FaceEventModel';
 import ReScheduleEventRequest from './requests/ReScheduleEventRequest';
 
 export async function createFaceEvent(request: CreateFaceEventRequest) {
@@ -14,7 +14,7 @@ export async function createFaceEvent(request: CreateFaceEventRequest) {
 }
 
 export function useFaceEvent() {
-  return useQuery<EventModel[], Error>(`all-face-events`, async () => {
+  return useQuery<FaceEventModel[], Error>(`all-face-events`, async () => {
     const { data } = await authenticatedRequest({
       url: `/admin/events/face-to-face`,
     });

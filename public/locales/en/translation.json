@@ -265,9 +265,15 @@
   },
   "events": {
     "main_face_event": {
-      "title": "Physical events"
+      "title": "Physical events",
+      "switch_btn_1": "See physical events",
+      "switch_btn_2": "See online events"
+    },
+    "main_online_event": {
+      "title": "Online events"
     },
     "main_face_event_cart": {
+      "schedule": "From {{start}} to {{end}}",
       "availability": "{{taken}} / {{total}} taken",
       "anim": "By {{firstName}} {{lastName}}"
     },
@@ -288,6 +294,24 @@
       "space": "Space",
       "animator": "Animator",
       "btn_add": "Add a physical event"
+    },
+    "online": {
+      "title": "Titre",
+      "description": "Description",
+      "startDateTime": "Start date & time",
+      "duration": "Duration (in hours)",
+      "animator": "Animator",
+      "btn_add": "Add an online event"
+    },
+    "notification": {
+      "event_created": "Event created",
+      "event_updated": "Event updated",
+      "event_failed": "Oops ! An error occurred !"
+    },
+    "cards": {
+      "btn_publish": "Publish",
+      "btn_reschedule": "ReSchedule",
+      "btn_cancel": "Cancel event"
     }
   }
 }

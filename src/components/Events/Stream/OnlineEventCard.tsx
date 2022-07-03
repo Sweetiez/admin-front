@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
-import EventModel from '../rewads/models/EventModel';
 import { useTranslation } from 'react-i18next';
-import {
-  cancelFaceEvent,
-  publishFaceEvent,
-} from '../../hooks/events/faceEventHooks';
 import { useQueryClient } from 'react-query';
-import Modal from '../utils/Modal';
-import ReScheduleEvent from './Face/modals/ReScheduleEvent';
-import { formatDate } from '../../hooks/utils/strings';
+import Modal from '../../utils/Modal';
+import { formatDate } from '../../../hooks/utils/strings';
+import OnlineEventModel from './models/OnlineEventModel';
+import ReScheduleOnlineEvent from './modals/ReScheduleOnlineEvent';
+import {
+  cancelOnlineEvent,
+  publishOnlineEvent,
+} from '../../../hooks/events/onlineEventHooks';
 
-interface EventCardProps {
-  event: EventModel;
+interface OnlineEventCardProps {
+  event: OnlineEventModel;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const OnlineEventCard: React.FC<OnlineEventCardProps> = ({ event }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [reScheduleModalState, setReScheduleModalState] = useState(false);
 
   async function handleEventPublish() {
-    await publishFaceEvent(event?.id ? event.id : '');
-    await queryClient.invalidateQueries(`all-face-events`);
+    await publishOnlineEvent(event?.id ? event.id : '');
+    await queryClient.invalidateQueries(`all-online-events`);
   }
 
   async function handleEventCancel() {
-    await cancelFaceEvent(event?.id ? event.id : '');
-    await queryClient.invalidateQueries(`all-face-events`);
+    await cancelOnlineEvent(event?.id ? event.id : '');
+    await queryClient.invalidateQueries(`all-online-events`);
   }
 
   return (
@@ -54,11 +54,6 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <span>{event.description}</span>
         <br />
         <span>
-          {event.localisation?.address} {event.localisation?.city} -{' '}
-          {event.localisation?.zipCode}
-        </span>
-        <br />
-        <span>
           {t('events.main_face_event_cart.anim', {
             firstName: event.animator?.firstname,
             lastName: event.animator?.lastname,
@@ -69,22 +64,22 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             {event?.status !== 'PUBLISHED' && (
               <button
                 onClick={handleEventPublish}
-                className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+                className="py-2 px-4 shadow-md no-underline rounded-full bg-gold-100 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
               >
-                Publier
+                {t('events.cards.btn_publish')}
               </button>
             )}
             <button
               onClick={() => setReScheduleModalState(true)}
-              className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+              className="py-2 px-4 shadow-md no-underline rounded-full bg-gold-100 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
             >
-              Re-Planifier
+              {t('events.cards.btn_reschedule')}
             </button>
             <button
               onClick={handleEventCancel}
-              className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
+              className="py-2 px-4 shadow-md no-underline rounded-full bg-gold-100 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
             >
-              Annuler
+              {t('events.cards.btn_cancel')}
             </button>
           </div>
           <>{event?.status}</>
@@ -92,7 +87,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       </div>
       <Modal
         modalContent={
-          <ReScheduleEvent
+          <ReScheduleOnlineEvent
             setOpenedModal={setReScheduleModalState}
             eventData={event}
           />
@@ -104,4 +99,4 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
   );
 };
 
-export default EventCard;
+export default OnlineEventCard;

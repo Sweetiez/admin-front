@@ -4,12 +4,10 @@ import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { capitalizeFirstLetter } from '../../../../hooks/utils/strings';
-import SpaceModel from '../models/SpaceModel';
-import { useSpaces } from '../../../../hooks/events/spacesHooks';
-import AnimatorModel from '../models/AnimatorModel';
-import CreateFaceEventRequest from '../../../../hooks/events/requests/CreateFaceEventRequest';
 import { useAnimators } from '../../../../hooks/events/animatorHooks';
-import { createFaceEvent } from '../../../../hooks/events/faceEventHooks';
+import CreateOnlineEventRequest from '../../../../hooks/events/requests/CreateOnlineEventRequest';
+import { createOnlineEvent } from '../../../../hooks/events/onlineEventHooks';
+import AnimatorModel from '../../Face/models/AnimatorModel';
 
 interface CreateFaceEventProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -68,63 +66,18 @@ const CreateFaceEvent: React.FC<CreateFaceEventProps> = ({
     setAnimators(animators.filter((s) => s.animatorId !== id));
   };
 
-  /**
-   * Spaces management
-   */
-  const [searchingSpaces, setSearchingSpaces] = useState('');
-  const [spaces, setSpaces] = useState<SpaceModel[]>([]);
-  const [spaceSelected, setSpaceSelected] = useState<SpaceModel>();
-  let { data: spaceData } = useSpaces();
-
-  const spacesFiltered = useMemo(() => {
-    let data = spaceData;
-    spaces.forEach((s) => (data = data?.filter((sp) => sp.id !== s.id)));
-    return data;
-  }, [spaceData, spaces]);
-
-  const addSpace = () => {
-    if (spaceSelected) {
-      let spaceItem = {
-        id: spaceSelected?.id,
-        address: spaceSelected?.address,
-        city: spaceSelected?.city,
-        zipCode: spaceSelected?.zipCode,
-        places: spaceSelected?.places,
-      };
-      const existing = spaces.find((s) => s.id === spaceSelected?.id);
-      if (existing) {
-        setSpaces([...spaces]);
-      } else {
-        setSpaces([...spaces, spaceItem]);
-      }
-      setSpaceSelected(undefined);
-      setSearchingSpaces('');
-    }
-  };
-
-  const handleOnSelect = (item: any) => {
-    setSpaceSelected(item);
-  };
-
-  const handleOnClear = () => {
-    setSpaceSelected(undefined);
-  };
-  const handleDeleteSweet = (id: string) => {
-    setSpaces(spaces.filter((s) => s.id !== id));
-  };
-
-  const submitFaceEventCreation = async (event: any) => {
+  const submitOnlineEventCreation = async (event: any) => {
     event.preventDefault();
     const title = capitalizeFirstLetter(event.target.title.value);
     const description = event.target.description.value;
     const startDateTime = event.target.start.value;
     const duration = event.target.duration.value;
+    const places = event.target.places.value;
 
     if (
       title === '' ||
       description === '' ||
       startDateTime === '' ||
-      spaces.length < 1 ||
       animators.length < 1
     ) {
       addToast(`${t('products.trays.add.alert_failed_empty')}`, {
@@ -134,18 +87,18 @@ const CreateFaceEvent: React.FC<CreateFaceEventProps> = ({
       return;
     }
 
-    const request = new CreateFaceEventRequest(
+    const request = new CreateOnlineEventRequest(
+      animators[0].animatorId ? animators[0].animatorId : '',
       title,
       description,
       startDateTime,
       Number(duration),
-      spaces[0]?.id ? spaces[0]?.id : '',
-      animators[0].animatorId ? animators[0].animatorId : '',
+      Number(places),
     );
 
     try {
-      await createFaceEvent(request);
-      await queryClient.invalidateQueries(`all-face-events`);
+      await createOnlineEvent(request);
+      await queryClient.invalidateQueries(`all-online-events`);
       addToast(`${t('events.notification.event_created')}`, {
         appearance: 'success',
         autoDismiss: true,
@@ -181,7 +134,7 @@ const CreateFaceEvent: React.FC<CreateFaceEventProps> = ({
           </div>
         </div>
 
-        <form onSubmit={submitFaceEventCreation}>
+        <form onSubmit={submitOnlineEventCreation}>
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
@@ -234,91 +187,23 @@ const CreateFaceEvent: React.FC<CreateFaceEventProps> = ({
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               type="number"
               placeholder={t('events.face.duration')}
+              min={1}
             />
           </div>
 
-          <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
-            <div className="grid grid-cols-1 col-span-3">
-              <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
-                {t('events.face.space')}
-              </label>
-            </div>
+          <div className="grid grid-cols-1 mt-5 mx-7">
+            <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold dark:text-white">
+              {t('events.face.duration')}
+            </label>
+            <input
+              id="places"
+              className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              type="number"
+              placeholder={t('events.face.duration')}
+              min={2}
+              max={6}
+            />
           </div>
-          {spaces.length <= 0 && (
-            <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
-              <div className="grid grid-cols-1 col-span-2">
-                <ReactSearchAutocomplete
-                  items={spacesFiltered}
-                  fuseOptions={{ keys: ['address'] }}
-                  resultStringKeyName="address"
-                  onSelect={handleOnSelect}
-                  onClear={handleOnClear}
-                  onSearch={(value: string) => setSearchingSpaces(value)}
-                  inputSearchString={searchingSpaces}
-                  showIcon={false}
-                  placeholder={t('products.search')}
-                  styling={{
-                    height: '39px',
-                    border:
-                      '2px solid rgba(196, 181, 253, var(--tw-border-opacity))',
-                    borderRadius: '8px',
-                    backgroundColor: 'white',
-                    boxShadow: 'none',
-                    hoverBackgroundColor: '#d8b4fe',
-                    fontSize: '16px',
-                    iconColor: '#d8b4fe',
-                    lineColor: '#c084fc',
-                    clearIconMargin: '3px 8px 0 0',
-                    zIndex: 2,
-                  }}
-                />
-              </div>
-
-              <div className="grid grid-cols-1">
-                <button
-                  type="button"
-                  onClick={() => {
-                    addSpace();
-                  }}
-                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
-                >
-                  {t('products.add')}
-                </button>
-              </div>
-            </div>
-          )}
-
-          {spaces.length > 0 && (
-            <div className="grid px-4 grid-cols-1 mt-1 mx-7 overflow-auto max-h-36 rounded-lg border border-gray-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ">
-              {spaces.map((space) => (
-                <div
-                  className="flex items-center justify-between my-1"
-                  key={space.id}
-                >
-                  <div>{space.address}</div>
-                  <span
-                    className="ml-1"
-                    onClick={() => space.id && handleDeleteSweet(space.id)}
-                  >
-                    <svg
-                      className="mt-0.5 ml-0.5 w-4 h-4 text-red-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
 
           <div className="grid mb-3 grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div className="grid grid-cols-1 col-span-3">

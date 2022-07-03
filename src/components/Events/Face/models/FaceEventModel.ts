@@ -1,4 +1,4 @@
-export default class EventModel {
+export default class FaceEventModel {
   id: string | undefined;
   title: string | undefined;
   description: string | undefined;
@@ -16,17 +16,17 @@ class LocationModel {
   city: string | undefined;
 }
 
-class ScheduleModel {
+export class ScheduleModel {
   start: string | undefined;
   end: string | undefined;
 }
 
-class AvailabilityModel {
+export class AvailabilityModel {
   totalPlaces: number | undefined;
   placeTaken: number | undefined;
 }
 
-class AnimatorModel {
+export class AnimatorModel {
   id: string | undefined;
   firstname: string | undefined;
   lastname: string | undefined;

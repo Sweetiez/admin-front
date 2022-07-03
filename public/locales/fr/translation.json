@@ -269,7 +269,12 @@
   },
   "events": {
     "main_face_event": {
-      "title": "Evénements physique"
+      "title": "Evénements physique",
+      "switch_btn_1": "Voir événements physiques",
+      "switch_btn_2": "Voir événements en ligne"
+    },
+    "main_online_event": {
+      "title": "Evénements en ligne"
     },
     "main_face_event_cart": {
       "schedule": "Du {{start}} au {{end}}",
@@ -293,6 +298,24 @@
       "space": "Lieu",
       "animator": "Animateur",
       "btn_add": "Ajouter un événement physique"
+    },
+    "online": {
+      "title": "Titre",
+      "description": "Description",
+      "startDateTime": "Date & Heure de début",
+      "duration": "Durée (en heures)",
+      "animator": "Animateur",
+      "btn_add": "Ajouter un événement en ligne"
+    },
+    "notification": {
+      "event_created": "Evénement créé avec succès",
+      "event_updated": "Evénement modifié avec succès",
+      "event_failed": "Oops ! Une erreur est survenue !"
+    },
+    "cards": {
+      "btn_publish": "Publier",
+        "btn_reschedule": "Re-Planifier",
+        "btn_cancel": "Annuler l'événement"
     }
   }
 }
