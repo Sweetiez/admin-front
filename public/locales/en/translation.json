@@ -264,6 +264,13 @@
     }
   },
   "events": {
+    "main_face_event": {
+      "title": "Physical events"
+    },
+    "main_face_event_cart": {
+      "availability": "{{taken}} / {{total}} taken",
+      "anim": "By {{firstName}} {{lastName}}"
+    },
     "spaces": {
       "title": "Add a space",
       "btn_add": "Add a space",
