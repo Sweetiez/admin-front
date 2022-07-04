@@ -205,9 +205,9 @@ const ModifyRecipe: React.FC = () => {
                   defaultValue={recipe?.difficulty}
                   required
                 >
-                  <option>NORMAL</option>
-                  <option>EASY</option>
-                  <option>HARD</option>
+                  <option value="NORMAL">{t('recipes.difficulty.normal')}</option>
+                  <option value="EASY">{t('recipes.difficulty.easy')}</option>
+                  <option value="HARD">{t('recipes.difficulty.hard')}</option>
                 </select>
               </div>
             </div>

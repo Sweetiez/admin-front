@@ -70,7 +70,7 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
           <div className="flex justify-center">
             <div className="flex">
               <h1 className="text-gray-600 font-bold md:text-2xl text-xl dark:text-white">
-                {t('events.spaces.title')}
+                {t('events.reschedule.title')}
               </h1>
             </div>
           </div>
@@ -113,7 +113,7 @@ const ReScheduleEvent: React.FC<ReScheduleEventProps> = ({
             </button>
             <input
               type="submit"
-              value={t('products.save_btn')}
+              value={t('events.reschedule.btn')}
               className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             />
           </div>

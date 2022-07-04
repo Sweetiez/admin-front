@@ -47,10 +47,10 @@ const OrderChangeStatusModal: React.FC<OrderChangeStatusModalProps> = ({
       <div className="grid bg-white rounded-lg shadow-xl w-fit dark:bg-gray-800">
         <form onSubmit={handleOrderStatusUpdate}>
           <h3 className="pl-4 pt-4 dark:text-white">
-            {t('orders.status-modal.client-ref')} : {order.id}
+            <b>{t('orders.status-modal.client-ref')}</b> : {order.id}
           </h3>
           <h3 className="pl-4 pt-4 dark:text-white">
-            {t('orders.status-modal.client-contact')} : {order.email} |{' '}
+            <b>{t('orders.status-modal.client-contact')}</b> : {order.email} |{' '}
             {order.phone}
           </h3>
 
@@ -60,12 +60,12 @@ const OrderChangeStatusModal: React.FC<OrderChangeStatusModalProps> = ({
             </label>
             <select
               id="status"
-              className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              className="w-28 py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
             >
-              <option>PAID</option>
-              <option>CANCELED</option>
-              <option>READY</option>
-              <option>DELIVERED</option>
+              <option value="PAID">{t('orders.status.paid')}</option>
+              <option value="CANCELED">{t('orders.status.canceled')}</option>
+              <option value="READY">{t('orders.status.ready')}</option>
+              <option value="DELIVERED">{t('orders.status.delivered')}</option>
             </select>
           </div>
           <div className="flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5">

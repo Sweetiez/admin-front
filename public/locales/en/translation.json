@@ -41,11 +41,27 @@
       "cancel": "Cancel",
       "alert_success": "Status updated",
       "alert_failed": "Status update failed"
+    },
+    "status": {
+      "created": "Created",
+      "ready": "Ready",
+      "paid": "Paid",
+      "delivered": "Delivered",
+      "canceled": "Canceled"
     }
   },
   "recipes": {
     "non-published": "Non-published recipes",
     "published": "Published recipes",
+    "status": {
+      "non-published": "Non publiée",
+      "published": "Publiée"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "normal": "Normal",
+      "hard": "Hard"
+    },
     "table": {
       "title": "Recipe titles",
       "status": "Status",
@@ -114,6 +130,22 @@
   },
   "products": {
     "name": "Name",
+    "highlights": {
+      "banner": "Banner",
+      "promoted": "Promoted",
+      "common": "Common"
+    },
+    "flavors": {
+      "SALTY": "Salty",
+      "SWEET": "Sweet",
+      "MIXED": "Mixed"
+    },
+    "status": {
+      "published": "Published",
+      "nonPublished": "Non Published",
+      "created": "Created",
+      "deleted": "Deleted"
+    },
     "price": "Price",
     "quantity": "Quantity",
     "highlight": "Highlight",
@@ -264,6 +296,16 @@
     }
   },
   "events": {
+    "status": {
+      "CREATED": "Created",
+      "PUBLISHED": "Published",
+      "CANCELLED": "Cancelled",
+      "RESCHEDULED": "Rescheduled"
+    },
+    "reschedule": {
+      "title": "Reschedule this event",
+      "btn": "Reschedule"
+    },
     "main_face_event": {
       "title": "Physical events",
       "switch_btn_1": "See physical events",

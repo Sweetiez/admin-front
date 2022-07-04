@@ -87,7 +87,7 @@ const FaceEventCard: React.FC<EventFaceCardProps> = ({ event }) => {
               {t('events.cards.btn_cancel')}
             </button>
           </div>
-          <>{event?.status}</>
+          <>{event?.status && t('events.status.'+event?.status)}</>
         </div>
       </div>
       <Modal

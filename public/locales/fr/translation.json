@@ -29,7 +29,7 @@
   },
   "orders": {
     "title": "Commandes en cours",
-    "checkbox-label": "Afficher les commandes réceptionnés",
+    "checkbox-label": "Afficher les commandes réceptionnées",
     "createdAt": "Commandé le",
     "pickupDate": "Commande prévue pour le",
     "totalPrice": "Prix total",
@@ -41,11 +41,27 @@
       "cancel": "Annuler",
       "alert_success": "Status mis à jour",
       "alert_failed": "Status non mis à jour"
+    },
+    "status": {
+      "created": "Créée",
+      "ready": "Prête",
+      "paid": "Payée",
+      "delivered": "Livrée",
+      "canceled": "Annulée"
     }
   },
   "recipes": {
     "non-published": "Produits non publiés",
     "published": "Produits publiés",
+    "status": {
+      "non-published": "Non publiée",
+      "published": "Publiée"
+    },
+    "difficulty": {
+      "easy": "Facile",
+      "normal": "Normale",
+      "hard": "Difficile"
+    },
     "table": {
       "title": "Titre de la recette",
       "status": "Status",
@@ -107,13 +123,29 @@
   },
   "ingredients": {
     "title": "Ajouter un ingrédient",
-    "add_btn": "Ajouter un nouveau ingrédient",
+    "add_btn": "Ajouter un nouvel ingrédient",
     "alert_success": "Ingrédient {{name}} à été ajouté avec succès",
     "alert_failed_empty": "Merci de remplir tous les champs",
     "alert_api_error": "Erreur lors de la création d'un ingrédient"
   },
   "products": {
     "name": "Nom",
+    "flavors": {
+      "SALTY": "Salé",
+      "SWEET": "Sucré",
+      "MIXED": "Mixte"
+    },
+    "highlights": {
+      "banner": "Bannière",
+      "promoted": "Promu",
+      "common": "Commune"
+    },
+    "status": {
+      "published": "Publié",
+      "nonPublished": "Non Publié",
+      "created": "Créé",
+      "deleted": "Supprimé"
+    },
     "price": "Prix",
     "quantity": "Quantité",
     "highlight": "Mise en avant",
@@ -129,10 +161,10 @@
     "modify_btn": "Modifier",
     "publish_btn": "Publier",
     "unpublish_btn": "Retirer",
-    "img_upload_title": "Ajouté une image",
+    "img_upload_title": "Ajouter une image",
     "img_upload_description": "Sélectionner une image",
-    "alert_img_upload": "Image ajouté avec succès",
-    "alert_img_delete": "Image supprimé avec succès",
+    "alert_img_upload": "Image ajoutée avec succès",
+    "alert_img_delete": "Image supprimée avec succès",
     "col_name": {
       "product": "Nom",
       "price": "Prix",
@@ -200,8 +232,8 @@
     "alert_delete_error": "Erreur lors de la suppression du commentaire"
   },
   "rewards": {
-    "non-published": "Récompenses non publiés",
-    "published": "Récompenses publié",
+    "non-published": "Récompenses non publiées",
+    "published": "Récompenses publiées",
     "button": {
       "add": "Ajouter une récompense"
     },
@@ -268,8 +300,18 @@
     }
   },
   "events": {
+    "status": {
+      "CREATED": "Créé",
+      "PUBLISHED": "Publié",
+      "CANCELLED": "Annulé",
+      "RESCHEDULED": "Reporté"
+    },
+    "reschedule": {
+      "title": "Reporter cet événement",
+      "btn": "Reporter"
+    },
     "main_face_event": {
-      "title": "Evénements physique",
+      "title": "Evénements physiques",
       "switch_btn_1": "Voir événements physiques",
       "switch_btn_2": "Voir événements en ligne"
     },
@@ -282,7 +324,7 @@
       "anim": "Animé par {{firstName}} {{lastName}}"
     },
     "spaces": {
-      "title": "Ajouter un lieux",
+      "title": "Ajouter un lieu",
       "btn_add": "Ajouter un lieu",
       "address": "Adresse",
       "city": "Ville",

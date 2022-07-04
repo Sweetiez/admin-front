@@ -5,6 +5,7 @@ import ModifySweet from './Sweets/ModifySweet';
 import ModifyTray from './Trays/ModifyTray';
 import PublishProductModal from "./PublishProductModal";
 import UnPublishProductModal from "./UnPublishProductModal";
+import {useTranslation} from "react-i18next";
 
 interface ProductRowProps {
   _id: number;
@@ -16,6 +17,7 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
   product,
   isTray,
 }) => {
+  const {t} = useTranslation()
   const [modifySweetModalState, setModifySweetModalState] = useState(false);
   const [modifyTrayModalState, setModifyTrayModalState] = useState(false);
   const [publishProductModalState, setPublishProductModalState] = useState(false);
@@ -26,18 +28,34 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
   } hover:bg-gray-100`;
 
   let statusStyle: string;
+  let statusStr: string;
   switch (product.status) {
     case 'PUBLISHED':
       statusStyle = 'bg-green-200 text-green-600';
+      statusStr= t('products.status.published')
       break;
     case 'CREATED':
       statusStyle = 'bg-indigo-200 text-indigo-600';
+      statusStr= t('products.status.created')
       break;
     case 'DELETED':
       statusStyle = 'bg-red-200 text-red-600';
+      statusStr= t('products.status.deleted')
       break;
     default:
+      statusStr= t('products.status.nonPublished')
       statusStyle = 'bg-brown-200 text-brown-600';
+  }
+  let highlightStr: string;
+  switch (product.highlight) {
+    case 'BANNER':
+      highlightStr= t('products.highlights.banner')
+      break;
+    case 'COMMON':
+      highlightStr= t('products.highlights.common')
+      break;
+    default:
+      highlightStr= t('products.highlights.promoted')
   }
 
   const isPublished = product.status === 'PUBLISHED';
@@ -127,12 +145,12 @@ const ProductTableRow: React.FC<ProductRowProps> = ({
         )}
         <td className="py-3 px-6 text-center">
           <div className="flex items-center justify-center">
-            <span>{product.highlight}</span>
+            <span>{highlightStr}</span>
           </div>
         </td>
         <td className="py-3 px-6 text-center">
           <span className={`${statusStyle} py-1 px-3 rounded-full text-xs`}>
-            {product.status}
+            {statusStr}
           </span>
         </td>
         <td className="py-3 px-6 text-center">

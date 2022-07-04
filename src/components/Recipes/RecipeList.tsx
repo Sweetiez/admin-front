@@ -107,18 +107,21 @@ const RecipeTableRow: React.FC<RecipeTableRowProps> = ({ _id, recipe }) => {
   // const [modifyModalState, setModifyModalState] = useState(false);
   const [publishModalState, setPublishModalState] = useState(false);
   const [unPublishModalState, setUnPublishModalState] = useState(false);
-
+  const {t} = useTranslation()
   const lineColor = `border-b border-gray-200 ${
     _id % 2 === 0 ? 'dark:bg-gray-100' : 'dark:bg-gray-300 bg-gray-50'
   } hover:bg-gray-100`;
 
   let statusStyle: string;
+  let statusStr: string;
   switch (recipe.state) {
     case 'PUBLISHED':
       statusStyle = 'bg-green-200 text-green-600';
+      statusStr = t('recipes.status.published')
       break;
     default:
       statusStyle = 'bg-brown-200 text-brown-600';
+      statusStr = t('recipes.status.non-published')
   }
 
   const isPublished = recipe.state === 'PUBLISHED';
@@ -196,7 +199,7 @@ const RecipeTableRow: React.FC<RecipeTableRowProps> = ({ _id, recipe }) => {
         </td>
         <td className="py-3 px-6 text-left">
           <span className={`${statusStyle} py-1 px-3 rounded-full text-xs`}>
-            {recipe.state}
+            {statusStr}
           </span>
         </td>
         <td className="py-3 px-6 text-center">

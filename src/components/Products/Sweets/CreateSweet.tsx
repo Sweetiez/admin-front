@@ -220,9 +220,9 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
               id="flavor"
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
             >
-              <option>SALTY</option>
-              <option>SWEET</option>
-              <option>MIXED</option>
+              <option value="SALTY">{t('products.flavors.SALTY')}</option>
+              <option value="SWEET">{t('products.flavors.SWEET')}</option>
+              <option value="MIXED">{t('products.flavors.MIXED')}</option>
             </select>
           </div>
 

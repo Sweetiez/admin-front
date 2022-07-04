@@ -82,7 +82,7 @@ const OnlineEventCard: React.FC<OnlineEventCardProps> = ({ event }) => {
               {t('events.cards.btn_cancel')}
             </button>
           </div>
-          <>{event?.status}</>
+          <>{event?.status && t('events.status.'+event?.status)}</>
         </div>
       </div>
       <Modal

@@ -55,6 +55,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
         label: sweetIngredientData.name ? sweetIngredientData.name : '',
       }))
     : [];
+
   const [sweetIngredients, setSweetIngredient] =
     useState<any>(sweetIngredientsData);
 
@@ -296,9 +297,9 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               defaultValue={sweetData?.flavor}
             >
-              <option>SALTY</option>
-              <option>SWEET</option>
-              <option>MIXED</option>
+              <option value="SALTY">{t('products.flavors.SALTY')}</option>
+              <option value="SWEET">{t('products.flavors.SWEET')}</option>
+              <option value="MIXED">{t('products.flavors.MIXED')}</option>
             </select>
           </div>
 
@@ -311,9 +312,9 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
               className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               defaultValue={sweetData?.highlight}
             >
-              <option>COMMON</option>
-              <option>PROMOTED</option>
-              <option>BANNER</option>
+              <option value="COMMON">{t('products.highlights.common')}</option>
+              <option value="PROMOTED">{t('products.highlights.promoted')}</option>
+              <option value="BANNER">{t('products.highlights.banner')}</option>
             </select>
           </div>
 
