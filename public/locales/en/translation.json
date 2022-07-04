@@ -25,7 +25,8 @@
     "recipe": "Recipes",
     "report": "Reports",
     "events": "Events",
-    "logout": "Logout"
+    "logout": "Logout",
+    "users": "Users"
   },
   "orders": {
     "title": "Orders",
@@ -313,6 +314,25 @@
       "btn_publish": "Publish",
       "btn_reschedule": "ReSchedule",
       "btn_cancel": "Cancel event"
+    }
+  },
+  "users": {
+    "title": "Users management",
+    "label_find": "Find a user",
+    "input_placeholder": "Email",
+    "btn_search": "Search",
+    "table": {
+      "email": "Email",
+      "role": "Role",
+      "actions": "Actions"
+    },
+    "roles": {
+      "roles": "Roles",
+      "title": "Roles management",
+      "btn_add": "Add a role",
+      "btn_mod": "Modify role",
+      "update_btn": "Modify",
+      "update_label" : "Modify roles for {{email}}"
     }
   }
 }

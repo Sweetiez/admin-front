@@ -25,7 +25,8 @@
     "recipe": "Recettes",
     "report": "Signalements",
     "events": "Evénements",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "users": "Utilisateurs"
   },
   "orders": {
     "title": "Commandes en cours",
@@ -315,8 +316,27 @@
     },
     "cards": {
       "btn_publish": "Publier",
-        "btn_reschedule": "Re-Planifier",
-        "btn_cancel": "Annuler l'événement"
+      "btn_reschedule": "Re-Planifier",
+      "btn_cancel": "Annuler l'événement"
+    }
+  },
+  "users": {
+    "title": "Gestion des utilisateurs",
+    "label_find": "Rechercher un utilisateur",
+    "input_placeholder": "Email",
+    "btn_search": "Rechercher",
+    "table": {
+      "email": "Email",
+      "role": "Roles",
+      "actions": "Actions"
+    },
+    "roles": {
+      "roles": "Roles",
+      "title": "Gestion des roles",
+      "btn_add": "Ajouter un role",
+      "btn_mod": "Modifier un role",
+      "update_btn": "Modifier",
+      "update_label" : "Modifier les roles pour {{email}}"
     }
   }
 }
