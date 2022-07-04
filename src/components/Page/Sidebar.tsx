@@ -221,6 +221,7 @@ const Sidebar: React.FC = () => {
                   {/*  </div>*/}
                   {/*</li>*/}
                   <li>
+                    <Link to="/admin/users">
                     <div className="text-base text-gray-900 dark:text-white font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 dark:hover:bg-indigo-500 group ">
                       <svg
                         className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
@@ -235,9 +236,10 @@ const Sidebar: React.FC = () => {
                         />
                       </svg>
                       <span className="ml-3 flex-1 whitespace-nowrap">
-                        Users
+                        {t('navigation.users')}
                       </span>
                     </div>
+                    </Link>
                   </li>
                 </ul>
                 <div className="space-y-2 pt-2">
