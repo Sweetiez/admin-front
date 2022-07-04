@@ -338,7 +338,7 @@
       "btn_add": "Ajouter un role",
       "btn_mod": "Modifier un role",
       "update_btn": "Modifier",
-      "update_label" : "Modifier les roles pour {{email}}"
+      "update_label": "Modifier les roles pour {{email}}"
     }
   }
 }
