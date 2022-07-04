@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useRoles } from '../../../hooks/users/roleHooks';
 import Select from 'react-dropdown-select';
 import UserModel from '../models/UserModel';
+import { RoleModelRequest } from '../models/RoleModel';
+import { updateUserRole } from '../../../hooks/users/userHooks';
+import { useToasts } from 'react-toast-notifications';
 
 interface ModifyUserRolesModalProps {
   user: UserModel | undefined;
@@ -13,9 +16,11 @@ const ModifyUserRolesModal: React.FC<ModifyUserRolesModalProps> = ({
   setModalState,
 }) => {
   const { t } = useTranslation();
-  // const queryClient = useQueryClient();
+  const { addToast } = useToasts();
   const { data: roles } = useRoles();
   const [rolesUpdated, setRolesUpdated] = useState<any>([]);
+
+  console.log(user);
 
   const roleOptions = roles
     ? roles.map((role: any) => ({
@@ -26,9 +31,31 @@ const ModifyUserRolesModal: React.FC<ModifyUserRolesModalProps> = ({
 
   async function handleSubmit(event: any) {
     event.preventDefault();
+    const request = rolesUpdated.map(
+      (item: { value: number; label: string }) =>
+        new RoleModelRequest(item.value, item.label),
+    );
 
-    console.log(rolesUpdated);
-    setModalState(false);
+    try {
+      const response = await updateUserRole(user?.id ? user.id : '', request);
+      if (response) {
+        setModalState(false);
+        addToast(`${t('users.alert_not_found')}`, {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      } else {
+        addToast(`${t('events.notification.event_failed')}`, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+    } catch (e) {
+      addToast(`${t('events.notification.event_failed')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
   }
 
   return (
@@ -42,6 +69,9 @@ const ModifyUserRolesModal: React.FC<ModifyUserRolesModalProps> = ({
                   email: user?.email ? user.email : '',
                 })}
               </h1>
+            </div>
+            <div className="">
+              Roles : {user?.roles?.map((role: any) => role.name).join(', ')}
             </div>
           </div>
 

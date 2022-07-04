@@ -325,6 +325,7 @@
     "label_find": "Rechercher un utilisateur",
     "input_placeholder": "Email",
     "btn_search": "Rechercher",
+    "alert_not_found": "Aucun utilisateur trouvé",
     "table": {
       "email": "Email",
       "role": "Roles",
