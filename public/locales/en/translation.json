@@ -336,5 +336,10 @@
       "update_btn": "Modify",
       "update_label": "Modify roles for {{email}}"
     }
+  },
+  "difficulties": {
+    "normal": "NORMAL",
+    "easy": "EASY",
+    "hard": "HARD"
   }
 }
