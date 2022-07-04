@@ -7,19 +7,38 @@ import RoleCard from './roles/RoleCard';
 import Modal from '../utils/Modal';
 import ModifyUserRolesModal from './roles/ModifyUserRolesModal';
 import UserModel from './models/UserModel';
+import FindUserByRequest from '../../hooks/users/request/FindUserByRequest';
+import { findByEmail } from '../../hooks/users/userHooks';
+import { useToasts } from 'react-toast-notifications';
 
 const UserRoleManagement: React.FC = () => {
   const { t } = useTranslation();
-  const [user, setUser] = useState<UserModel | undefined>();
+  const { addToast } = useToasts();
+  const [user, setUser] = useState<UserModel | undefined>(undefined);
   const [modifyUserRoles, setModifyUserRoles] = useState(false);
 
-  function handleSearch(event: any) {
+  async function handleSearch(event: any) {
     event.preventDefault();
-    console.log(event.target.email.value);
 
-    // const response = new UserModel('', event.target.email.value, []);
-    setUser(undefined);
-    setModifyUserRoles(true);
+    const request = new FindUserByRequest(event.target.email.value);
+
+    try {
+      const response = await findByEmail(request);
+      if (response) {
+        setUser(response);
+        setModifyUserRoles(true);
+      } else {
+        addToast(`${t('users.alert_not_found')}`, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+    } catch (e) {
+      addToast(`${t('users.alert_not_found')}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
   }
 
   return (
@@ -55,7 +74,6 @@ const UserRoleManagement: React.FC = () => {
             <RoleCard />
           </div>
         </div>
-        {user}
         {/*<table className="mt-4 2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">*/}
         {/*  <thead>*/}
         {/*    <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">*/}
