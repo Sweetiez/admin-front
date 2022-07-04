@@ -322,6 +322,7 @@
     "input_placeholder": "Email",
     "btn_search": "Search",
     "alert_not_found": "No user found",
+    "alert_user_role_updated": "User roles updated",
     "table": {
       "email": "Email",
       "role": "Role",

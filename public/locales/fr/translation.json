@@ -326,6 +326,7 @@
     "input_placeholder": "Email",
     "btn_search": "Rechercher",
     "alert_not_found": "Aucun utilisateur trouvé",
+    "alert_user_role_updated": "Rôles de l'utilisateur modifié avec succès",
     "table": {
       "email": "Email",
       "role": "Roles",
