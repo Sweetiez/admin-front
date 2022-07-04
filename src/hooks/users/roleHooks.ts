@@ -6,7 +6,7 @@ import AddRoleRequest from './request/AddRoleRequest';
 export function useRoles() {
   return useQuery<RoleModel[], Error>(`all-roles`, async () => {
     const { data } = await authenticatedRequest({
-      url: `roles`,
+      url: `admin/roles`,
     });
     return data;
   });
@@ -24,7 +24,7 @@ export async function createRole(request: AddRoleRequest) {
 export async function updateRole(id: number, request: AddRoleRequest) {
   const { data } = await authenticatedRequest({
     url: `admin/roles/${id}`,
-    method: 'POST',
+    method: 'PUT',
     data: request,
   });
   return data;
