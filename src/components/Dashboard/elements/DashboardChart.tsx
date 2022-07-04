@@ -39,6 +39,18 @@ export const options = {
       text: 'Revenu chart',
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 interface DashboardChartProps {
