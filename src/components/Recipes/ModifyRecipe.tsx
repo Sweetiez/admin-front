@@ -76,11 +76,9 @@ const ModifyRecipe: React.FC = () => {
       recipeId,
       stepsUpdated,
     );
-    const response = await updateRecipeStep(updateStepOrderRequest);
+    await updateRecipeStep(updateStepOrderRequest);
     await queryClient.invalidateQueries(`recipe-${recipeId}`);
 
-    console.log(response);
-    // setItems(computeStepCards(response));
   }
 
   function computeSteps(): StepModel[] {
@@ -205,9 +203,9 @@ const ModifyRecipe: React.FC = () => {
                   defaultValue={recipe?.difficulty}
                   required
                 >
-                  <option>NORMAL</option>
-                  <option>EASY</option>
-                  <option>HARD</option>
+                  <option value="NORMAL">{t('difficulties.normal')}</option>
+                  <option value="EASY">{t('difficulties.easy')}</option>
+                  <option value="HARD">{t('difficulties.hard')}</option>
                 </select>
               </div>
             </div>

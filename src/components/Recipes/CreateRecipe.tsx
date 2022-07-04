@@ -124,9 +124,9 @@ const CreateRecipe: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 required
               >
-                <option>NORMAL</option>
-                <option>EASY</option>
-                <option>HARD</option>
+                <option value="NORMAL">{t('difficulties.normal')}</option>
+                <option value="EASY">{t('difficulties.easy')}</option>
+                <option value="HARD">{t('difficulties.hard')}</option>
               </select>
             </div>
           </div>
