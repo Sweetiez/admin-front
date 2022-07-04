@@ -76,11 +76,9 @@ const ModifyRecipe: React.FC = () => {
       recipeId,
       stepsUpdated,
     );
-    const response = await updateRecipeStep(updateStepOrderRequest);
+    await updateRecipeStep(updateStepOrderRequest);
     await queryClient.invalidateQueries(`recipe-${recipeId}`);
 
-    console.log(response);
-    // setItems(computeStepCards(response));
   }
 
   function computeSteps(): StepModel[] {
@@ -110,7 +108,7 @@ const ModifyRecipe: React.FC = () => {
     await uploadRecipeImage(recipe.id ? recipe.id : '', event.target.files[0]);
 
     await queryClient.invalidateQueries(`recipe-${recipe.id}`);
-    addToast(`${t('products.update.alert_img_upload')}`, {
+    addToast(`${t('products.alert_img_upload')}`, {
       appearance: 'success',
       autoDismiss: true,
     });

@@ -11,7 +11,7 @@ const StreamingEvent: React.FC = () => {
   const { data: onlineEvents } = useOnlineEvent();
 
   return (
-    <>
+    <div className="bg-gray-100 dark:bg-gray-600">
       <div className="pt-4 flex justify-center">
         <button
           onClick={() => setAddEventModalState(true)}
@@ -42,7 +42,7 @@ const StreamingEvent: React.FC = () => {
         setModalState={() => setAddEventModalState(false)}
         persistent={true}
       />
-    </>
+    </div>
   );
 };
 

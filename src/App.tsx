@@ -13,6 +13,7 @@ import ModifyRecipe from './components/Recipes/ModifyRecipe';
 import TrayList from './components/Products/Trays/TrayList';
 import RewardList from './components/rewads/RewardList';
 import Events from './components/Events/Events';
+import UserRoleManagement from "./components/Users/UserRoleManagement";
 
 function App() {
   const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ function App() {
               <Route path="/admin/recipes/:id" element={<ModifyRecipe />} />
               <Route path="/admin/reports" element={<ReportList />} />
               <Route path="/admin/events" element={<Events />} />
+              <Route path="/admin/users" element={<UserRoleManagement />} />
             </Routes>
           </Router>
           <ReactQueryDevtools initialIsOpen={false} />
