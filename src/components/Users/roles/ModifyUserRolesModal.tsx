@@ -40,7 +40,7 @@ const ModifyUserRolesModal: React.FC<ModifyUserRolesModalProps> = ({
       const response = await updateUserRole(user?.id ? user.id : '', request);
       if (response) {
         setModalState(false);
-        addToast(`${t('users.alert_not_found')}`, {
+        addToast(`${t('users.alert_user_role_updated')}`, {
           appearance: 'success',
           autoDismiss: true,
         });
