@@ -13,6 +13,8 @@ import {
 import Select from 'react-dropdown-select';
 import '../../../assets/css/_dropdown-select.css';
 import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
+import Lottie from 'react-lottie-player';
+import loader from '../../../assets/lotties/loader.json';
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -26,6 +28,8 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const [newIngredientName, setNewIngredientName] = useState('');
   const [quantity, setQuantity] = useState(5);
   const [sweetIngredients, setSweetIngredient] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
+  const [loadingIngredient, setLoadingIngredient] = useState(false);
 
   const ingredientOptions = ingredientData
     ? ingredientData.map((ingredient: any) => ({
@@ -41,10 +45,12 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
         appearance: 'success',
         autoDismiss: true,
       });
+      setLoading(false);
       setOpenedModal(false);
     },
     onError: (err: any) => {
       addToast(err.message, { appearance: 'error', autoDismiss: true });
+      setLoading(false);
     },
   });
 
@@ -67,18 +73,21 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     const request = new CreateIngredientRequest(name);
 
     try {
+      setLoadingIngredient(true);
       await createIngredient(request);
       addToast(`${t('ingredients.alert_success', { name: name })}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       await queryClient.invalidateQueries('all-ingredients');
+      setLoadingIngredient(false);
       setCreateNewIngredient(false);
     } catch (e) {
       addToast(`${t('ingredients.alert_api_error')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
+      setLoadingIngredient(false);
     }
   };
 
@@ -111,12 +120,13 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     const request = new CreateSweetRequest(
       name,
       Number(price),
-        quantity,
+      quantity,
       ingredients,
       description,
       flavor,
     );
 
+    setLoading(true);
     mutate(request);
   };
 
@@ -193,10 +203,26 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
 
                 <button
                   type="button"
-                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                  disabled={loadingIngredient}
+                  className={`${
+                      loadingIngredient
+                      ? 'bg-gray-300 px-4'
+                      : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'
+                  } w-auto rounded-lg shadow-xl font-medium text-white`}
                   onClick={() => submitIngredientCreation()}
                 >
-                  {t('ingredients.add_btn')}
+                  {loadingIngredient ? (
+                      <div className="flex justify-center">
+                        <Lottie
+                            className="h-10 w-14"
+                            loop
+                            animationData={loader}
+                            play
+                        />
+                      </div>
+                  ) : (
+                    <>{t('products.add')}</>
+                  )}
                 </button>
               </div>
             ) : (
@@ -276,11 +302,17 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             >
               {t('products.cancel_btn')}
             </button>
-            <input
+            <button
+              disabled={loading}
               type="submit"
-              value={t('products.save_btn')}
-              className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
-            />
+              className={`${
+                loading
+                  ? 'bg-gray-300 px-4'
+                  : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'
+              } w-auto rounded-lg shadow-xl font-medium text-white`}
+            >
+
+            </button>
           </div>
         </form>
       </div>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
 import { capitalizeFirstLetter } from '../../hooks/utils/strings';
 import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
 import { createIngredient } from '../../hooks/ingredients/ingredientsHooks';
 import {useQueryClient} from "react-query";
+import Lottie from "react-lottie-player";
+import loader from "../../assets/lotties/loader.json";
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
@@ -13,6 +15,7 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { addToast } = useToasts();
+  const [loading, setLoading] = useState(false);
 
   const submitIngredientCreation = async (event: any) => {
     event.preventDefault();
@@ -29,18 +32,21 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
     const request = new CreateIngredientRequest(name);
 
     try {
+      setLoading(true);
       await createIngredient(request);
         addToast(`${t('ingredients.alert_success', {name: name})}`, {
             appearance: 'success',
             autoDismiss: true,
         });
       await queryClient.invalidateQueries(`all-ingredients`);
+      setLoading(false);
       setOpenedModal(false);
     } catch (e) {
       addToast(`${t('ingredients.alert_api_error')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
+      setLoading(false);
     }
   };
 
@@ -97,11 +103,20 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             >
               {t('products.cancel_btn')}
             </button>
-            <input
+            <button
+                disabled={loading}
               type="submit"
-              value={t('products.save_btn')}
-              className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
-            />
+              className={`${loading ? 'bg-gray-300 px-4' : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'} w-auto rounded-lg shadow-xl font-medium text-white`}
+            >
+              {loading ?
+                  <Lottie
+                      className="h-10 w-14"
+                      loop
+                      animationData={loader}
+                      play
+                  />
+                  : <>{t('products.save_btn')}</>}
+            </button>
           </div>
         </form>
       </div>
