@@ -19,6 +19,7 @@
   "navigation": {
     "dashboard": "Tableau de bord",
     "orders": "Commandes",
+    "ingredients": "Ingrédients",
     "sweets": "Mignardises",
     "trays": "Plateaux",
     "rewards": "Récompenses",
@@ -123,11 +124,17 @@
     }
   },
   "ingredients": {
+    "ingredientList": "Liste des ingrédients",
     "title": "Ajouter un ingrédient",
     "add_btn": "Ajouter un nouvel ingrédient",
     "alert_success": "Ingrédient {{name}} à été ajouté avec succès",
     "alert_failed_empty": "Merci de remplir tous les champs",
-    "alert_api_error": "Erreur lors de la création d'un ingrédient"
+    "alert_api_error": "Erreur lors de la création d'un ingrédient",
+    "delete": {
+      "areYouSure": "Etes-vous sûr de vouloir supprimer cet ingrédient ?",
+      "alert_success": "L'ingrédient à bien été supprimé",
+      "alert_error": "Erreur lors de la suppression d'un ingrédient"
+    }
   },
   "products": {
     "name": "Nom",
