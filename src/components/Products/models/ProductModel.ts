@@ -1,4 +1,4 @@
-import IngredientModel from './IngredientModel';
+import IngredientModel from '../../Ingredients/models/IngredientModel';
 
 export default class ProductModel {
   id: string | undefined;

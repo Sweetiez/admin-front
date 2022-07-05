@@ -14,6 +14,7 @@ import TrayList from './components/Products/Trays/TrayList';
 import RewardList from './components/rewads/RewardList';
 import Events from './components/Events/Events';
 import UserRoleManagement from "./components/Users/UserRoleManagement";
+import IngredientsList from "./components/Ingredients/IngredientList";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
               <Route path="/admin" element={<Dashboard />} />
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/sweets" element={<SweetList />} />
+              <Route path="/admin/ingredients" element={<IngredientsList />} />
               <Route path="/admin/trays" element={<TrayList />} />
               <Route path="/admin/rewards" element={<RewardList />} />
               <Route path="/admin/recipes" element={<RecipeList />} />
