@@ -17,6 +17,8 @@ import {
   deleteProductImage,
   uploadProductImage,
 } from '../../../hooks/products/productsHooks';
+import Lottie from "react-lottie-player";
+import loader from "../../../assets/lotties/loader.json";
 
 interface ModifyProductProps {
   product: ProductModelRow;
@@ -41,6 +43,8 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
   const { addToast } = useToasts();
   const [createNewIngredient, setCreateNewIngredient] = useState(false);
   const [newIngredientName, setNewIngredientName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [loadingIngredient, setLoadingIngredient] = useState(false);
 
   const ingredientOptions = ingredientData
     ? ingredientData.map((ingredient) => ({
@@ -84,18 +88,21 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
     const request = new CreateIngredientRequest(name);
 
     try {
+      setLoadingIngredient(true)
       await createIngredient(request);
       addToast(`${t('ingredients.alert_success', { name: name })}`, {
         appearance: 'success',
         autoDismiss: true,
       });
       await queryClient.invalidateQueries('all-ingredients');
+      setLoadingIngredient(false)
       setCreateNewIngredient(false);
     } catch (e) {
       addToast(`${t('ingredients.alert_api_error')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
+      setLoadingIngredient(false)
     }
   };
 
@@ -150,6 +157,7 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
       sweetData.rating ? sweetData.rating : 0,
     );
 
+    setLoading(true);
     const response = await updateSweet(request);
     if (response) {
       await queryClient.invalidateQueries(`all-sweets`);
@@ -158,12 +166,14 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
         appearance: 'success',
         autoDismiss: true,
       });
+      setLoading(false);
       setOpenedModal(false);
     } else {
       addToast(`${t('products.sweets.update.alert_failed')}`, {
         appearance: 'error',
         autoDismiss: true,
       });
+      setLoading(false);
     }
   }
 
@@ -240,11 +250,27 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
                 />
 
                 <button
+                    disabled={loadingIngredient}
                   type="button"
-                  className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                    className={`${
+                        loadingIngredient
+                            ? 'bg-gray-300 px-4'
+                            : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'
+                    } w-auto rounded-lg shadow-xl font-medium text-white`}
                   onClick={() => submitIngredientCreation()}
                 >
-                  {t('ingredients.add_btn')}
+                  {loadingIngredient ? (
+                      <div className="flex justify-center">
+                        <Lottie
+                            className="h-10 w-14"
+                            loop
+                            animationData={loader}
+                            play
+                        />
+                      </div>
+                  ) : (
+                      <>{t('products.add')}</>
+                  )}
                 </button>
               </div>
             ) : (
@@ -414,11 +440,26 @@ const ModifySweet: React.FC<ModifyProductProps> = ({
             >
               {t('products.cancel_btn')}
             </button>
-            <input
+            <button
+                disabled={loading}
               type="submit"
-              value={t('products.modify_btn')}
-              className="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
-            />
+              className={`${
+                  loading
+                      ? 'bg-gray-300 px-4'
+                      : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'
+              } w-auto rounded-lg shadow-xl font-medium text-white`}
+            >
+              {loading ? (
+                  <Lottie
+                      className="h-10 w-14"
+                      loop
+                      animationData={loader}
+                      play
+                  />
+              ) : (
+                  <>{t('products.modify_btn')}</>
+              )}
+            </button>
           </div>
         </form>
       </div>
