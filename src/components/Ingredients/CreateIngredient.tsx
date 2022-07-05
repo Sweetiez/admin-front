@@ -1,15 +1,17 @@
 import React from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
-import { capitalizeFirstLetter } from '../../../hooks/utils/strings';
-import CreateIngredientRequest from '../../../hooks/ingredients/requests/CreateIngredientRequest';
-import { createIngredient } from '../../../hooks/ingredients/ingredientsHooks';
+import { capitalizeFirstLetter } from '../../hooks/utils/strings';
+import CreateIngredientRequest from '../../hooks/ingredients/requests/CreateIngredientRequest';
+import { createIngredient } from '../../hooks/ingredients/ingredientsHooks';
+import {useQueryClient} from "react-query";
 
 interface CreateProductProps {
   setOpenedModal: (openedModal: boolean) => void;
 }
 const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const { addToast } = useToasts();
 
   const submitIngredientCreation = async (event: any) => {
@@ -32,6 +34,7 @@ const CreateIngredient: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
             appearance: 'success',
             autoDismiss: true,
         });
+      await queryClient.invalidateQueries(`all-ingredients`);
       setOpenedModal(false);
     } catch (e) {
       addToast(`${t('ingredients.alert_api_error')}`, {
