@@ -6,18 +6,12 @@ import { useTranslation } from 'react-i18next';
 import AccessRoleController from '../../Auth/AccessRoleController';
 import { Role } from '../../../hooks/auth/access/Roles';
 import Modal from '../../utils/Modal';
-import CreateIngredient from './CreateIngredient';
 import ProductTableRow from '../ProductTableRow';
 
 const SweetList: React.FC = () => {
   const { t } = useTranslation();
   const [addModalState, setAddModalState] = useState(false);
-  const [addIngredientModalState, setAddIngredientModalState] = useState(false);
   let { data: sweets } = useSweets();
-
-  const manageCloseIngredientModal = useCallback(() => {
-    setAddIngredientModalState(false);
-  }, []);
 
   const manageCloseCreateProductModal = useCallback(() => {
     setAddModalState(false);
@@ -37,12 +31,6 @@ const SweetList: React.FC = () => {
             className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
           >
             {t('products.sweets.add_btn')}
-          </button>
-          <button
-            onClick={() => setAddIngredientModalState(true)}
-            className="py-2 px-4 shadow-md no-underline rounded-full bg-indigo-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-light focus:outline-none active:shadow-none mr-2"
-          >
-            {t('ingredients.add_btn')}
           </button>
         </div>
       </div>
@@ -131,14 +119,6 @@ const SweetList: React.FC = () => {
           </tbody>
         </table>
       </div>
-
-      <Modal
-        modalContent={
-          <CreateIngredient setOpenedModal={setAddIngredientModalState} />
-        }
-        modalState={addIngredientModalState}
-        setModalState={manageCloseIngredientModal}
-      />
       <Modal
         modalContent={<CreateSweet setOpenedModal={setAddModalState} />}
         modalState={addModalState}
