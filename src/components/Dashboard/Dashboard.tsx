@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
               value={
                 dashboardData?.informations?.accounts
                   ? dashboardData?.informations?.accounts
-                  : -1
+                  : 0
               }
             />
             <DashboardCard
@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
               value={
                 dashboardData?.informations?.publishedTrays
                   ? dashboardData?.informations?.publishedTrays
-                  : -1
+                  : 0
               }
             />
             <DashboardCard
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
               value={
                 dashboardData?.informations?.publishedSweets
                   ? dashboardData?.informations?.publishedSweets
-                  : -1
+                  : 0
               }
             />
             <DashboardCard
@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
               value={
                 dashboardData?.informations?.publishedRecipes
                   ? dashboardData?.informations?.publishedRecipes
-                  : -1
+                  : 0
               }
             />
           </div>
