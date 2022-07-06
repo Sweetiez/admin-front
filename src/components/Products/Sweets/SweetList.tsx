@@ -41,12 +41,12 @@ const SweetList: React.FC = () => {
             {t('products.sweets.title_all')}
           </div>
         </div>
-        <div className="row-start-3 2xl:row-start-1 col-start-2 2xl:col-start-5 col-end-5 2xl:col-end-8">
+        <div className="row-start-3 2xl:row-start-3 col-start-2 2xl:col-start-2 col-end-5 2xl:col-end-5">
           <div className="font-birthstone text-3xl dark:text-white self-center whitespace-nowrap">
             {t('products.sweets.title_online')}
           </div>
         </div>
-        <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-5 h-40">
+        <table className="2xl:row-start-2 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-8 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
@@ -82,7 +82,7 @@ const SweetList: React.FC = () => {
               ))}
           </tbody>
         </table>
-        <table className="row-start-4 2xl:row-start-2 col-start-2 2xl:col-start-5 col-end-8 2xl:col-end-8 h-40">
+        <table className="row-start-4 2xl:row-start-4 col-start-2 2xl:col-start-2 col-end-8 2xl:col-end-8 h-40">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left">
