@@ -311,7 +311,16 @@ const CreateSweet: React.FC<CreateProductProps> = ({ setOpenedModal }) => {
                   : 'bg-purple-500 hover:bg-purple-700 px-4 py-2'
               } w-auto rounded-lg shadow-xl font-medium text-white`}
             >
-
+              {loading ? (
+                  <Lottie
+                      className="h-10 w-14"
+                      loop
+                      animationData={loader}
+                      play
+                  />
+              ) : (
+                  <>{t('products.save_btn')}</>
+              )}
             </button>
           </div>
         </form>
